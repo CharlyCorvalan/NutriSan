@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.spi.DirStateFactory;
@@ -21,7 +22,7 @@ import javax.swing.JOptionPane;
 public class PacienteData {
 
     private Connection con = null;
-
+private ArrayList<Paciente> pacientes=new ArrayList<>();
     public PacienteData() {
         con=Conector.getConnection();
     }
@@ -61,5 +62,33 @@ public void modificiarPaciente(Paciente paciente){
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Paciente");
         }
+}
+public void eliminarPaciente(int id){
+    String sql="UPDATE paciente SET estado=0 WHERE idPaciente=?";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, id);
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Paciente eliminado");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Paciente "+ex);
+        }
+    
+}
+public ArrayList <Paciente> listarPaciente(){
+   String sql="SELECT * FROM paciente WHERE estado=1";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ResultSet rs=ps.executeQuery();
+            while (rs.next()){
+                Paciente paciente=new Paciente();
+                
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Paciente "+ex);
+        }
+    return pacientes;
 }
 }
