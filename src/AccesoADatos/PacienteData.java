@@ -84,11 +84,36 @@ public ArrayList <Paciente> listarPaciente(){
             ResultSet rs=ps.executeQuery();
             while (rs.next()){
                 Paciente paciente=new Paciente();
-                
+                paciente.setNombre(rs.getString("nombre"));
+                paciente.setDni(rs.getInt("dni"));
+                paciente.setDomicilio(rs.getString("domicilio"));
+                paciente.setTelefono(rs.getString("telefono"));
+                paciente.setEstado(rs.getBoolean("estado"));
+                pacientes.add(paciente);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Paciente "+ex);
+        }
+    return pacientes;
+}
+public ArrayList<Paciente> listarPacientePorDieta(int idDieta){
+    String sql="SELECT nombre, paciente.idPaciente FROM paciente join dieta on (paciente.idPaciente = dieta.idPaciente)"
+            + " WHERE idDieta=?";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, idDieta);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                Paciente paciente=new Paciente();
+                paciente.setIdPaciente(rs.getInt("idPaciente"));
+                paciente.setNombre(rs.getString("nombre"));
+                pacientes.add(paciente);
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Paciente "+ex);
         }
+    
     return pacientes;
 }
 }
