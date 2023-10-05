@@ -5,6 +5,7 @@
 package nutrisan;
 
 import AccesoADatos.ComidaDatos;
+import AccesoADatos.DietaComidaData;
 import AccesoADatos.DietaData;
 import AccesoADatos.PacienteData;
 import Entidades.Comida;
@@ -39,12 +40,14 @@ public class NutriSan {
 //        for (Paciente paciente1 : paciente) {
 //            System.out.println(paciente1.toString());
 //        }
-//        Dieta d1=new Dieta("Vegana", p5, LocalDate.of(2023, 5, 15), 95.56, 84, LocalDate.of(2023, 8, 15));
+        Dieta d1=new Dieta(1,"Vegana", p5, LocalDate.of(2023, 5, 15), 95.56, 84, LocalDate.of(2023, 8, 15));
 //        DietaData dd1=new DietaData();
 //        dd1.agregarDieta(d1);
-        Comida comida = new Comida("pizza", "(2 porciones) pizza de masa integral, con queso port Salut y albaca", 450);
-        ComidaDatos comi = new ComidaDatos();
-        comi.agregarComida(comida);
+        Comida comida = new Comida(1,"pizza", "(2 porciones) pizza de masa integral, con queso port Salut y albaca", 450);
+//        ComidaDatos comi = new ComidaDatos();
+//        comi.agregarComida(comida);
+          DietaComidaData dcd=new DietaComidaData();
+          dcd.agregarDietaComida(d1, comida);
     }
 
 }

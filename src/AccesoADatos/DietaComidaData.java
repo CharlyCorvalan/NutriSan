@@ -29,42 +29,22 @@ private Connection con= null;
        
     }
 
- public void agregarDieta(Dieta dieta, Comida comida) {
-        String sql = "INSERT INTO dieta (idDieta, idComida,) VALUES (?, ?)";
+ public void agregarDietaComida(Dieta dieta, Comida comida) {
+        String sql = "insert into dietacomida (idDieta, idComida) VALUES (?, ?)";
         DietaComida dt= new DietaComida();
-
         PreparedStatement stmt;
     try {
         stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-         stmt.setInt(1,dieta.getIdDieta());
+        stmt.setInt(1,dieta.getIdDieta());
         stmt.setInt(2, comida.getIdComida()); 
-        ResultSet rs= stmt.getGeneratedKeys();
-         
+        stmt.executeUpdate();
+        ResultSet rs= stmt.getGeneratedKeys();  
         while (rs.next()){
-            
-      dt.setId(rs.getInt(1));
-            
-      JOptionPane.showMessageDialog(null,"se agrego la comida a la dieta");
-      
-            
-            
-            
+      dt.setId(rs.getInt(1));      
+      JOptionPane.showMessageDialog(null,"Se agrego la comida a la dieta");
         }
-         
-         
-         
-         
-         
     } catch (SQLException ex) {
         Logger.getLogger(DietaComidaData.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    
-    
-
-     
-      
-
+    }   
 }
-  
- 
 }
