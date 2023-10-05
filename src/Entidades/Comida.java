@@ -16,6 +16,13 @@ public class Comida {
         this.idComida = idComida;
     }
 
+    public Comida(String nombre, String detalle, int cantCalorias) {
+        this.nombre = nombre;
+        this.detalle = detalle;
+        this.cantCalorias = cantCalorias;
+    }
+    
+
     public String getNombre() {
         return nombre;
     }
