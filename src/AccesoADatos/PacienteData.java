@@ -116,4 +116,46 @@ public ArrayList<Paciente> listarPacientePorDieta(int idDieta){
     
     return pacientes;
 }
+public Paciente buscarXdni(int dni){
+    Paciente pa=new Paciente();
+    String sql="select idPaciente ,nombre,dni,domicilio,telefono, estado from paciente where dni=?";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, dni);
+            ResultSet resultado=ps.executeQuery();
+            while(resultado.next()){
+                pa.setIdPaciente(resultado.getInt("idPaciente"));
+                pa.setNombre(resultado.getString("nombre"));
+                pa.setDni(resultado.getInt("dni"));
+                pa.setDomicilio(resultado.getString("domicilio"));
+                pa.setTelefono(resultado.getString("telefono"));
+                pa.setEstado(resultado.getBoolean("estado"));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Paciente");
+        }
+    System.out.println(pa);
+    return pa;
+}
+public Paciente buscarXNombre(String nombre){
+    Paciente pa=new Paciente();
+    String sql="select idPaciente, nombre, dni, domicilio, telefono,estado from paciente where nombre like ?";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setString(1, nombre);
+            ResultSet  resultado=ps.executeQuery();
+            while(resultado.next()){
+                pa.setIdPaciente(resultado.getInt("idPaciente"));
+                pa.setNombre(resultado.getString("nombre"));
+                pa.setDomicilio(resultado.getString("domicilio"));
+                pa.setDni(resultado.getInt("dni"));
+                pa.setTelefono(resultado.getString("telefono"));
+                pa.setEstado(resultado.getBoolean("estado"));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de Pacientes");
+        }
+        System.out.println(pa);
+    return pa;
+}
 }

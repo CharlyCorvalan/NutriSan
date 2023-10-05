@@ -50,10 +50,8 @@ public class DietaData {
         }
     }
     public void modificarDieta(Dieta dieta){
-        PacienteData paciente=new PacienteData();
-        Paciente paci=new Paciente();
-        paci=paciente.buscarPacienteID(dieta.getPaciente().getIdPaciente());
-        if(paci.getIdPaciente()>0){
+        
+        
         String sql="update dieta set pesoFinal=?, fechaFinal=?"
                 + "where idDieta=?";
         try {
@@ -69,5 +67,5 @@ public class DietaData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Dieta");
         }  
     }
-    }
+    
 }
