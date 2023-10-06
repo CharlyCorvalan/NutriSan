@@ -40,14 +40,34 @@ public class NutriSan {
 //        for (Paciente paciente1 : paciente) {
 //            System.out.println(paciente1.toString());
 //        }
-        Dieta d1=new Dieta(1,"Vegana", p5, LocalDate.of(2023, 5, 15), 95.56, 84, LocalDate.of(2023, 8, 15));
+        Dieta d1 = new Dieta(1, "Vegana", p5, LocalDate.of(2023, 5, 15), 95.56, 84, LocalDate.of(2023, 8, 15));
 //        DietaData dd1=new DietaData();
 //        dd1.agregarDieta(d1);
-        Comida comida = new Comida(1,"pizza", "(2 porciones) pizza de masa integral, con queso port Salut y albaca", 450);
-//        ComidaDatos comi = new ComidaDatos();
-//        comi.agregarComida(comida);
-          DietaComidaData dcd=new DietaComidaData();
-          dcd.agregarDietaComida(d1, comida);
+        Comida comida = new Comida(1, "pizza", "(2 porciones) pizza de masa integral, con queso port Salut y albaca", 450);
+        Comida comida2 = new Comida(2, "Pollo", "200gr de pollo hervido, a la plancha o al horno", 200);
+        Comida comida3 = new Comida(3, "Carnes rojas", "200gr de carne al horno, a la plancha o asada", 300);
+        Comida comida4 = new Comida(4, "Legumbres", "150gr de legumbres cocidas", 150);
+        Comida comida5 = new Comida(5, "Yogurt Natural", "200gr (1 pote)", 175);
+        Comida comida6 = new Comida(6, "Ensaladas verdes", "200gr de ensalada fresca", 125);
+
+//        comidaArray.add(comida.getIdComida(), comida);
+//        comidaArray.add(comida2.getIdComida(), comida2);
+//        comidaArray.add(comida3.getIdComida(), comida3);
+//        comidaArray.add(comida4.getIdComida(), comida4);
+//        comidaArray.add(comida5.getIdComida(), comida5);
+//        comidaArray.add(comida6.getIdComida(), comida6);
+        ComidaDatos comi = new ComidaDatos();
+//        comi.agregarComida(comida6);
+        DietaComidaData dcd = new DietaComidaData();
+        //dcd.agregarDietaComida(d1, comidaArray);
+        //System.out.println(dcd.add());
+
+        ArrayList<Comida> comidaArray = new ArrayList<>(dcd.add(4));
+
+        for (Comida comida1 : comidaArray) {
+            System.out.println(comida1.getIdComida());
+        }
+        //dcd.agregarDietaComida(d1, comidaArray);
     }
 
 }
