@@ -1,15 +1,16 @@
 package Vistas;
 
-
+import AccesoADatos.PacienteData;
+import Entidades.Paciente;
+import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
-
-
 /**
  *
  * @author charl
@@ -18,9 +19,15 @@ public class PacienteVista extends javax.swing.JInternalFrame {
 
     private JComponent Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
     private Dimension DimensionBarra = null;
+    private boolean N, M, E, B = false;
+    private Paciente pa=new Paciente();
+    private PacienteData paData=new PacienteData();
+
     public PacienteVista() {
         initComponents();
-        ((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
+        ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
+        PanelAdvertencia.setVisible(false);
+        Tabla.setVisible(false);
     }
 
     /**
@@ -32,15 +39,43 @@ public class PacienteVista extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        PanelAdvertencia = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        OpcionDeAviso = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        PanelAceptar = new javax.swing.JPanel();
+        BotonAceptar = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        PanelCancelar = new javax.swing.JPanel();
+        BotonCancelar = new javax.swing.JLabel();
+        PanelBuscar = new javax.swing.JPanel();
+        BotonBuscar = new javax.swing.JLabel();
+        BarraMenu = new javax.swing.JPanel();
+        PanelNuevo = new javax.swing.JPanel();
+        BotonNuevo = new javax.swing.JLabel();
+        PanelModificar = new javax.swing.JPanel();
+        BotonModificar = new javax.swing.JLabel();
+        PanelEliminar = new javax.swing.JPanel();
+        BotonEliminar = new javax.swing.JLabel();
+        PanelListar = new javax.swing.JPanel();
+        BotonListar = new javax.swing.JLabel();
+        LabelNuevo = new javax.swing.JLabel();
+        TextoTelefono = new javax.swing.JTextField();
+        LabelDNI = new javax.swing.JLabel();
+        TextoDni = new javax.swing.JTextField();
+        LabelDireccion = new javax.swing.JLabel();
+        LabelTelefono = new javax.swing.JLabel();
+        TextoNombre = new javax.swing.JTextField();
+        TextoDireccion = new javax.swing.JTextField();
+        Tabla = new javax.swing.JScrollPane();
+        TablaListar = new javax.swing.JTable();
+        Fondo = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 255, 255));
         setBorder(null);
@@ -50,21 +85,71 @@ public class PacienteVista extends javax.swing.JInternalFrame {
         setPreferredSize(new java.awt.Dimension(748, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(51, 204, 255));
+        PanelAdvertencia.setBackground(new java.awt.Color(255, 255, 255));
+        PanelAdvertencia.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(255, 0, 51));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField1.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setText("AGREGAR");
-        jTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+        jLabel1.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("AVISO");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 30));
+
+        PanelAdvertencia.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 120, 30));
+
+        jLabel3.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Esta por");
+        PanelAdvertencia.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 70, -1));
+
+        OpcionDeAviso.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
+        OpcionDeAviso.setBorder(null);
+        PanelAdvertencia.add(OpcionDeAviso, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 100, -1));
+
+        jLabel4.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("un paciente");
+        PanelAdvertencia.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 110, 20));
+
+        jLabel5.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("SI");
+        PanelAdvertencia.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 50, 20));
+
+        jLabel6.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("VOLVER");
+        PanelAdvertencia.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("¿Desea continuar?");
+        PanelAdvertencia.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 140, 20));
+
+        getContentPane().add(PanelAdvertencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, 310, 210));
+
+        PanelAceptar.setBackground(new java.awt.Color(204, 204, 204));
+        PanelAceptar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        BotonAceptar.setBackground(new java.awt.Color(204, 204, 204));
+        BotonAceptar.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
+        BotonAceptar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        BotonAceptar.setText("ACEPTAR");
+        BotonAceptar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BotonAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BotonAceptarMouseClicked(evt);
             }
         });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 50));
+        BotonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonAceptarActionPerformed(evt);
+            }
+        });
+        PanelAceptar.add(BotonAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 30));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 490, 170, 50));
+        getContentPane().add(PanelAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 140, 30));
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -72,61 +157,374 @@ public class PacienteVista extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Roboto Black", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("AGREGAR PACIENTE");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 330, 50));
+        jLabel2.setText(" MENU PACIENTE");
+        jLabel2.setToolTipText("");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 310, 50));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 330, 50));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 350, 50));
 
-        jPanel3.setBackground(new java.awt.Color(0, 204, 255));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        PanelCancelar.setBackground(new java.awt.Color(204, 204, 204));
+        PanelCancelar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("MODIFICAR");
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 50));
+        BotonCancelar.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
+        BotonCancelar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BotonCancelar.setText("CANCELAR");
+        BotonCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        PanelCancelar.add(BotonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 30));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 490, 170, 50));
+        getContentPane().add(PanelCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 280, -1, 30));
 
-        jPanel4.setBackground(new java.awt.Color(0, 204, 204));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        PanelBuscar.setBackground(new java.awt.Color(255, 255, 255));
+        PanelBuscar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("ELIMINAR");
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 50));
+        BotonBuscar.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
+        BotonBuscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BotonBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar2.png"))); // NOI18N
+        BotonBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BotonBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BotonBuscarMouseClicked(evt);
+            }
+        });
+        PanelBuscar.add(BotonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 30));
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 490, 190, 50));
+        getContentPane().add(PanelBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, 50, 30));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pngtree-abstract-background-png-image_4121274.jpg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 564));
+        BarraMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        PanelNuevo.setBackground(new java.awt.Color(204, 204, 204));
+        PanelNuevo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        PanelNuevo.setForeground(new java.awt.Color(153, 153, 153));
+        PanelNuevo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        BotonNuevo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BotonNuevo.setText("NUEVO");
+        BotonNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BotonNuevo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BotonNuevoMouseClicked(evt);
+            }
+        });
+        PanelNuevo.add(BotonNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 30));
+
+        BarraMenu.add(PanelNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, 30));
+
+        PanelModificar.setBackground(new java.awt.Color(204, 204, 204));
+        PanelModificar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        PanelModificar.setForeground(new java.awt.Color(153, 153, 153));
+        PanelModificar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        BotonModificar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BotonModificar.setText("MODIFICAR");
+        BotonModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BotonModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BotonModificarMouseClicked(evt);
+            }
+        });
+        PanelModificar.add(BotonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 30));
+
+        BarraMenu.add(PanelModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, 100, 30));
+
+        PanelEliminar.setBackground(new java.awt.Color(204, 204, 204));
+        PanelEliminar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        PanelEliminar.setForeground(new java.awt.Color(153, 153, 153));
+        PanelEliminar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        BotonEliminar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BotonEliminar.setText("ELIMINAR");
+        BotonEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BotonEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BotonEliminarMouseClicked(evt);
+            }
+        });
+        PanelEliminar.add(BotonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 30));
+
+        BarraMenu.add(PanelEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 80, 30));
+
+        PanelListar.setBackground(new java.awt.Color(204, 204, 204));
+        PanelListar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        PanelListar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        BotonListar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BotonListar.setText("LISTAR");
+        BotonListar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        PanelListar.add(BotonListar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 30));
+
+        BarraMenu.add(PanelListar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 80, 30));
+
+        getContentPane().add(BarraMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 350, 30));
+
+        LabelNuevo.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
+        LabelNuevo.setText("NOMBRE:");
+        getContentPane().add(LabelNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+
+        TextoTelefono.setEditable(false);
+        TextoTelefono.setForeground(new java.awt.Color(102, 102, 102));
+        TextoTelefono.setText(" Telefono de contacto (solo numeros)");
+        TextoTelefono.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TextoTelefonoMouseClicked(evt);
+            }
+        });
+        getContentPane().add(TextoTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 430, 30));
+
+        LabelDNI.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
+        LabelDNI.setText("DNI:");
+        getContentPane().add(LabelDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
+
+        TextoDni.setEditable(false);
+        TextoDni.setForeground(new java.awt.Color(102, 102, 102));
+        TextoDni.setText(" (solo numeros)");
+        TextoDni.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TextoDniMouseClicked(evt);
+            }
+        });
+        getContentPane().add(TextoDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 132, 230, 30));
+
+        LabelDireccion.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
+        LabelDireccion.setText("DIRECCION:");
+        getContentPane().add(LabelDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
+
+        LabelTelefono.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
+        LabelTelefono.setText("TELEFONO:");
+        getContentPane().add(LabelTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
+
+        TextoNombre.setEditable(false);
+        TextoNombre.setForeground(new java.awt.Color(102, 102, 102));
+        TextoNombre.setText(" Nombre completo del paciente");
+        TextoNombre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TextoNombreMouseClicked(evt);
+            }
+        });
+        getContentPane().add(TextoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 92, 430, 30));
+
+        TextoDireccion.setEditable(false);
+        TextoDireccion.setForeground(new java.awt.Color(102, 102, 102));
+        TextoDireccion.setText("Agregar calle y numero");
+        TextoDireccion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TextoDireccionMouseClicked(evt);
+            }
+        });
+        getContentPane().add(TextoDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 430, 30));
+
+        TablaListar.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        Tabla.setViewportView(TablaListar);
+
+        getContentPane().add(Tabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 327, 710, 230));
+
+        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pngtree-abstract-background-png-image_4121274.jpg"))); // NOI18N
+        getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 564));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void BotonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAceptarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_BotonAceptarActionPerformed
+
+    private void BotonNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonNuevoMouseClicked
+        check(1);
+
+    }//GEN-LAST:event_BotonNuevoMouseClicked
+
+    private void TextoNombreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TextoNombreMouseClicked
+        if (N == true) {
+            TextoNombre.setForeground(Color.black);
+            TextoNombre.setText("");
+        } 
+    }//GEN-LAST:event_TextoNombreMouseClicked
+
+    private void TextoDniMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TextoDniMouseClicked
+        if (N == true || M == true || E == true) {
+            TextoDni.setForeground(Color.black);
+            TextoDni.setText("");
+        }
+    }//GEN-LAST:event_TextoDniMouseClicked
+
+    private void TextoDireccionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TextoDireccionMouseClicked
+        if (N == true) {
+            TextoDireccion.setForeground(Color.black);
+            TextoDireccion.setText("");
+        } else if (M == true && B == true) {
+            TextoDireccion.setForeground(Color.black);
+            TextoDireccion.setEditable(true);
+        }
+    }//GEN-LAST:event_TextoDireccionMouseClicked
+
+    private void TextoTelefonoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TextoTelefonoMouseClicked
+        if (N == true) {
+            TextoTelefono.setForeground(Color.black);
+            TextoTelefono.setText("");
+        } else if (M == true && B == true) {
+            TextoTelefono.setForeground(Color.black);
+            TextoTelefono.setEditable(true);
+        }
+    }//GEN-LAST:event_TextoTelefonoMouseClicked
+
+    private void BotonModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonModificarMouseClicked
+        check(2);
+        if (M == true) {
+            TextoDni.setText("Coloque el dni del paciente a buscar");
+        }
+    }//GEN-LAST:event_BotonModificarMouseClicked
+
+    private void BotonEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonEliminarMouseClicked
+        check(3);
+        if (E == true) {
+            TextoDni.setText("Coloque el dni del paciente a buscar");
+        }
+    }//GEN-LAST:event_BotonEliminarMouseClicked
+
+    private void BotonBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonBuscarMouseClicked
+        B = true;
+        String dniS = TextoDni.getText();
+        try {
+            int dni = Integer.parseInt(dniS);
+            pa=buscarXDNI(dni);
+            if(pa.getDni()!=0){
+            pa = (paData.buscarXdni(dni));
+            TextoNombre.setText(pa.getNombre());
+            TextoTelefono.setText(pa.getTelefono());
+            TextoDireccion.setText(pa.getDomicilio());
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "DNI incorrecto, intente nuevamente");
+
+        }
+
+    }//GEN-LAST:event_BotonBuscarMouseClicked
+
+    private void BotonAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonAceptarMouseClicked
+       String dniS=TextoDni.getText();
+           try {
+               int dni=Integer.parseInt(dniS);
+               pa=buscarXDNI(dni);
+               if(pa.getDni()!=0){
+                  if(M==true&&B==true){
+                        pa.setDomicilio(TextoDireccion.getText());
+                        pa.setTelefono(TextoTelefono.getText());
+                        paData.modificiarPaciente(pa);
+                    }else if(E==true&&B==true){
+                        paData.eliminarPaciente(pa.getIdPaciente());
+                    }
+               }else if(N==true){
+                       pa.setNombre(TextoNombre.getText());
+                       pa.setDni(dni);
+                       pa.setDomicilio(TextoDireccion.getText());
+                       pa.setTelefono(TextoTelefono.getText());
+                       paData.agregarPaciente(pa);
+               }
+           } catch (NumberFormatException e) {
+           }
+       
+    }//GEN-LAST:event_BotonAceptarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel BarraMenu;
+    private javax.swing.JTextField BotonAceptar;
+    private javax.swing.JLabel BotonBuscar;
+    private javax.swing.JLabel BotonCancelar;
+    private javax.swing.JLabel BotonEliminar;
+    private javax.swing.JLabel BotonListar;
+    private javax.swing.JLabel BotonModificar;
+    private javax.swing.JLabel BotonNuevo;
+    private javax.swing.JLabel Fondo;
+    private javax.swing.JLabel LabelDNI;
+    private javax.swing.JLabel LabelDireccion;
+    private javax.swing.JLabel LabelNuevo;
+    private javax.swing.JLabel LabelTelefono;
+    private javax.swing.JTextField OpcionDeAviso;
+    private javax.swing.JPanel PanelAceptar;
+    private javax.swing.JPanel PanelAdvertencia;
+    private javax.swing.JPanel PanelBuscar;
+    private javax.swing.JPanel PanelCancelar;
+    private javax.swing.JPanel PanelEliminar;
+    private javax.swing.JPanel PanelListar;
+    private javax.swing.JPanel PanelModificar;
+    private javax.swing.JPanel PanelNuevo;
+    private javax.swing.JScrollPane Tabla;
+    private javax.swing.JTable TablaListar;
+    private javax.swing.JTextField TextoDireccion;
+    private javax.swing.JTextField TextoDni;
+    private javax.swing.JTextField TextoNombre;
+    private javax.swing.JTextField TextoTelefono;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
-public void QuitarLaBarraTitulo()
-{
-Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
-DimensionBarra = Barra.getPreferredSize();
-Barra.setSize(0,0);
-Barra.setPreferredSize(new Dimension(0,0));
-repaint();
-}
+public void QuitarLaBarraTitulo() {
+        Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
+        DimensionBarra = Barra.getPreferredSize();
+        Barra.setSize(0, 0);
+        Barra.setPreferredSize(new Dimension(0, 0));
+        repaint();
+    }
+
+    private void check(int x) {
+        B = false;
+        TextoNombre.setEditable(false);
+        TextoDni.setEditable(false);
+        TextoTelefono.setEditable(false);
+        TextoDireccion.setEditable(false);
+        TextoNombre.setForeground(Color.gray);
+        TextoDni.setForeground(Color.gray);
+        TextoTelefono.setForeground(Color.gray);
+        TextoDireccion.setForeground(Color.gray);
+        TextoNombre.setText("Nombre completo del paciente");
+        TextoDni.setText("(solo numeros)");
+        TextoDireccion.setText("Agregar calle y numero");
+        TextoTelefono.setText("Telefono de contacto (solo numeros)");
+        if (x == 1) {
+            N = true;
+            M = false;
+            E = false;
+            TextoNombre.setEditable(true);
+            TextoDni.setEditable(true);
+            TextoTelefono.setEditable(true);
+            TextoDireccion.setEditable(true);
+        } else if (x == 2) {
+            M = true;
+            N = false;
+            E = false;
+            TextoDni.setEditable(true);
+
+        } else if (x == 3) {
+            E = true;
+            N = false;
+            M = false;
+            TextoDni.setEditable(true);
+        }
+    }
+    private Paciente buscarXDNI(int x){
+        PacienteData paData=new PacienteData();
+        pa=(paData.buscarXdni(x));
+        if(pa.getDni()==0){
+            JOptionPane.showMessageDialog(null, "Paciente no encontrado");
+//            return pa;
+        }
+            return pa;
+        
+    }
 }

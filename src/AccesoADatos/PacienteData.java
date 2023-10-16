@@ -35,7 +35,7 @@ public void agregarPaciente(Paciente paciente){
             ps.setInt(2, paciente.getDni());
             ps.setString(3, paciente.getDomicilio());
             ps.setString(4, paciente.getTelefono());
-            ps.setBoolean(5, paciente.isEstado());
+            ps.setBoolean(5, true);
             ps.executeUpdate();
             ResultSet resultado=ps.getGeneratedKeys();
             if(resultado.next()){
