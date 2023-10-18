@@ -2,6 +2,7 @@
 package AccesoADatos;
 
 import Entidades.Comida;
+import Entidades.Ingredientes;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -11,15 +12,15 @@ import javax.swing.JOptionPane;
 
 public class ComidaDatos {
     private Connection con=null;
-
+    ArrayList<Ingredientes> ingre=new ArrayList<>();
     public ComidaDatos() {
         con = Conector.getConnection();
     }
     
    
     
-    public void agregarComida(Comida comida){
-        String sql="INSERT into comida (nombre, detalle, cantCalorias) VALUES (?,?,?)";
+    public void agregarComida(Comida comida, ArrayList<Ingredientes> ingredientes){
+        String sql="INSERT into comida (nombre, detalle, cantCalorias, idIngredientes) VALUES (?,?,?,?)";
         try {
             PreparedStatement ps=con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, comida.getNombre());
