@@ -1,33 +1,35 @@
 package Vistas;
 
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.beans.PropertyVetoException;
 import javax.swing.ImageIcon;
+import javax.swing.JInternalFrame;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author charl
  */
 public class VPrueba4 extends javax.swing.JFrame {
 
-    private PacienteVista br=new PacienteVista();
+    private PacienteVista paciente = new PacienteVista();
+    private ArmarDieta dieta = new ArmarDieta();
+    private ArmarComida comida = new ArmarComida();
+//    private JInternalFrame br = new JInternalFrame();
     int xMouse, yMouse;
-    
+
     public VPrueba4() {
         initComponents();
         this.setLocationRelativeTo(null);
-       PanelInicio.setVisible(false);
-       PanelBuscar.setVisible(false);
-       
-        
-        
+        PanelInicio.setVisible(false);
+        PanelPaciente.setVisible(false);
+        PanelComida.setVisible(false);
+        PanelDieta.setVisible(false);
     }
 
     /**
@@ -39,7 +41,7 @@ public class VPrueba4 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/fondo3.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/FondoPrincipal.png"));
         Image image = icon.getImage();
         escritorio = new javax.swing.JDesktopPane(){
             public void paintComponent(Graphics g){
@@ -51,19 +53,27 @@ public class VPrueba4 extends javax.swing.JFrame {
         PanelCerrar = new javax.swing.JPanel();
         LabelCerrar = new javax.swing.JLabel();
         Blateral = new javax.swing.JPanel();
-        Home = new javax.swing.JLabel();
-        Buscar = new javax.swing.JLabel();
-        Editar = new javax.swing.JLabel();
-        Paciente = new javax.swing.JLabel();
+        LHome = new javax.swing.JLabel();
+        LDieta = new javax.swing.JLabel();
+        LPaciente = new javax.swing.JLabel();
+        LComida = new javax.swing.JLabel();
         PanelInicio = new javax.swing.JPanel();
         LabelInicio = new javax.swing.JLabel();
-        PanelBuscar = new javax.swing.JPanel();
+        PanelPaciente = new javax.swing.JPanel();
         LabelBuscar = new javax.swing.JLabel();
+        PanelDieta = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        PanelComida = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
+        escritorio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        escritorio.setPreferredSize(new java.awt.Dimension(800, 600));
+
         BSuperior.setBackground(new java.awt.Color(255, 255, 255));
+        BSuperior.setPreferredSize(new java.awt.Dimension(800, 35));
         BSuperior.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 BSuperiorMouseDragged(evt);
@@ -113,52 +123,73 @@ public class VPrueba4 extends javax.swing.JFrame {
         );
         BSuperiorLayout.setVerticalGroup(
             BSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelCerrar, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+            .addComponent(PanelCerrar, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
         );
 
         Blateral.setBackground(new java.awt.Color(255, 255, 255));
+        Blateral.setPreferredSize(new java.awt.Dimension(50, 600));
         Blateral.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Home.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Home.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/casa2.png"))); // NOI18N
-        Home.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        Home.addMouseListener(new java.awt.event.MouseAdapter() {
+        LHome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/casa2.png"))); // NOI18N
+        LHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LHome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                HomeMouseClicked(evt);
+                LHomeMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                HomeMouseEntered(evt);
+                LHomeMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                HomeMouseExited(evt);
+                LHomeMouseExited(evt);
             }
         });
-        Blateral.add(Home, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, 30));
+        Blateral.add(LHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, 30));
 
-        Buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar2.png"))); // NOI18N
-        Buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BuscarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                BuscarMouseExited(evt);
-            }
-        });
-        Blateral.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 30, 30));
-
-        Editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nuevo2.png"))); // NOI18N
-        Editar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        Blateral.add(Editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
-
-        Paciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/paciente2.png"))); // NOI18N
-        Paciente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        Paciente.addMouseListener(new java.awt.event.MouseAdapter() {
+        LDieta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nuevo2.png"))); // NOI18N
+        LDieta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LDieta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                PacienteMouseClicked(evt);
+                LDietaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                LDietaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                LDietaMouseExited(evt);
             }
         });
-        Blateral.add(Paciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, 30));
+        Blateral.add(LDieta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
+
+        LPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/paciente2.png"))); // NOI18N
+        LPaciente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LPaciente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LPacienteMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                LPacienteMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                LPacienteMouseExited(evt);
+            }
+        });
+        Blateral.add(LPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, 30));
+
+        LComida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LComida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cubiertosFinal.png"))); // NOI18N
+        LComida.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LComidaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                LComidaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                LComidaMouseExited(evt);
+            }
+        });
+        Blateral.add(LComida, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
 
         PanelInicio.setBackground(new java.awt.Color(204, 204, 204));
         PanelInicio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -168,116 +199,198 @@ public class VPrueba4 extends javax.swing.JFrame {
         LabelInicio.setText("INICIO");
         PanelInicio.add(LabelInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 30));
 
-        PanelBuscar.setBackground(new java.awt.Color(204, 204, 204));
-        PanelBuscar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        PanelPaciente.setBackground(new java.awt.Color(204, 204, 204));
+        PanelPaciente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         LabelBuscar.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
         LabelBuscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LabelBuscar.setText("BUSCAR");
-        PanelBuscar.add(LabelBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 30));
+        LabelBuscar.setText("PACIENTE");
+        PanelPaciente.add(LabelBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 30));
+
+        PanelDieta.setBackground(new java.awt.Color(204, 204, 204));
+        PanelDieta.setPreferredSize(new java.awt.Dimension(140, 30));
+        PanelDieta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("DIETA");
+        PanelDieta.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 30));
+
+        PanelComida.setBackground(new java.awt.Color(204, 204, 204));
+        PanelComida.setMinimumSize(new java.awt.Dimension(140, 30));
+        PanelComida.setPreferredSize(new java.awt.Dimension(140, 30));
+        PanelComida.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("COMIDA");
+        PanelComida.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 0, 110, 30));
 
         escritorio.setLayer(BSuperior, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(Blateral, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(PanelInicio, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        escritorio.setLayer(PanelBuscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(PanelPaciente, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(PanelDieta, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(PanelComida, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(BSuperior, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE)
             .addGroup(escritorioLayout.createSequentialGroup()
-                .addComponent(Blateral, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Blateral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(PanelInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                    .addComponent(PanelBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(105, 599, Short.MAX_VALUE))
-            .addComponent(BSuperior, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(PanelInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(PanelDieta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(PanelComida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PanelPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 602, Short.MAX_VALUE))
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Blateral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(escritorioLayout.createSequentialGroup()
                 .addComponent(BSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(PanelInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(PanelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(Blateral, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67)
+                .addComponent(PanelInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67)
+                .addComponent(PanelPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
+                .addComponent(PanelDieta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74)
+                .addComponent(PanelComida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio)
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio)
+            .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void HomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeMouseClicked
-      
-        br.dispose();
-    }//GEN-LAST:event_HomeMouseClicked
+    private void LPacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LPacienteMouseClicked
+        if (dieta.isVisible() == true) {
+            cerrarVentana(dieta);
+            abrirVentanas(paciente);
+        } else if (comida.isVisible() == true) {
+            cerrarVentana(comida);
+            abrirVentanas(paciente);
+        }else {
+            abrirVentanas(paciente);
+        }
+    }//GEN-LAST:event_LPacienteMouseClicked
 
-    private void PacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PacienteMouseClicked
-        barras();
-    }//GEN-LAST:event_PacienteMouseClicked
-
-    private void HomeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeMouseEntered
-        PanelInicio.setVisible(true);
-    }//GEN-LAST:event_HomeMouseEntered
-
-    private void BuscarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BuscarMouseEntered
-        PanelBuscar.setVisible(true);
-    }//GEN-LAST:event_BuscarMouseEntered
-
-    private void HomeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeMouseExited
+    private void LHomeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LHomeMouseExited
         PanelInicio.setVisible(false);
-    }//GEN-LAST:event_HomeMouseExited
+    }//GEN-LAST:event_LHomeMouseExited
 
-    private void BuscarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BuscarMouseExited
-        PanelBuscar.setVisible(false);
-    }//GEN-LAST:event_BuscarMouseExited
+    private void LHomeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LHomeMouseEntered
+        PanelInicio.setVisible(true);
+    }//GEN-LAST:event_LHomeMouseEntered
 
-    private void PanelCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelCerrarMouseEntered
-        PanelCerrar.setBackground(Color.red);
-        LabelCerrar.setForeground(Color.white);
-    }//GEN-LAST:event_PanelCerrarMouseEntered
+    private void LHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LHomeMouseClicked
+        if (paciente.isVisible() == true) {
+            cerrarVentana(paciente);
+        } else if (dieta.isVisible() == true) {
+            cerrarVentana(dieta);
+        } else if (comida.isVisible() == true) {
+            cerrarVentana(comida);
+        }
+
+    }//GEN-LAST:event_LHomeMouseClicked
+
+    private void BSuperiorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BSuperiorMouseEntered
+        xMouse = evt.getX();
+        yMouse = evt.getY();
+    }//GEN-LAST:event_BSuperiorMouseEntered
+
+    private void BSuperiorMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BSuperiorMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xMouse, y - yMouse);
+    }//GEN-LAST:event_BSuperiorMouseDragged
 
     private void PanelCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelCerrarMouseExited
         PanelCerrar.setBackground(Color.white);
         LabelCerrar.setForeground(Color.black);
     }//GEN-LAST:event_PanelCerrarMouseExited
 
-    private void BSuperiorMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BSuperiorMouseDragged
-        int x=evt.getXOnScreen();
-        int y=evt.getYOnScreen();
-        this.setLocation(x-xMouse, y-yMouse);
-    }//GEN-LAST:event_BSuperiorMouseDragged
-
-    private void BSuperiorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BSuperiorMouseEntered
-        xMouse=evt.getX();
-        yMouse=evt.getY();
-    }//GEN-LAST:event_BSuperiorMouseEntered
-
-    private void LabelCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelCerrarMouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_LabelCerrarMouseClicked
-
-    private void LabelCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelCerrarMouseEntered
-       PanelCerrar.setBackground(Color.red);
+    private void PanelCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelCerrarMouseEntered
+        PanelCerrar.setBackground(Color.red);
         LabelCerrar.setForeground(Color.white);
-    }//GEN-LAST:event_LabelCerrarMouseEntered
+    }//GEN-LAST:event_PanelCerrarMouseEntered
 
     private void LabelCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelCerrarMouseExited
         PanelCerrar.setBackground(Color.white);
         LabelCerrar.setForeground(Color.black);
     }//GEN-LAST:event_LabelCerrarMouseExited
+
+    private void LabelCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelCerrarMouseEntered
+        PanelCerrar.setBackground(Color.red);
+        LabelCerrar.setForeground(Color.white);
+    }//GEN-LAST:event_LabelCerrarMouseEntered
+
+    private void LabelCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelCerrarMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_LabelCerrarMouseClicked
+
+    private void LPacienteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LPacienteMouseEntered
+        PanelPaciente.setVisible(true);
+    }//GEN-LAST:event_LPacienteMouseEntered
+
+    private void LPacienteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LPacienteMouseExited
+        PanelPaciente.setVisible(false);
+    }//GEN-LAST:event_LPacienteMouseExited
+
+    private void LDietaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LDietaMouseEntered
+        PanelDieta.setVisible(true);
+    }//GEN-LAST:event_LDietaMouseEntered
+
+    private void LDietaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LDietaMouseExited
+        PanelDieta.setVisible(false);
+    }//GEN-LAST:event_LDietaMouseExited
+
+    private void LComidaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LComidaMouseEntered
+        PanelComida.setVisible(true);
+    }//GEN-LAST:event_LComidaMouseEntered
+
+    private void LComidaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LComidaMouseExited
+        PanelComida.setVisible(false);
+    }//GEN-LAST:event_LComidaMouseExited
+
+    private void LDietaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LDietaMouseClicked
+        if (paciente.isVisible() == true) {
+            cerrarVentana(paciente);
+             abrirVentanas(dieta);
+        } else if (comida.isVisible() == true) {
+            cerrarVentana(comida);
+             abrirVentanas(dieta);
+        }else{
+            abrirVentanas(dieta);
+        }
+    }//GEN-LAST:event_LDietaMouseClicked
+
+    private void LComidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LComidaMouseClicked
+        if(paciente.isVisible()==true){
+            cerrarVentana(paciente);
+            abrirVentanas(comida);
+        }else if(dieta.isVisible()==true){
+            cerrarVentana(dieta);
+            abrirVentanas(comida);
+        }else{
+            abrirVentanas(comida);
+        }
+    }//GEN-LAST:event_LComidaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -317,22 +430,32 @@ public class VPrueba4 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BSuperior;
     private javax.swing.JPanel Blateral;
-    private javax.swing.JLabel Buscar;
-    private javax.swing.JLabel Editar;
-    private javax.swing.JLabel Home;
+    private javax.swing.JLabel LComida;
+    private javax.swing.JLabel LDieta;
+    private javax.swing.JLabel LHome;
+    private javax.swing.JLabel LPaciente;
     private javax.swing.JLabel LabelBuscar;
     private javax.swing.JLabel LabelCerrar;
     private javax.swing.JLabel LabelInicio;
-    private javax.swing.JLabel Paciente;
-    private javax.swing.JPanel PanelBuscar;
     private javax.swing.JPanel PanelCerrar;
+    private javax.swing.JPanel PanelComida;
+    private javax.swing.JPanel PanelDieta;
     private javax.swing.JPanel PanelInicio;
+    private javax.swing.JPanel PanelPaciente;
     private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
-public void barras(){
-        br.setVisible(true);
-        escritorio.add(br);
-        escritorio.moveToFront(br);
-        br.setLocation(52, 36);
-}
+
+    private void abrirVentanas(JInternalFrame x) {
+        x.setVisible(true);
+        escritorio.add(x);
+        escritorio.moveToFront(x);
+        x.setLocation(50, 35);
+    }
+
+    private void cerrarVentana(JInternalFrame x) {
+        x.dispose();
+        escritorio.remove(x);
+    }
 }
