@@ -4,17 +4,40 @@
  */
 package Vistas;
 
+import AccesoADatos.DietaData;
+import Entidades.Dieta;
+import java.awt.Dimension;
+import javax.swing.JComponent;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author charl
  */
 public class ArmarDieta extends javax.swing.JInternalFrame {
-
-    /**
-     * Creates new form ArmarDieta
-     */
+    private DefaultTableModel modelo = new DefaultTableModel();
+    private DefaultTableModel modelo2 = new DefaultTableModel();
+private JComponent Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
+    private Dimension DimensionBarra = null;
     public ArmarDieta() {
         initComponents();
+        ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
+        PanelFechaFinal.setVisible(false);
+        PanelCantCalorias.setVisible(false);
+        TablaComidasAgregadas.setVisible(false);
+        PanelBotonCrearDieta.setVisible(false);
+        PanelBotonCrearDietaComida.setVisible(false);
+        PanelBotonEliminar.setVisible(false);
+        PanelBotonModificarDieta.setVisible(false);
+        PanelListarDietas.setVisible(false);
+        TablaComidasAgregadas.setVisible(false);
+        TablaComidasParaAgregar.setVisible(false);
+        CargarCabeceraComiAgregadas();
+        CargarCabeceraComidas();
+        CargarComboBox();
+        CargarComboBoxListarDietas();
+        
+        
     }
 
     /**
@@ -26,32 +49,484 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        PanelIngresarNomDieta = new javax.swing.JPanel();
+        ingrNomDietaLabel = new javax.swing.JLabel();
+        TextoNomDieta = new javax.swing.JTextField();
+        PanelPesoInicialLabel = new javax.swing.JPanel();
+        LabelIngPesoInicial = new javax.swing.JLabel();
+        PanelIngPesoFinal = new javax.swing.JPanel();
+        LabelIngPesoFinal = new javax.swing.JLabel();
+        PanelFechaInicial = new javax.swing.JPanel();
+        LabelFechaInicial = new javax.swing.JLabel();
+        CalendarioFechaInicial = new com.toedter.calendar.JDateChooser();
+        TextoPesoInicial = new javax.swing.JTextField();
+        TextoPesoFinal = new javax.swing.JTextField();
+        PanelFechaFinal = new javax.swing.JPanel();
+        LabelFechaFinal = new javax.swing.JLabel();
+        TextoFechaFinalAutomatica = new javax.swing.JTextField();
+        PanelCantCalorias = new javax.swing.JPanel();
+        LabelCantCalorias = new javax.swing.JLabel();
+        TextoCaloriasSumadas = new javax.swing.JTextField();
+        LabelObjKcal = new javax.swing.JLabel();
+        TextoObjetivoCaloriasEditable = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TablaComidasAgregadas = new javax.swing.JTable();
+        PanelBotonCrearDieta = new javax.swing.JPanel();
+        LabelCrearDieta = new javax.swing.JLabel();
+        PanelBotonEliminar = new javax.swing.JPanel();
+        LabelBotonElinimar = new javax.swing.JLabel();
+        PanelBotonCrearDietaComida = new javax.swing.JPanel();
+        LabelBotonCrearDietaComida = new javax.swing.JLabel();
+        PanelListarDietas = new javax.swing.JPanel();
+        LabelListarDietas = new javax.swing.JLabel();
+        ComboListaDietas = new javax.swing.JComboBox<>();
+        PanelBotonModificarDieta = new javax.swing.JPanel();
+        LabelBotonModificarDieta = new javax.swing.JLabel();
+        ComboListarCalorias = new javax.swing.JComboBox<>();
+        PanelSelecCalorias = new javax.swing.JPanel();
+        LabelSeleccionCal = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TablaComidasParaAgregar = new javax.swing.JTable();
+        Fondo = new javax.swing.JLabel();
 
-        jLabel1.setText("dieta");
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setPreferredSize(new java.awt.Dimension(750, 565));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(195, 195, 195)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(402, Short.MAX_VALUE))
+        PanelIngresarNomDieta.setBackground(new java.awt.Color(204, 204, 255));
+        PanelIngresarNomDieta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        ingrNomDietaLabel.setForeground(new java.awt.Color(0, 0, 0));
+        ingrNomDietaLabel.setText("Ingrese un nombre para su dieta");
+        PanelIngresarNomDieta.add(ingrNomDietaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 190, 20));
+
+        getContentPane().add(PanelIngresarNomDieta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 200, 20));
+
+        TextoNomDieta.setBackground(new java.awt.Color(204, 204, 255));
+        getContentPane().add(TextoNomDieta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 110, -1));
+
+        PanelPesoInicialLabel.setBackground(new java.awt.Color(204, 204, 255));
+
+        LabelIngPesoInicial.setForeground(new java.awt.Color(0, 0, 0));
+        LabelIngPesoInicial.setText("  Ingrese su peso inicial");
+
+        javax.swing.GroupLayout PanelPesoInicialLabelLayout = new javax.swing.GroupLayout(PanelPesoInicialLabel);
+        PanelPesoInicialLabel.setLayout(PanelPesoInicialLabelLayout);
+        PanelPesoInicialLabelLayout.setHorizontalGroup(
+            PanelPesoInicialLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelPesoInicialLabelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LabelIngPesoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(180, 180, 180)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(284, Short.MAX_VALUE))
+        PanelPesoInicialLabelLayout.setVerticalGroup(
+            PanelPesoInicialLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelPesoInicialLabelLayout.createSequentialGroup()
+                .addComponent(LabelIngPesoInicial)
+                .addGap(0, 4, Short.MAX_VALUE))
         );
+
+        getContentPane().add(PanelPesoInicialLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 200, 20));
+
+        PanelIngPesoFinal.setBackground(new java.awt.Color(204, 204, 255));
+
+        LabelIngPesoFinal.setForeground(new java.awt.Color(0, 0, 0));
+        LabelIngPesoFinal.setText("  Ingrese su peso final");
+
+        javax.swing.GroupLayout PanelIngPesoFinalLayout = new javax.swing.GroupLayout(PanelIngPesoFinal);
+        PanelIngPesoFinal.setLayout(PanelIngPesoFinalLayout);
+        PanelIngPesoFinalLayout.setHorizontalGroup(
+            PanelIngPesoFinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelIngPesoFinalLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LabelIngPesoFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+        PanelIngPesoFinalLayout.setVerticalGroup(
+            PanelIngPesoFinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelIngPesoFinalLayout.createSequentialGroup()
+                .addComponent(LabelIngPesoFinal)
+                .addGap(0, 4, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(PanelIngPesoFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 200, 20));
+
+        PanelFechaInicial.setBackground(new java.awt.Color(204, 204, 255));
+
+        LabelFechaInicial.setForeground(new java.awt.Color(0, 0, 0));
+        LabelFechaInicial.setText("Fecha inicial");
+
+        CalendarioFechaInicial.setBackground(new java.awt.Color(204, 204, 255));
+
+        javax.swing.GroupLayout PanelFechaInicialLayout = new javax.swing.GroupLayout(PanelFechaInicial);
+        PanelFechaInicial.setLayout(PanelFechaInicialLayout);
+        PanelFechaInicialLayout.setHorizontalGroup(
+            PanelFechaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelFechaInicialLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LabelFechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CalendarioFechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        PanelFechaInicialLayout.setVerticalGroup(
+            PanelFechaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelFechaInicialLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LabelFechaInicial)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelFechaInicialLayout.createSequentialGroup()
+                .addGap(0, 1, Short.MAX_VALUE)
+                .addComponent(CalendarioFechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        getContentPane().add(PanelFechaInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 200, 30));
+
+        TextoPesoInicial.setBackground(new java.awt.Color(204, 204, 255));
+        getContentPane().add(TextoPesoInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 70, -1));
+
+        TextoPesoFinal.setBackground(new java.awt.Color(204, 204, 255));
+        getContentPane().add(TextoPesoFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 70, -1));
+
+        PanelFechaFinal.setBackground(new java.awt.Color(204, 204, 255));
+
+        LabelFechaFinal.setForeground(new java.awt.Color(0, 0, 0));
+        LabelFechaFinal.setText("Fecha Final");
+
+        TextoFechaFinalAutomatica.setBackground(new java.awt.Color(204, 204, 255));
+        TextoFechaFinalAutomatica.setForeground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout PanelFechaFinalLayout = new javax.swing.GroupLayout(PanelFechaFinal);
+        PanelFechaFinal.setLayout(PanelFechaFinalLayout);
+        PanelFechaFinalLayout.setHorizontalGroup(
+            PanelFechaFinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelFechaFinalLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LabelFechaFinal)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(TextoFechaFinalAutomatica, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        PanelFechaFinalLayout.setVerticalGroup(
+            PanelFechaFinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelFechaFinalLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PanelFechaFinalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelFechaFinal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TextoFechaFinalAutomatica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31))
+        );
+
+        getContentPane().add(PanelFechaFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 170, 30));
+
+        PanelCantCalorias.setBackground(new java.awt.Color(204, 204, 255));
+
+        LabelCantCalorias.setBackground(new java.awt.Color(204, 204, 255));
+        LabelCantCalorias.setForeground(new java.awt.Color(0, 0, 0));
+        LabelCantCalorias.setText("Calorias:");
+
+        TextoCaloriasSumadas.setBackground(new java.awt.Color(204, 204, 255));
+        TextoCaloriasSumadas.setForeground(new java.awt.Color(0, 0, 0));
+
+        LabelObjKcal.setBackground(new java.awt.Color(204, 204, 255));
+        LabelObjKcal.setForeground(new java.awt.Color(0, 0, 0));
+        LabelObjKcal.setText("Objetivo Semanal en kcal:");
+
+        TextoObjetivoCaloriasEditable.setBackground(new java.awt.Color(204, 204, 255));
+        TextoObjetivoCaloriasEditable.setForeground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout PanelCantCaloriasLayout = new javax.swing.GroupLayout(PanelCantCalorias);
+        PanelCantCalorias.setLayout(PanelCantCaloriasLayout);
+        PanelCantCaloriasLayout.setHorizontalGroup(
+            PanelCantCaloriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelCantCaloriasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LabelCantCalorias)
+                .addGap(18, 18, 18)
+                .addComponent(TextoCaloriasSumadas, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(LabelObjKcal)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TextoObjetivoCaloriasEditable, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        PanelCantCaloriasLayout.setVerticalGroup(
+            PanelCantCaloriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCantCaloriasLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(PanelCantCaloriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelCantCalorias)
+                    .addComponent(TextoCaloriasSumadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabelObjKcal)
+                    .addComponent(TextoObjetivoCaloriasEditable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        getContentPane().add(PanelCantCalorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 390, 30));
+
+        TablaComidasAgregadas.setBackground(new java.awt.Color(204, 204, 255));
+        TablaComidasAgregadas.setForeground(new java.awt.Color(0, 0, 0));
+        TablaComidasAgregadas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(TablaComidasAgregadas);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 390, 220));
+
+        PanelBotonCrearDieta.setBackground(new java.awt.Color(255, 0, 0));
+
+        LabelCrearDieta.setBackground(new java.awt.Color(255, 0, 0));
+        LabelCrearDieta.setForeground(new java.awt.Color(0, 0, 0));
+        LabelCrearDieta.setText("   Crear Dieta");
+
+        javax.swing.GroupLayout PanelBotonCrearDietaLayout = new javax.swing.GroupLayout(PanelBotonCrearDieta);
+        PanelBotonCrearDieta.setLayout(PanelBotonCrearDietaLayout);
+        PanelBotonCrearDietaLayout.setHorizontalGroup(
+            PanelBotonCrearDietaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelBotonCrearDietaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LabelCrearDieta, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        PanelBotonCrearDietaLayout.setVerticalGroup(
+            PanelBotonCrearDietaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LabelCrearDieta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(PanelBotonCrearDieta, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, -1, 20));
+
+        PanelBotonEliminar.setBackground(new java.awt.Color(204, 204, 255));
+
+        LabelBotonElinimar.setBackground(new java.awt.Color(204, 204, 255));
+        LabelBotonElinimar.setForeground(new java.awt.Color(0, 0, 0));
+        LabelBotonElinimar.setText("      Eliminar");
+
+        javax.swing.GroupLayout PanelBotonEliminarLayout = new javax.swing.GroupLayout(PanelBotonEliminar);
+        PanelBotonEliminar.setLayout(PanelBotonEliminarLayout);
+        PanelBotonEliminarLayout.setHorizontalGroup(
+            PanelBotonEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LabelBotonElinimar, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+        );
+        PanelBotonEliminarLayout.setVerticalGroup(
+            PanelBotonEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LabelBotonElinimar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(PanelBotonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 80, 30));
+
+        PanelBotonCrearDietaComida.setBackground(new java.awt.Color(204, 204, 255));
+
+        LabelBotonCrearDietaComida.setBackground(new java.awt.Color(204, 204, 255));
+        LabelBotonCrearDietaComida.setForeground(new java.awt.Color(0, 0, 0));
+        LabelBotonCrearDietaComida.setText("     Empezar!");
+
+        javax.swing.GroupLayout PanelBotonCrearDietaComidaLayout = new javax.swing.GroupLayout(PanelBotonCrearDietaComida);
+        PanelBotonCrearDietaComida.setLayout(PanelBotonCrearDietaComidaLayout);
+        PanelBotonCrearDietaComidaLayout.setHorizontalGroup(
+            PanelBotonCrearDietaComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LabelBotonCrearDietaComida, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+        );
+        PanelBotonCrearDietaComidaLayout.setVerticalGroup(
+            PanelBotonCrearDietaComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelBotonCrearDietaComidaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LabelBotonCrearDietaComida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(15, 15, 15))
+        );
+
+        getContentPane().add(PanelBotonCrearDietaComida, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 450, 80, 30));
+
+        PanelListarDietas.setBackground(new java.awt.Color(204, 204, 255));
+
+        LabelListarDietas.setBackground(new java.awt.Color(204, 204, 255));
+        LabelListarDietas.setForeground(new java.awt.Color(0, 0, 0));
+        LabelListarDietas.setText("Lista de Dietas:");
+
+        ComboListaDietas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout PanelListarDietasLayout = new javax.swing.GroupLayout(PanelListarDietas);
+        PanelListarDietas.setLayout(PanelListarDietasLayout);
+        PanelListarDietasLayout.setHorizontalGroup(
+            PanelListarDietasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelListarDietasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LabelListarDietas, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(ComboListaDietas, 0, 138, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        PanelListarDietasLayout.setVerticalGroup(
+            PanelListarDietasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelListarDietasLayout.createSequentialGroup()
+                .addGroup(PanelListarDietasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelListarDietas)
+                    .addComponent(ComboListaDietas, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(PanelListarDietas, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 260, 20));
+
+        PanelBotonModificarDieta.setBackground(new java.awt.Color(255, 0, 0));
+
+        LabelBotonModificarDieta.setBackground(new java.awt.Color(255, 0, 0));
+        LabelBotonModificarDieta.setForeground(new java.awt.Color(0, 0, 0));
+        LabelBotonModificarDieta.setText("  Modificar Dieta");
+
+        javax.swing.GroupLayout PanelBotonModificarDietaLayout = new javax.swing.GroupLayout(PanelBotonModificarDieta);
+        PanelBotonModificarDieta.setLayout(PanelBotonModificarDietaLayout);
+        PanelBotonModificarDietaLayout.setHorizontalGroup(
+            PanelBotonModificarDietaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LabelBotonModificarDieta, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+        );
+        PanelBotonModificarDietaLayout.setVerticalGroup(
+            PanelBotonModificarDietaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LabelBotonModificarDieta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(PanelBotonModificarDieta, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, -1, 20));
+
+        getContentPane().add(ComboListarCalorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 50, 180, -1));
+
+        PanelSelecCalorias.setBackground(new java.awt.Color(204, 204, 255));
+
+        LabelSeleccionCal.setBackground(new java.awt.Color(204, 204, 255));
+        LabelSeleccionCal.setForeground(new java.awt.Color(0, 0, 0));
+        LabelSeleccionCal.setText(" Seleccione las Kcal.");
+
+        javax.swing.GroupLayout PanelSelecCaloriasLayout = new javax.swing.GroupLayout(PanelSelecCalorias);
+        PanelSelecCalorias.setLayout(PanelSelecCaloriasLayout);
+        PanelSelecCaloriasLayout.setHorizontalGroup(
+            PanelSelecCaloriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LabelSeleccionCal, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+        );
+        PanelSelecCaloriasLayout.setVerticalGroup(
+            PanelSelecCaloriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelSelecCaloriasLayout.createSequentialGroup()
+                .addGap(0, 4, Short.MAX_VALUE)
+                .addComponent(LabelSeleccionCal))
+        );
+
+        getContentPane().add(PanelSelecCalorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, 140, 20));
+
+        jScrollPane2.setBackground(new java.awt.Color(204, 204, 255));
+        jScrollPane2.setForeground(new java.awt.Color(0, 0, 0));
+
+        TablaComidasParaAgregar.setBackground(new java.awt.Color(204, 204, 255));
+        TablaComidasParaAgregar.setForeground(new java.awt.Color(0, 0, 0));
+        TablaComidasParaAgregar.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(TablaComidasParaAgregar);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(483, 90, 230, 350));
+
+        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FondoDieta.png"))); // NOI18N
+        Fondo.setPreferredSize(new java.awt.Dimension(750, 565));
+        getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 750, 590));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private com.toedter.calendar.JDateChooser CalendarioFechaInicial;
+    private javax.swing.JComboBox<String> ComboListaDietas;
+    private javax.swing.JComboBox<String> ComboListarCalorias;
+    private javax.swing.JLabel Fondo;
+    private javax.swing.JLabel LabelBotonCrearDietaComida;
+    private javax.swing.JLabel LabelBotonElinimar;
+    private javax.swing.JLabel LabelBotonModificarDieta;
+    private javax.swing.JLabel LabelCantCalorias;
+    private javax.swing.JLabel LabelCrearDieta;
+    private javax.swing.JLabel LabelFechaFinal;
+    private javax.swing.JLabel LabelFechaInicial;
+    private javax.swing.JLabel LabelIngPesoFinal;
+    private javax.swing.JLabel LabelIngPesoInicial;
+    private javax.swing.JLabel LabelListarDietas;
+    private javax.swing.JLabel LabelObjKcal;
+    private javax.swing.JLabel LabelSeleccionCal;
+    private javax.swing.JPanel PanelBotonCrearDieta;
+    private javax.swing.JPanel PanelBotonCrearDietaComida;
+    private javax.swing.JPanel PanelBotonEliminar;
+    private javax.swing.JPanel PanelBotonModificarDieta;
+    private javax.swing.JPanel PanelCantCalorias;
+    private javax.swing.JPanel PanelFechaFinal;
+    private javax.swing.JPanel PanelFechaInicial;
+    private javax.swing.JPanel PanelIngPesoFinal;
+    private javax.swing.JPanel PanelIngresarNomDieta;
+    private javax.swing.JPanel PanelListarDietas;
+    private javax.swing.JPanel PanelPesoInicialLabel;
+    private javax.swing.JPanel PanelSelecCalorias;
+    private javax.swing.JTable TablaComidasAgregadas;
+    private javax.swing.JTable TablaComidasParaAgregar;
+    private javax.swing.JTextField TextoCaloriasSumadas;
+    private javax.swing.JTextField TextoFechaFinalAutomatica;
+    private javax.swing.JTextField TextoNomDieta;
+    private javax.swing.JTextField TextoObjetivoCaloriasEditable;
+    private javax.swing.JTextField TextoPesoFinal;
+    private javax.swing.JTextField TextoPesoInicial;
+    private javax.swing.JLabel ingrNomDietaLabel;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
+
+public void QuitarLaBarraTitulo() {
+        Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
+        DimensionBarra = Barra.getPreferredSize();
+        Barra.setSize(0, 0);
+        Barra.setPreferredSize(new Dimension(0, 0));
+        repaint();
+    }
+
+private void CargarCabeceraComiAgregadas() {
+        //Por medio del objeto DefaultTableModel "modelo" se cargan las cabeceras de la tabla por medio del
+        //metodo addColumn() que luego, se cargan a la tabla por medio del metodo setModel().
+        modelo.addColumn("NOMBRE");
+        modelo.addColumn("DETALLE");
+        modelo.addColumn("CALORIAS");
+        TablaComidasAgregadas.setModel(modelo);
+
+    }
+
+private void CargarCabeceraComidas() {
+        //Por medio del objeto DefaultTableModel "modelo" se cargan las cabeceras de la tabla por medio del
+        //metodo addColumn() que luego, se cargan a la tabla por medio del metodo setModel().
+        modelo2.addColumn("NOMBRE");
+        
+        modelo2.addColumn("CALORIAS");
+        TablaComidasParaAgregar.setModel(modelo2);
+}
+
+public void CargarComboBox(){
+   
+    ComboListarCalorias.addItem("0-250 Kcal");
+    ComboListarCalorias.addItem("250-500 Kcal");
+    ComboListarCalorias.addItem("500-750 Kcal");
+    ComboListarCalorias.addItem("750-1000 Kcal");
+    ComboListarCalorias.addItem("1000< Kcal");
+    
+    
+}
+
+public void CargarComboBoxListarDietas(){
+    DietaData dd=new DietaData();
+    for (Dieta dieta : dd.listarDietas()) {
+        ComboListaDietas.addItem(dieta.getNombre());
+    }
+}
 }

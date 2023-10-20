@@ -4,6 +4,7 @@
  */
 package AccesoADatos;
 
+import Entidades.Comida;
 import Entidades.Dieta;
 import Entidades.Paciente;
 import java.sql.Connection;
@@ -11,6 +12,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
@@ -22,17 +24,18 @@ import javax.swing.JOptionPane;
  * @author charl
  */
 public class DietaData {
-    private Connection con=null;
+
+    private Connection con = null;
 
     public DietaData() {
-        con=Conector.getConnection();
+        con = Conector.getConnection();
     }
-    
-    public void agregarDieta(Dieta dieta){
-        String sql="insert into dieta (idPaciente,nombre,fechaInicial,pesoInicial,pesoFinal,fechaFinal)"
+
+    public void agregarDieta(Dieta dieta) {
+        String sql = "insert into dieta (idPaciente,nombre,fechaInicial,pesoInicial,pesoFinal,fechaFinal)"
                 + "values(?,?,?,?,?,?)";
         try {
-            PreparedStatement ps=con.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setInt(1, dieta.getPaciente().getIdPaciente());
             ps.setString(2, dieta.getNombre());
             ps.setDate(3, Date.valueOf(dieta.getFechaInicial()));
@@ -40,32 +43,51 @@ public class DietaData {
             ps.setDouble(5, dieta.getPesoFinal());
             ps.setDate(6, Date.valueOf(dieta.getFechaFinal()));
             ps.executeUpdate();
-            ResultSet resultado=ps.getGeneratedKeys();
-            while(resultado.next()){
+            ResultSet resultado = ps.getGeneratedKeys();
+            while (resultado.next()) {
                 dieta.setIdDieta(resultado.getInt(1));
-                JOptionPane.showMessageDialog(null, "Dieta agregada satisfactoriamente");     
+                JOptionPane.showMessageDialog(null, "Dieta agregada satisfactoriamente");
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Dieta");
         }
     }
-    public void modificarDieta(Dieta dieta){
-        
-        
-        String sql="update dieta set pesoFinal=?, fechaFinal=?"
+
+    public void modificarDieta(Dieta dieta) {
+
+        String sql = "update dieta set pesoFinal=?, fechaFinal=?"
                 + "where idDieta=?";
         try {
-            PreparedStatement ps=con.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setDouble(1, dieta.getPesoFinal());
             ps.setDate(2, Date.valueOf(dieta.getFechaFinal()));
             ps.setInt(3, dieta.getIdDieta());
-            int resultado=ps.executeUpdate();
-            if(resultado==1){
+            int resultado = ps.executeUpdate();
+            if (resultado == 1) {
                 JOptionPane.showMessageDialog(null, "Datos de dieta modificado satisfactoriamente");
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Dieta");
-        }  
+        }
     }
-    
+
+    public ArrayList<Dieta> listarDietas() {
+        ArrayList<Dieta> dietas = new ArrayList<>();
+        String sql = "SELECT nombre FROM dieta";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Dieta dieta = new Dieta();
+                dieta.setNombre(rs.getString("nombre"));
+                dietas.add(dieta);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al conectar a la tabla dieta " + ex);
+        }
+
+        return dietas;
+    }
+
 }
