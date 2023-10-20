@@ -5,11 +5,11 @@ public class Comida {
     private String detalle;
     private int cantCalorias;
     private int idComida;
-private Ingredientes ingredientes;
+    private Ingredientes ingredientes;
     public Comida() {
     }
 
-    public Comida(String nombre, String detalle, int cantCalorias, int idComida, Ingredientes ingredientes) {
+    public Comida(int idComida,String nombre, String detalle, int cantCalorias,  Ingredientes ingredientes) {
         this.nombre = nombre;
         this.detalle = detalle;
         this.cantCalorias = cantCalorias;

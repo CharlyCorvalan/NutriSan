@@ -16,13 +16,13 @@ import javax.swing.JInternalFrame;
  * @author charl
  */
 public class VPrueba4 extends javax.swing.JFrame {
-
+    
     private PacienteVista paciente = new PacienteVista();
     private ArmarDieta dieta = new ArmarDieta();
     private ArmarComida comida = new ArmarComida();
-//    private JInternalFrame br = new JInternalFrame();
+    private IngredientesVista ingredientes = new IngredientesVista();
     int xMouse, yMouse;
-
+    
     public VPrueba4() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -30,6 +30,7 @@ public class VPrueba4 extends javax.swing.JFrame {
         PanelPaciente.setVisible(false);
         PanelComida.setVisible(false);
         PanelDieta.setVisible(false);
+        PanelIngredientes.setVisible(false);
     }
 
     /**
@@ -57,6 +58,7 @@ public class VPrueba4 extends javax.swing.JFrame {
         LDieta = new javax.swing.JLabel();
         LPaciente = new javax.swing.JLabel();
         LComida = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         PanelInicio = new javax.swing.JPanel();
         LabelInicio = new javax.swing.JLabel();
         PanelPaciente = new javax.swing.JPanel();
@@ -65,6 +67,8 @@ public class VPrueba4 extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         PanelComida = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        PanelIngredientes = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -178,6 +182,7 @@ public class VPrueba4 extends javax.swing.JFrame {
 
         LComida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LComida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cubiertosFinal.png"))); // NOI18N
+        LComida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         LComida.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 LComidaMouseClicked(evt);
@@ -190,6 +195,22 @@ public class VPrueba4 extends javax.swing.JFrame {
             }
         });
         Blateral.add(LComida, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/manzanaFinal.png"))); // NOI18N
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel1MouseExited(evt);
+            }
+        });
+        Blateral.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, -1, -1));
 
         PanelInicio.setBackground(new java.awt.Color(204, 204, 204));
         PanelInicio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -226,12 +247,21 @@ public class VPrueba4 extends javax.swing.JFrame {
         jLabel3.setText("COMIDA");
         PanelComida.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 0, 110, 30));
 
+        PanelIngredientes.setBackground(new java.awt.Color(204, 204, 204));
+        PanelIngredientes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("INGREDIENTES");
+        PanelIngredientes.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 30));
+
         escritorio.setLayer(BSuperior, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(Blateral, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(PanelInicio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(PanelPaciente, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(PanelDieta, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(PanelComida, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(PanelIngredientes, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
@@ -241,17 +271,19 @@ public class VPrueba4 extends javax.swing.JFrame {
             .addGroup(escritorioLayout.createSequentialGroup()
                 .addComponent(Blateral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(PanelInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(PanelDieta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(PanelComida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PanelPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(PanelInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PanelDieta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PanelComida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PanelPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PanelIngredientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 602, Short.MAX_VALUE))
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Blateral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(escritorioLayout.createSequentialGroup()
+                .addComponent(Blateral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(escritorioLayout.createSequentialGroup()
                 .addComponent(BSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(67, 67, 67)
@@ -261,7 +293,10 @@ public class VPrueba4 extends javax.swing.JFrame {
                 .addGap(53, 53, 53)
                 .addComponent(PanelDieta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(74, 74, 74)
-                .addComponent(PanelComida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(PanelComida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(76, 76, 76)
+                .addComponent(PanelIngredientes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -285,9 +320,13 @@ public class VPrueba4 extends javax.swing.JFrame {
         } else if (comida.isVisible() == true) {
             cerrarVentana(comida);
             abrirVentanas(paciente);
-        }else {
+        } else if (ingredientes.isVisible() == true) {
+            cerrarVentana(ingredientes);
+            abrirVentanas(paciente);
+        } else {
             abrirVentanas(paciente);
         }
+        
     }//GEN-LAST:event_LPacienteMouseClicked
 
     private void LHomeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LHomeMouseExited
@@ -305,6 +344,8 @@ public class VPrueba4 extends javax.swing.JFrame {
             cerrarVentana(dieta);
         } else if (comida.isVisible() == true) {
             cerrarVentana(comida);
+        }else if(ingredientes.isVisible()==true){
+            cerrarVentana(ingredientes);
         }
 
     }//GEN-LAST:event_LHomeMouseClicked
@@ -371,26 +412,57 @@ public class VPrueba4 extends javax.swing.JFrame {
     private void LDietaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LDietaMouseClicked
         if (paciente.isVisible() == true) {
             cerrarVentana(paciente);
-             abrirVentanas(dieta);
+            abrirVentanas(dieta);
         } else if (comida.isVisible() == true) {
             cerrarVentana(comida);
-             abrirVentanas(dieta);
-        }else{
+            abrirVentanas(dieta);
+        } else if (ingredientes.isVisible() == true) {
+            cerrarVentana(ingredientes);
+            abrirVentanas(dieta);
+        } else {
             abrirVentanas(dieta);
         }
+        
     }//GEN-LAST:event_LDietaMouseClicked
 
     private void LComidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LComidaMouseClicked
-        if(paciente.isVisible()==true){
+        if (paciente.isVisible() == true) {
             cerrarVentana(paciente);
             abrirVentanas(comida);
-        }else if(dieta.isVisible()==true){
+        } else if (dieta.isVisible() == true) {
             cerrarVentana(dieta);
             abrirVentanas(comida);
-        }else{
+        } else if (ingredientes.isVisible() == true) {
+            cerrarVentana(ingredientes);
+            abrirVentanas(comida);
+        } else {
             abrirVentanas(comida);
         }
+        
     }//GEN-LAST:event_LComidaMouseClicked
+
+    private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
+        PanelIngredientes.setVisible(true);
+    }//GEN-LAST:event_jLabel1MouseEntered
+
+    private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
+        PanelIngredientes.setVisible(false);
+    }//GEN-LAST:event_jLabel1MouseExited
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        if (paciente.isVisible() == true) {
+            cerrarVentana(paciente);
+            abrirVentanas(ingredientes);
+        } else if (dieta.isVisible() == true) {
+            cerrarVentana(dieta);
+            abrirVentanas(ingredientes);
+        } else if (comida.isVisible() == true) {
+            cerrarVentana(comida);
+            abrirVentanas(ingredientes);
+        } else {
+            abrirVentanas(ingredientes);
+        }
+    }//GEN-LAST:event_jLabel1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -440,11 +512,14 @@ public class VPrueba4 extends javax.swing.JFrame {
     private javax.swing.JPanel PanelCerrar;
     private javax.swing.JPanel PanelComida;
     private javax.swing.JPanel PanelDieta;
+    private javax.swing.JPanel PanelIngredientes;
     private javax.swing.JPanel PanelInicio;
     private javax.swing.JPanel PanelPaciente;
     private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 
     private void abrirVentanas(JInternalFrame x) {
@@ -453,7 +528,7 @@ public class VPrueba4 extends javax.swing.JFrame {
         escritorio.moveToFront(x);
         x.setLocation(50, 35);
     }
-
+    
     private void cerrarVentana(JInternalFrame x) {
         x.dispose();
         escritorio.remove(x);

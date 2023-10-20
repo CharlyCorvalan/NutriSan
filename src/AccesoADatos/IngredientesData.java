@@ -20,16 +20,17 @@ ArrayList<Ingredientes> ingred =new ArrayList<>();
     }
    
     public void agregarIngrediente(Ingredientes ingredientes){
-        String sql="INSERT into ingredientes (nombre, categoria, cantCalorias) VALUES (?,?,?)";
+        String sql="INSERT into ingredientes (nombre, categoria, cantCalorias,estado) VALUES (?,?,?,?)";
         try {
             PreparedStatement ps=con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, ingredientes.getNombre());
             ps.setString(2, ingredientes.getCategoria());
             ps.setInt(3, ingredientes.getCantCalorias());
+            ps.setBoolean(4, true);
             ps.executeUpdate();
             ResultSet rs=ps.getGeneratedKeys();
             if(rs.next()){
-                ingredientes.setIdIngredientes(rs.getInt(1));
+                ingredientes.setIdIngredientes(rs.getInt(1));       
                 JOptionPane.showMessageDialog(null, "Ingrediente agregado con exito!");
             }
             ps.close();
@@ -40,7 +41,7 @@ ArrayList<Ingredientes> ingred =new ArrayList<>();
     }
    
     public void eliminarIngrediente(int idIngredientes){
-    String sql="DELETE FROM ingredientes WHERE idIngredientes=?";
+    String sql="update ingredientes set estado=0 where idIngredientes=?";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setInt(1, idIngredientes);
@@ -55,7 +56,7 @@ ArrayList<Ingredientes> ingred =new ArrayList<>();
 }
     
     public ArrayList<Ingredientes> listarIngredientesPorCateg(String categoria){
-    String sql="SELECT nombre, cantCalorias, idIngredientes FROM ingredientes WHERE ingredientes.categoria=?";
+    String sql="SELECT nombre, cantCalorias, idIngredientes, estado FROM ingredientes WHERE categoria like=?";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setString(1, categoria);
