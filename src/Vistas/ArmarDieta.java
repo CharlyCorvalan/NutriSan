@@ -5,8 +5,10 @@
 package Vistas;
 
 import AccesoADatos.DietaData;
+import Entidades.Comida;
 import Entidades.Dieta;
 import java.awt.Dimension;
+import java.util.ArrayList;
 import javax.swing.JComponent;
 import javax.swing.table.DefaultTableModel;
 
@@ -307,6 +309,7 @@ private JComponent Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI(
         LabelBotonElinimar.setBackground(new java.awt.Color(204, 204, 255));
         LabelBotonElinimar.setForeground(new java.awt.Color(0, 0, 0));
         LabelBotonElinimar.setText("      Eliminar");
+        LabelBotonElinimar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout PanelBotonEliminarLayout = new javax.swing.GroupLayout(PanelBotonEliminar);
         PanelBotonEliminar.setLayout(PanelBotonEliminarLayout);
@@ -326,6 +329,7 @@ private JComponent Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI(
         LabelBotonCrearDietaComida.setBackground(new java.awt.Color(204, 204, 255));
         LabelBotonCrearDietaComida.setForeground(new java.awt.Color(0, 0, 0));
         LabelBotonCrearDietaComida.setText("     Empezar!");
+        LabelBotonCrearDietaComida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout PanelBotonCrearDietaComidaLayout = new javax.swing.GroupLayout(PanelBotonCrearDietaComida);
         PanelBotonCrearDietaComida.setLayout(PanelBotonCrearDietaComidaLayout);
@@ -335,10 +339,7 @@ private JComponent Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI(
         );
         PanelBotonCrearDietaComidaLayout.setVerticalGroup(
             PanelBotonCrearDietaComidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelBotonCrearDietaComidaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(LabelBotonCrearDietaComida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(15, 15, 15))
+            .addComponent(LabelBotonCrearDietaComida, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
         getContentPane().add(PanelBotonCrearDietaComida, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 450, 80, 30));
@@ -529,4 +530,24 @@ public void CargarComboBoxListarDietas(){
         ComboListaDietas.addItem(dieta.getNombre());
     }
 }
+
+public void cargarTablaComidasParaAgregar(ArrayList<Comida> list) {
+//El metodo recibe un ArrayList de Comida "list" que luego se recorre con un forech, el cual, carga cada 
+//uno de los elementos en ese ArrayList en la tabla por medio de un instanciacion de "modelo2", para despues
+//cargar la tabla con esos elementos.
+        for (Comida elem : list) {
+            modelo2.addRow(new Object[]{elem.getNombre(), elem.getCantCalorias()});
+        }
+
+    }
+
+public void cargarTablaComidasAgregadas(ArrayList<Comida> list) {
+//El metodo recibe un ArrayList de Comida "list" que luego se recorre con un forech, el cual, carga cada 
+//uno de los elementos en ese ArrayList en la tabla por medio de un instanciacion de "modelo2", para despues
+//cargar la tabla con esos elementos.
+        for (Comida elem : list) {
+            modelo2.addRow(new Object[]{elem.getNombre(), elem.getCantCalorias()});
+        }
+
+    }
 }
