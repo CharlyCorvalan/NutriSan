@@ -134,7 +134,6 @@ public Paciente buscarXdni(int dni){
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Paciente");
         }
-    System.out.println(pa);
     return pa;
 }
 public Paciente buscarXNombre(String nombre){

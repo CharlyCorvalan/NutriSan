@@ -10,22 +10,23 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
-public class ComidaDatos {
+public class ComidaData {
     private Connection con=null;
     ArrayList<Ingredientes> ingre=new ArrayList<>();
-    public ComidaDatos() {
+    public ComidaData() {
         con = Conector.getConnection();
     }
     
    
     
-    public void agregarComida(Comida comida, ArrayList<Ingredientes> ingredientes){
-        String sql="INSERT into comida (nombre, detalle, cantCalorias, idIngredientes) VALUES (?,?,?,?)";
+    public void agregarComida(Comida comida){
+        String sql="INSERT into comida (nombre, detalle, cantCalorias, estado) VALUES (?,?,?,?)";
         try {
             PreparedStatement ps=con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, comida.getNombre());
             ps.setString(2, comida.getDetalle());
             ps.setInt(3, comida.getCantCalorias());
+            ps.setBoolean(4, true);
             ps.executeUpdate();
             ResultSet rs=ps.getGeneratedKeys();
             if(rs.next()){
@@ -34,17 +35,19 @@ public class ComidaDatos {
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al conectar a la tabla comida "+ex);
+            JOptionPane.showMessageDialog(null, "Error al conectar a la tabla comida ");
         }
         
     }
     
-    public ArrayList <Comida> listarComidas(){
+    public ArrayList <Comida> listarComidas(String detalle){
       ArrayList <Comida> comidas =new ArrayList<>();
-      String sql="SELECT * FROM comida";
+      String sql="SELECT * FROM comida where detalle=?";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
+            ps.setString(1, detalle);
             ResultSet rs=ps.executeQuery();
+            
             while (rs.next()){
                 Comida comida=new Comida();
                 comida.setNombre(rs.getString("nombre"));
@@ -55,7 +58,7 @@ public class ComidaDatos {
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al conectar a la tabla comida "+ex);
+            JOptionPane.showMessageDialog(null, "Error al conectar a la tabla comida ");
         }
         
         return comidas;
@@ -78,9 +81,38 @@ public class ComidaDatos {
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al conectar a la tabla comida "+ex);
+            JOptionPane.showMessageDialog(null, "Error al conectar a la tabla comida ");
         }
         
         return comidas;
+    }
+    public void eliminarComida(Comida comida){
+        String sql="update comida set estado=0 where idComida=?";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, comida.getIdComida());
+            int resultado=ps.executeUpdate();
+            if(resultado==1){
+                JOptionPane.showMessageDialog(null, "Comida eliminada");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla comida");
+        }
+    }
+    public void editarComida(Comida comida){
+        String sql="update comida set nombre=?,detalle=?,cantCalorias=? where idComida=?";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setString(1, comida.getNombre());
+            ps.setString(2, comida.getDetalle());
+            ps.setInt(3, comida.getCantCalorias());
+            ps.setInt(4, comida.getIdComida());
+            int resultado=ps.executeUpdate();
+            if(resultado==1){
+                JOptionPane.showMessageDialog(null, "Comida modificada exitosamente");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al conectar a la tabla comida");
+        }
     }
 }

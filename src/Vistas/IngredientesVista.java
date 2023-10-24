@@ -6,9 +6,13 @@ package Vistas;
 
 import AccesoADatos.IngredientesData;
 import Entidades.Ingredientes;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,13 +23,19 @@ public class IngredientesVista extends javax.swing.JInternalFrame {
 
     private JComponent Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
     private Dimension DimensionBarra = null;
-    private DefaultTableModel modelo=new DefaultTableModel();
+    private DefaultTableModel modelo = new DefaultTableModel();
+    private boolean N, M, E, A = false;
+
     public IngredientesVista() {
         initComponents();
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         cargarCabecera();
         cargarCombo();
         limpiarTabla();
+
+        TextoNombre.setBackground(Color.GRAY);
+        TextoCalorias.setBackground(Color.gray);
+
     }
 
     /**
@@ -75,6 +85,11 @@ public class IngredientesVista extends javax.swing.JInternalFrame {
         Nuevo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Nuevo.setText("NUEVO");
         Nuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Nuevo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                NuevoMouseClicked(evt);
+            }
+        });
         getContentPane().add(Nuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 90, 40));
 
         Editar.setFont(new java.awt.Font("Roboto Black", 0, 24)); // NOI18N
@@ -82,6 +97,11 @@ public class IngredientesVista extends javax.swing.JInternalFrame {
         Editar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Editar.setText("EDITAR");
         Editar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Editar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EditarMouseClicked(evt);
+            }
+        });
         getContentPane().add(Editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, -1, 40));
 
         Eliminar.setBackground(new java.awt.Color(204, 204, 255));
@@ -90,12 +110,22 @@ public class IngredientesVista extends javax.swing.JInternalFrame {
         Eliminar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Eliminar.setText("ELIMINAR");
         Eliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Eliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EliminarMouseClicked(evt);
+            }
+        });
         getContentPane().add(Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, -1, 40));
 
         Listar.setFont(new java.awt.Font("Roboto Black", 0, 24)); // NOI18N
         Listar.setForeground(new java.awt.Color(153, 255, 255));
         Listar.setText("LISTAR");
         Listar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Listar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ListarMouseClicked(evt);
+            }
+        });
         getContentPane().add(Listar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 100, -1, 40));
 
         Nombre.setFont(new java.awt.Font("Roboto Black", 0, 24)); // NOI18N
@@ -110,28 +140,148 @@ public class IngredientesVista extends javax.swing.JInternalFrame {
         Calorias.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Calorias.setText("Calorias");
         getContentPane().add(Calorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, -1, -1));
+
+        TextoNombre.setEditable(false);
         getContentPane().add(TextoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, 200, -1));
+
+        TextoCalorias.setEditable(false);
         getContentPane().add(TextoCalorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 200, 200, -1));
 
         Aceptar.setFont(new java.awt.Font("Roboto Black", 0, 22)); // NOI18N
         Aceptar.setForeground(new java.awt.Color(204, 255, 255));
         Aceptar.setText("ACEPTAR");
-        getContentPane().add(Aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, -1, -1));
+        Aceptar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Aceptar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AceptarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(Aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, -1, -1));
 
         Cancelar.setFont(new java.awt.Font("Roboto Black", 0, 22)); // NOI18N
         Cancelar.setForeground(new java.awt.Color(204, 255, 255));
         Cancelar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Cancelar.setText("CANCELAR");
-        getContentPane().add(Cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, -1, -1));
+        Cancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CancelarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(Cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, -1, -1));
 
         getContentPane().add(ComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 150, 110, -1));
 
         Fondo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/FAC.png"))); // NOI18N
+        Fondo.setFocusable(false);
         getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 560));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ListarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListarMouseClicked
+        limpiarTabla();
+        cargarTabla();
+    }//GEN-LAST:event_ListarMouseClicked
+
+    private void NuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NuevoMouseClicked
+        limpiarTabla();
+        TextoNombre.setEditable(true);
+        TextoCalorias.setEditable(true);
+        TextoNombre.setBackground(Color.white);
+        TextoCalorias.setBackground(Color.white);
+        checkAceptar(1);
+
+    }//GEN-LAST:event_NuevoMouseClicked
+
+    private void AceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AceptarMouseClicked
+        if (A == true) {
+            String nombre = TextoNombre.getText();
+            String cal = TextoCalorias.getText();
+            Ingredientes ingrediente = new Ingredientes();
+            IngredientesData ingreData = new IngredientesData();
+            if (nombre.isEmpty() || cal.isEmpty()||ComboBox.getSelectedIndex()==0) {
+                JOptionPane.showMessageDialog(null, "Debe completar los campos de nombre, calorias y seleccionar una categoria");
+            } else {
+                try {
+                    int calorias = Integer.parseInt(cal);
+
+                    if (E == true) {
+                        int filas = modelo.getRowCount();
+                        if (filas > -1) {
+                            int id = Integer.parseInt(modelo.getValueAt(Tabla.getSelectedRow(), 0).toString());
+                            ingreData.eliminarIngrediente(id);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
+                        }
+                    } else if (M == true) {
+                        int filas = modelo.getRowCount();
+                        if (filas > -1) {
+                            int id = Integer.parseInt(modelo.getValueAt(Tabla.getSelectedRow(), 0).toString());
+                            ingrediente.setIdIngredientes(id);
+                            ingrediente.setNombre(nombre);
+                            ingrediente.setCantCalorias(calorias);
+                            ingrediente.setCategoria(ComboBox.getSelectedItem().toString());
+                            ingreData.modificarIngrediente(ingrediente);
+                        }
+                    } else if (N == true && ComboBox.getSelectedIndex() != 0) {
+                        ingrediente.setNombre(nombre);
+                        ingrediente.setCantCalorias(calorias);
+                        ingrediente.setCategoria(ComboBox.getSelectedItem().toString());
+                        ingreData.agregarIngrediente(ingrediente);
+                    }
+                    limpiarTodo();
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Debe ingresar solo numeros enteros en calorias");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una opcion antes de continuar");
+        }
+    }//GEN-LAST:event_AceptarMouseClicked
+
+    private void EditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditarMouseClicked
+        if (Tabla.getSelectedRow() >= 0) {
+            TextoNombre.setEditable(true);
+            TextoCalorias.setEditable(true);
+            TextoNombre.setBackground(Color.white);
+            TextoCalorias.setBackground(Color.white);
+            TextoNombre.setText(modelo.getValueAt(Tabla.getSelectedRow(), 1).toString());
+            TextoCalorias.setText(modelo.getValueAt(Tabla.getSelectedRow(), 3).toString());
+            checkAceptar(2);
+        } else {
+            JOptionPane.showMessageDialog(null, "Primero seleccione un ingrediente de la tabla");
+            TextoNombre.setEditable(false);
+            TextoCalorias.setEditable(false);
+            TextoNombre.setBackground(Color.gray);
+            TextoCalorias.setBackground(Color.gray);
+            A = false;
+        }
+    }//GEN-LAST:event_EditarMouseClicked
+
+    private void EliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarMouseClicked
+        if (Tabla.getSelectedRow() >= 0) {
+            TextoNombre.setEditable(true);
+            TextoCalorias.setEditable(true);
+            TextoNombre.setBackground(Color.white);
+            TextoCalorias.setBackground(Color.white);
+            TextoNombre.setText(modelo.getValueAt(Tabla.getSelectedRow(), 1).toString());
+            TextoCalorias.setText(modelo.getValueAt(Tabla.getSelectedRow(), 3).toString());
+            checkAceptar(3);
+        } else {
+            JOptionPane.showMessageDialog(null, "Primero seleccione un ingrediente de la tabla");
+            TextoNombre.setEditable(false);
+            TextoCalorias.setEditable(false);
+            TextoNombre.setBackground(Color.gray);
+            TextoCalorias.setBackground(Color.gray);
+            A = false;
+        }
+    }//GEN-LAST:event_EliminarMouseClicked
+
+    private void CancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CancelarMouseClicked
+        limpiarTodo();
+    }//GEN-LAST:event_CancelarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -151,35 +301,81 @@ public class IngredientesVista extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 private void cargarCabecera() {
-modelo.addColumn("ID");
-modelo.addColumn("Nombre");
-modelo.addColumn("Categoria");
-modelo.addColumn("Calorias");
-modelo.addColumn("Estado");
-Tabla.setModel(modelo);
+        modelo.addColumn("ID");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Categoria");
+        modelo.addColumn("Calorias");
+        modelo.addColumn("Estado");
+        Tabla.setModel(modelo);
     }
-private void cargarCombo(){
-    ComboBox.addItem("Categoria");
-    ComboBox.addItem("Vegetales");
-    ComboBox.addItem("Tuberculos");
-    ComboBox.addItem("Lacteos");
-    ComboBox.addItem("Carnes");
-    ComboBox.addItem("Legumbres");
-    ComboBox.addItem("Bebida");
-}
-private void cargarTabla(String x){
-     IngredientesData ingreData=new IngredientesData();
-     ArrayList<Ingredientes>ingredientes =new ArrayList<>();
-     ingredientes =ingreData.listarIngredientesPorCateg(x);
-     for (Ingredientes ingre : ingredientes) {
-        modelo.addRow(new Object[]{ingre.getIdIngredientes(),ingre.getNombre(),ingre.getCategoria(),ingre.getCantCalorias(),ingre.isEstado()});
+
+    private void cargarCombo() {
+        ComboBox.addItem("Categoria");
+        ComboBox.addItem("Vegetales");
+        ComboBox.addItem("Tuberculos");
+        ComboBox.addItem("Legumbres");
+        ComboBox.addItem("Frutas");
+        ComboBox.addItem("Cereales");
+        ComboBox.addItem("Lacteos");
+        ComboBox.addItem("Panificados");
+        ComboBox.addItem("Carnes");
+        ComboBox.addItem("Bebidas");
     }
-    
-}
-private void limpiarTabla(){
-    int filas=modelo.getRowCount();
-    for (int i = filas-1; i > -1; i--) {
-        modelo.removeRow(i);
+
+    private void cargarTabla() {
+        IngredientesData ingreData = new IngredientesData();
+        ArrayList<Ingredientes> ingredientes = new ArrayList<>();
+        ingredientes = ingreData.listarIngredientesPorCateg(ComboBox.getSelectedItem().toString());
+        for (Ingredientes ingre : ingredientes) {
+            modelo.addRow(new Object[]{ingre.getIdIngredientes(), ingre.getNombre(), ComboBox.getSelectedItem().toString(), ingre.getCantCalorias(), ingre.isEstado()});
+        }
     }
-}
+
+    private void limpiarTabla() {
+        int filas = modelo.getRowCount();
+        for (int i = filas - 1; i > -1; i--) {
+            modelo.removeRow(i);
+        }
+    }
+
+    private boolean checkAceptar(int x) {
+
+        if (x == 3) {
+            E = true;
+            N = false;
+            M = false;
+            A = true;
+            return A;
+        } else if (x == 2) {
+            M = true;
+            E = false;
+            N = false;
+            A = true;
+            return A;
+        } else if (x == 1) {
+            N = true;
+            E = false;
+            M = false;
+            A = true;
+            return A;
+        } else {
+
+            return A;
+        }
+    }
+
+    private void limpiarTodo() {
+        TextoNombre.setText("");
+        TextoCalorias.setText("");
+        ComboBox.setSelectedIndex(0);
+        TextoNombre.setEditable(false);
+        TextoCalorias.setEditable(false);
+        TextoNombre.setBackground(Color.gray);
+        TextoCalorias.setBackground(Color.gray);
+        A = false;
+        N = false;
+        M = false;
+        E = false;
+        limpiarTabla();
+    }
 }
