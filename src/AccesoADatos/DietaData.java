@@ -86,6 +86,7 @@ public class DietaData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al conectar a la tabla dieta " + ex);
         }
+        
 
         return dietas;
     }
