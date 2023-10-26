@@ -378,6 +378,11 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        TablaComidasParaAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaComidasParaAgregarMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(TablaComidasParaAgregar);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(483, 90, 230, 350));
@@ -386,6 +391,9 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
         LabelBotonModificarDieta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/modificaTransparenteFotos.png"))); // NOI18N
         LabelBotonModificarDieta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         LabelBotonModificarDieta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LabelBotonModificarDietaMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 LabelBotonModificarDietaMouseEntered(evt);
             }
@@ -508,12 +516,12 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_CalendarioFechaInicialPropertyChange
 
     private void LabelCrearDietaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelCrearDietaMouseClicked
-        crear=true;
-        modificar=false;
+        crear = true;
+        modificar = false;
         String pasSelec = ComboPacientes.getSelectedItem().toString();
-        if (ComboPacientes.getSelectedIndex()==0) {
+        if (ComboPacientes.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un paciente para continuar");
-        }else{
+        } else {
             TextoPesoFinal.setEditable(true);
             TextoPesoInicial.setEditable(true);
             CalendarioFechaInicial.setEnabled(true);
@@ -523,7 +531,7 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_LabelCrearDietaMouseClicked
 
     private void TextoNomDietaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TextoNomDietaMouseClicked
-       if(crear==true){
+        if (crear == true) {
 //        if (TextoNomDieta.getText().equals("Ingrese un nombre de dieta..")) {
             TextoNomDieta.setText("");
             TextoNomDieta.setForeground(Color.BLACK);
@@ -532,8 +540,9 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_TextoNomDietaMouseClicked
 
     private void LabelBotonCrearDietaComidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelBotonCrearDietaComidaMouseClicked
-        ArrayList<Comida> comidas = new ArrayList<>();
-        String nom = TextoNomDieta.getText();
+        if(crear==true){
+        try{
+            String nom = TextoNomDieta.getText();
         int pesoInicial = Integer.parseInt(TextoPesoInicial.getText());
         int pesoFinal = Integer.parseInt(TextoPesoFinal.getText());
         int CaloriasSumadas = Integer.parseInt(TextoCaloriasSumadas.getText());
@@ -566,19 +575,25 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
             int numDni = Integer.parseInt(numiD);
 
             PacienteData PD = new PacienteData();
-
             pas.setIdPaciente(PD.buscarXdni(numDni).getIdPaciente());
             Dieta die = new Dieta(nom, pas, fechaInicial, pesoInicial, pesoFinal, fechafinalllll);
             DietaData DD = new DietaData();
             DD.agregarDieta(die);
-
-            int filaselec = TablaComidasAgregadas.getSelectedRow();
-            if (filaselec > -1) {
-                DietaComidaData DCD = new DietaComidaData();
-
+            ArrayList<Comida> comidas = new ArrayList<>();
+            int filaselec = modelo.getRowCount();
+            for (int i = filaselec-1; i > -1; i--) {
+                Comida comi=new Comida();
+                comi.setIdComida(Integer.parseInt( modelo.getValueAt(i, 0).toString()));
+                comidas.add(comi);
             }
+            DietaComidaData DCD=new DietaComidaData();
+            DCD.agregarDietaComida(die, comidas);
         } else {
             JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
+        }
+        }catch(NumberFormatException x){
+            JOptionPane.showMessageDialog(null, "Revise los datos antes de continuar");
+        }
         }
     }//GEN-LAST:event_LabelBotonCrearDietaComidaMouseClicked
 
@@ -658,12 +673,12 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
                     String fechaFFFinal = fechafinalllll.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                     TextoFechaFinalAutomatica.setText(fechaFFFinal);
                 }
-
+            TextoCaloriasSumadas.setText("0");
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Ingrese un valor numerico" + e);
             }
 
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Faltan datos");
         }
 
@@ -671,8 +686,8 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
 
     private void ComboPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboPacientesActionPerformed
         limpiarTodo();
-        if(ComboPacientes.getSelectedIndex()!=0){
-            Paciente paci=new Paciente();            
+        if (ComboPacientes.getSelectedIndex() != 0) {
+            Paciente paci = new Paciente();
             String numeroID = (ComboPacientes.getSelectedItem().toString());
             int cadena = numeroID.length();
             String numiD = "";
@@ -684,49 +699,77 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
                 }
             }
             int numDni = Integer.parseInt(numiD);
-            PacienteData paciData=new PacienteData();           
-            paci=paciData.buscarXdni(numDni);
+            PacienteData paciData = new PacienteData();
+            paci = paciData.buscarXdni(numDni);
             CargarComboBoxListarDietas(paci);
         }
     }//GEN-LAST:event_ComboPacientesActionPerformed
 
     private void ComboListarCaloriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboListarCaloriasActionPerformed
-       
-        if(ComboListarCalorias.getSelectedIndex()!=0){
-            int caloria1=0;
-            int caloria2=0;
-            int r=0;
-            String cal=ComboListarCalorias.getSelectedItem().toString();
-            int largo=cal.length();
-            String calMas="";
-            for (int i = 0; i < largo-1; i++) {
-                if(cal.substring(i, i+1).equals("-")){
-                    i=largo;
-                }else{
-                    calMas=calMas+cal.substring(i, i+1);
-                }                   
-                }
-            
-            caloria1=Integer.parseInt(calMas);
-            calMas="";
-            for (int i = 0; i < largo-1; i++) {
-                if(cal.substring(i, i+1).equals("-")){
-                     r=i+2;
-                }else if(cal.substring(i, i+1).equals(" ")){
-                    i=largo;
-                }else if(r==i+1){
-                    calMas=calMas+cal.substring(i, i+1);
-                    r=r+1;
+            limpiarTabla(modelo2);
+        if (ComboListarCalorias.getSelectedIndex() != 0) {
+            int caloria1 = 0;
+            int caloria2 = 0;
+            int r = 0;
+            String cal = ComboListarCalorias.getSelectedItem().toString();
+            int largo = cal.length();
+            String calMas = "";
+            for (int i = 0; i < largo - 1; i++) {
+                if (cal.substring(i, i + 1).equals("-")) {
+                    i = largo;
+                } else {
+                    calMas = calMas + cal.substring(i, i + 1);
                 }
             }
-            caloria2=Integer.parseInt(calMas);
-            ComidaData comiData=new ComidaData();
-            ArrayList<Comida> comida=new ArrayList<>();
-            comida=comiData.listarComidasPorCalorias(caloria1, caloria2);
+
+            caloria1 = Integer.parseInt(calMas);
+            calMas = "";
+            for (int i = 0; i < largo - 1; i++) {
+                if (cal.substring(i, i + 1).equals("-")) {
+                    r = i + 2;
+                } else if (cal.substring(i, i + 1).equals(" ")) {
+                    i = largo;
+                } else if (r == i + 1) {
+                    calMas = calMas + cal.substring(i, i + 1);
+                    r = r + 1;
+                }
+            }
+            caloria2 = Integer.parseInt(calMas);
+            ComidaData comiData = new ComidaData();
+            ArrayList<Comida> comida = new ArrayList<>();
+            comida = comiData.listarComidasPorCalorias(caloria1, caloria2);
             cargarTablaComidasParaAgregar(comida);
-            
+
         }
     }//GEN-LAST:event_ComboListarCaloriasActionPerformed
+
+    private void TablaComidasParaAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaComidasParaAgregarMouseClicked
+        int id = Integer.parseInt(modelo2.getValueAt(TablaComidasParaAgregar.getSelectedRow(), 0).toString());
+        Comida comida = new Comida();
+        ComidaData cmData = new ComidaData();
+        comida = cmData.buscarComida(id);
+        cargarTablaComidasAgregadas(comida);
+        
+        int calo=Integer.parseInt(modelo2.getValueAt(TablaComidasParaAgregar.getSelectedRow(), 2).toString());
+        int calosum=Integer.parseInt(TextoCaloriasSumadas.getText());
+        int resultado=calosum+calo;
+        TextoCaloriasSumadas.setText(String.valueOf(resultado));
+    }//GEN-LAST:event_TablaComidasParaAgregarMouseClicked
+
+    private void LabelBotonModificarDietaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelBotonModificarDietaMouseClicked
+         crear = false;
+        modificar = true;
+        
+        if (ComboPacientes.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un paciente para continuar");
+        } else {
+            TextoPesoFinal.setEditable(true);
+            TextoPesoInicial.setEditable(true);
+            CalendarioFechaInicial.setEnabled(true);
+            TextoNomDieta.setEditable(true);
+            
+        }
+    }//GEN-LAST:event_LabelBotonModificarDietaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -781,6 +824,7 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
     private void CargarCabeceraComiAgregadas() {
         //Por medio del objeto DefaultTableModel "modelo" se cargan las cabeceras de la tabla por medio del
         //metodo addColumn() que luego, se cargan a la tabla por medio del metodo setModel().
+        modelo.addColumn("ID");
         modelo.addColumn("NOMBRE");
         modelo.addColumn("DETALLE");
         modelo.addColumn("CALORIAS");
@@ -791,8 +835,8 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
     private void CargarCabeceraComidas() {
         //Por medio del objeto DefaultTableModel "modelo" se cargan las cabeceras de la tabla por medio del
         //metodo addColumn() que luego, se cargan a la tabla por medio del metodo setModel().
+        modelo2.addColumn("ID");
         modelo2.addColumn("NOMBRE");
-
         modelo2.addColumn("CALORIAS");
         TablaComidasParaAgregar.setModel(modelo2);
     }
@@ -820,14 +864,14 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
     }
 
     public void CargarComboBoxListarDietas(Paciente x) {
-        
+
         DietaData dd = new DietaData();
-        ArrayList<Dieta> dieta=new ArrayList<>();
-        dieta=dd.listarDietas(x);
-            for (Dieta dieta1 : dieta) {
-            ComboListaDietas.addItem(dieta1.getNombre());
+        ArrayList<Dieta> dieta = new ArrayList<>();
+        dieta = dd.listarDietas(x);
+        for (Dieta dieta1 : dieta) {
+            ComboListaDietas.addItem(dieta1.getIdDieta()+"-"+ dieta1.getNombre());
         }
-        
+
     }
 
     public void cargarTablaComidasParaAgregar(ArrayList<Comida> list) {
@@ -835,24 +879,33 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
 //uno de los elementos en ese ArrayList en la tabla por medio de un instanciacion de "modelo2", para despues
 //cargar la tabla con esos elementos.
         for (Comida elem : list) {
-            modelo2.addRow(new Object[]{elem.getNombre(), elem.getCantCalorias()});
+            modelo2.addRow(new Object[]{elem.getIdComida(), elem.getNombre(), elem.getCantCalorias()});
         }
 
     }
 
-    public void cargarTablaComidasAgregadas(ArrayList<Comida> list) {
+    public void cargarTablaComidasAgregadas(Comida list) {
 //El metodo recibe un ArrayList de Comida "list" que luego se recorre con un forech, el cual, carga cada 
 //uno de los elementos en ese ArrayList en la tabla por medio de un instanciacion de "modelo2", para despues
 //cargar la tabla con esos elementos.
-        for (Comida elem : list) {
-            modelo2.addRow(new Object[]{elem.getNombre(), elem.getCantCalorias()});
-        }
+        int filas = modelo.getRowCount();
+        modelo.insertRow(filas, new Object[]{list.getIdComida(), list.getNombre(), list.getDetalle(), list.getCantCalorias()});
+//        for (Comida elem : list) {
+//            modelo2.addRow(new Object[]{elem.getNombre(), elem.getCantCalorias()});
+//        }
 
     }
-    public void limpiarTodo(){
-        int cant=ComboListaDietas.getItemCount();
-         for (int i = cant - 1; i > -1; i--) {
+
+    public void limpiarTodo() {
+        int cant = ComboListaDietas.getItemCount();
+        for (int i = cant - 1; i > -1; i--) {
             ComboListaDietas.removeItemAt(i);
+        }
+    }
+    public void limpiarTabla(DefaultTableModel x){
+        int filas=x.getRowCount();
+        for (int i = filas-1; i > -1; i--) {
+            x.removeRow(i);
         }
     }
 }
