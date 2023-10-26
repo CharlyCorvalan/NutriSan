@@ -4,6 +4,7 @@
  */
 package Vistas;
 
+import AccesoADatos.ComidaData;
 import AccesoADatos.DietaComidaData;
 import AccesoADatos.DietaData;
 import AccesoADatos.PacienteData;
@@ -32,6 +33,7 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
     private DefaultTableModel modelo2 = new DefaultTableModel();
     private JComponent Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
     private Dimension DimensionBarra = null;
+    private boolean crear, modificar = false;
 
     public ArmarDieta() {
         initComponents();
@@ -44,7 +46,7 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
         CargarCabeceraComiAgregadas();
         CargarCabeceraComidas();
         CargarComboBox();
-        CargarComboBoxListarDietas();
+//        CargarComboBoxListarDietas();
         LabelAvisoModificar.setVisible(false);
         LabelAvisoCrearDieta.setVisible(false);
         LabelAvisoEmpezar.setVisible(false);
@@ -53,6 +55,10 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
         TextoObjetivoCaloriasEditable.setEditable(false);
         TextoCaloriasSumadas.setEditable(false);
         TextoFechaFinalAutomatica.setEditable(false);
+        TextoPesoFinal.setEditable(false);
+        TextoPesoInicial.setEditable(false);
+        CalendarioFechaInicial.setEnabled(false);
+        TextoNomDieta.setEditable(false);
 
     }
 
@@ -120,7 +126,6 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
 
         PanelPesoInicialLabel.setBackground(new java.awt.Color(204, 204, 255));
 
-        LabelIngPesoInicial.setForeground(new java.awt.Color(0, 0, 0));
         LabelIngPesoInicial.setText("  Ingrese su peso inicial");
 
         javax.swing.GroupLayout PanelPesoInicialLabelLayout = new javax.swing.GroupLayout(PanelPesoInicialLabel);
@@ -143,7 +148,6 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
 
         PanelIngPesoFinal.setBackground(new java.awt.Color(204, 204, 255));
 
-        LabelIngPesoFinal.setForeground(new java.awt.Color(0, 0, 0));
         LabelIngPesoFinal.setText("  Ingrese su peso final");
 
         javax.swing.GroupLayout PanelIngPesoFinalLayout = new javax.swing.GroupLayout(PanelIngPesoFinal);
@@ -166,17 +170,16 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
 
         PanelFechaInicial.setBackground(new java.awt.Color(204, 204, 255));
 
-        LabelFechaInicial.setForeground(new java.awt.Color(0, 0, 0));
         LabelFechaInicial.setText("Fecha inicial");
 
         CalendarioFechaInicial.setBackground(new java.awt.Color(204, 204, 255));
         CalendarioFechaInicial.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 CalendarioFechaInicialAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         CalendarioFechaInicial.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -222,11 +225,9 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
 
         PanelFechaFinal.setBackground(new java.awt.Color(204, 204, 255));
 
-        LabelFechaFinal.setForeground(new java.awt.Color(0, 0, 0));
         LabelFechaFinal.setText("Fecha Final");
 
         TextoFechaFinalAutomatica.setBackground(new java.awt.Color(204, 204, 255));
-        TextoFechaFinalAutomatica.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout PanelFechaFinalLayout = new javax.swing.GroupLayout(PanelFechaFinal);
         PanelFechaFinal.setLayout(PanelFechaFinalLayout);
@@ -255,18 +256,14 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
         PanelCantCalorias.setBackground(new java.awt.Color(204, 204, 255));
 
         LabelCantCalorias.setBackground(new java.awt.Color(204, 204, 255));
-        LabelCantCalorias.setForeground(new java.awt.Color(0, 0, 0));
         LabelCantCalorias.setText("Calorias:");
 
         TextoCaloriasSumadas.setBackground(new java.awt.Color(204, 204, 255));
-        TextoCaloriasSumadas.setForeground(new java.awt.Color(0, 0, 0));
 
         LabelObjKcal.setBackground(new java.awt.Color(204, 204, 255));
-        LabelObjKcal.setForeground(new java.awt.Color(0, 0, 0));
         LabelObjKcal.setText("Objetivo Semanal en kcal:");
 
         TextoObjetivoCaloriasEditable.setBackground(new java.awt.Color(204, 204, 255));
-        TextoObjetivoCaloriasEditable.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout PanelCantCaloriasLayout = new javax.swing.GroupLayout(PanelCantCalorias);
         PanelCantCalorias.setLayout(PanelCantCaloriasLayout);
@@ -298,7 +295,6 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
         getContentPane().add(PanelCantCalorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 390, 30));
 
         TablaComidasAgregadas.setBackground(new java.awt.Color(204, 204, 255));
-        TablaComidasAgregadas.setForeground(new java.awt.Color(0, 0, 0));
         TablaComidasAgregadas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -317,7 +313,6 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
         PanelListarDietas.setBackground(new java.awt.Color(204, 204, 255));
 
         LabelListarDietas.setBackground(new java.awt.Color(204, 204, 255));
-        LabelListarDietas.setForeground(new java.awt.Color(0, 0, 0));
         LabelListarDietas.setText("Lista de Dietas:");
 
         javax.swing.GroupLayout PanelListarDietasLayout = new javax.swing.GroupLayout(PanelListarDietas);
@@ -342,12 +337,16 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
 
         getContentPane().add(PanelListarDietas, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 260, 20));
 
+        ComboListarCalorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboListarCaloriasActionPerformed(evt);
+            }
+        });
         getContentPane().add(ComboListarCalorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 50, 180, -1));
 
         PanelSelecCalorias.setBackground(new java.awt.Color(204, 204, 255));
 
         LabelSeleccionCal.setBackground(new java.awt.Color(204, 204, 255));
-        LabelSeleccionCal.setForeground(new java.awt.Color(0, 0, 0));
         LabelSeleccionCal.setText(" Seleccione las Kcal.");
 
         javax.swing.GroupLayout PanelSelecCaloriasLayout = new javax.swing.GroupLayout(PanelSelecCalorias);
@@ -366,10 +365,8 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
         getContentPane().add(PanelSelecCalorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, 140, 20));
 
         jScrollPane2.setBackground(new java.awt.Color(204, 204, 255));
-        jScrollPane2.setForeground(new java.awt.Color(0, 0, 0));
 
         TablaComidasParaAgregar.setBackground(new java.awt.Color(204, 204, 255));
-        TablaComidasParaAgregar.setForeground(new java.awt.Color(0, 0, 0));
         TablaComidasParaAgregar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -386,7 +383,6 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(483, 90, 230, 350));
 
         LabelBotonModificarDieta.setBackground(new java.awt.Color(255, 0, 0));
-        LabelBotonModificarDieta.setForeground(new java.awt.Color(0, 0, 0));
         LabelBotonModificarDieta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/modificaTransparenteFotos.png"))); // NOI18N
         LabelBotonModificarDieta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         LabelBotonModificarDieta.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -400,7 +396,6 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
         getContentPane().add(LabelBotonModificarDieta, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, -1, -1));
 
         LabelCrearDieta.setBackground(new java.awt.Color(255, 0, 0));
-        LabelCrearDieta.setForeground(new java.awt.Color(0, 0, 0));
         LabelCrearDieta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/CrearDietaTransparenteFotos.png"))); // NOI18N
         LabelCrearDieta.setText("   Crear Dieta");
         LabelCrearDieta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -418,7 +413,6 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
         getContentPane().add(LabelCrearDieta, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 40, 40));
 
         LabelBotonCrearDietaComida.setBackground(new java.awt.Color(204, 204, 255));
-        LabelBotonCrearDietaComida.setForeground(new java.awt.Color(0, 0, 0));
         LabelBotonCrearDietaComida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/CrearEmpezarTransparenteFotos.png"))); // NOI18N
         LabelBotonCrearDietaComida.setText("     Empezar!");
         LabelBotonCrearDietaComida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -449,6 +443,11 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
         LabelAvisoEmpezar.setText("Empezar!");
         getContentPane().add(LabelAvisoEmpezar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 460, -1, 20));
 
+        ComboPacientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboPacientesActionPerformed(evt);
+            }
+        });
         getContentPane().add(ComboPacientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 200, 20));
 
         LabelBotonPreVisualizarDieta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/visualizarDietaChiquita.png"))); // NOI18N
@@ -466,7 +465,6 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
         });
         getContentPane().add(LabelBotonPreVisualizarDieta, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, 40, 30));
 
-        LabelAvisoPrevisualizarPlanDieta.setForeground(new java.awt.Color(0, 0, 0));
         LabelAvisoPrevisualizarPlanDieta.setText("Ver Plan Dieta");
         getContentPane().add(LabelAvisoPrevisualizarPlanDieta, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, -1, -1));
 
@@ -510,32 +508,41 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_CalendarioFechaInicialPropertyChange
 
     private void LabelCrearDietaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelCrearDietaMouseClicked
-String pasSelec=ComboPacientes.getSelectedItem().toString();
-if(pasSelec!=null){
-    
-}
+        crear=true;
+        modificar=false;
+        String pasSelec = ComboPacientes.getSelectedItem().toString();
+        if (ComboPacientes.getSelectedIndex()==0) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un paciente para continuar");
+        }else{
+            TextoPesoFinal.setEditable(true);
+            TextoPesoInicial.setEditable(true);
+            CalendarioFechaInicial.setEnabled(true);
+            TextoNomDieta.setEditable(true);
+        }
 
     }//GEN-LAST:event_LabelCrearDietaMouseClicked
 
     private void TextoNomDietaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TextoNomDietaMouseClicked
-        if (TextoNomDieta.getText().equals("Ingrese un nombre de dieta..")) {
+       if(crear==true){
+//        if (TextoNomDieta.getText().equals("Ingrese un nombre de dieta..")) {
             TextoNomDieta.setText("");
             TextoNomDieta.setForeground(Color.BLACK);
         }
+//       }
     }//GEN-LAST:event_TextoNomDietaMouseClicked
 
     private void LabelBotonCrearDietaComidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelBotonCrearDietaComidaMouseClicked
-        ArrayList<Comida> comidas=new ArrayList<>();
+        ArrayList<Comida> comidas = new ArrayList<>();
         String nom = TextoNomDieta.getText();
         int pesoInicial = Integer.parseInt(TextoPesoInicial.getText());
-                int pesoFinal = Integer.parseInt(TextoPesoFinal.getText());
+        int pesoFinal = Integer.parseInt(TextoPesoFinal.getText());
         int CaloriasSumadas = Integer.parseInt(TextoCaloriasSumadas.getText());
         int ObjetivoCaloriasEditable = Integer.parseInt(TextoObjetivoCaloriasEditable.getText());
         LocalDate fechaInicial;
-         fechaInicial = CalendarioFechaInicial.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-         LocalDate fechafinalllll=null;
-         String fecha=TextoFechaFinalAutomatica.getText();
-         fechafinalllll.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        fechaInicial = CalendarioFechaInicial.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate fechafinalllll = null;
+        String fecha = TextoFechaFinalAutomatica.getText();
+        fechafinalllll.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         if (ComboPacientes.getSelectedIndex() != 0 && TextoNomDieta != null && TextoPesoInicial != null && TextoPesoFinal != null && CalendarioFechaInicial != null && CaloriasSumadas < ObjetivoCaloriasEditable && modelo.getRowCount() > -1) {
 
             TextoPesoInicial.setEditable(false);
@@ -565,11 +572,10 @@ if(pasSelec!=null){
             DietaData DD = new DietaData();
             DD.agregarDieta(die);
 
-            
             int filaselec = TablaComidasAgregadas.getSelectedRow();
-            if(filaselec>-1){
-               DietaComidaData DCD=new DietaComidaData();
-               
+            if (filaselec > -1) {
+                DietaComidaData DCD = new DietaComidaData();
+
             }
         } else {
             JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
@@ -595,7 +601,7 @@ if(pasSelec!=null){
     }//GEN-LAST:event_LabelBotonPreVisualizarDietaMouseExited
 
     private void LabelBotonPreVisualizarDietaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelBotonPreVisualizarDietaMouseClicked
-        if (TextoPesoFinal.getText() != null && TextoPesoFinal != null && CalendarioFechaInicial.getDate() != null) {
+        if (TextoPesoFinal.getText() != null && TextoPesoInicial != null && CalendarioFechaInicial.getDate() != null) {
             PanelFechaFinal.setVisible(true);
             PanelCantCalorias.setVisible(true);
             try {
@@ -652,15 +658,75 @@ if(pasSelec!=null){
                     String fechaFFFinal = fechafinalllll.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                     TextoFechaFinalAutomatica.setText(fechaFFFinal);
                 }
-            
-        
-                }catch (NumberFormatException e) {
+
+            } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Ingrese un valor numerico" + e);
-                             }
-    
+            }
+
+        }else{
+            JOptionPane.showMessageDialog(null, "Faltan datos");
         }
-        
+
     }//GEN-LAST:event_LabelBotonPreVisualizarDietaMouseClicked
+
+    private void ComboPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboPacientesActionPerformed
+        limpiarTodo();
+        if(ComboPacientes.getSelectedIndex()!=0){
+            Paciente paci=new Paciente();            
+            String numeroID = (ComboPacientes.getSelectedItem().toString());
+            int cadena = numeroID.length();
+            String numiD = "";
+            for (int i = 0; i < cadena - 1; i++) {
+                if (numeroID.substring(i, i + 1).equals("-")) {
+                    i = cadena;
+                } else {
+                    numiD = numiD + numeroID.substring(i, i + 1);
+                }
+            }
+            int numDni = Integer.parseInt(numiD);
+            PacienteData paciData=new PacienteData();           
+            paci=paciData.buscarXdni(numDni);
+            CargarComboBoxListarDietas(paci);
+        }
+    }//GEN-LAST:event_ComboPacientesActionPerformed
+
+    private void ComboListarCaloriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboListarCaloriasActionPerformed
+       
+        if(ComboListarCalorias.getSelectedIndex()!=0){
+            int caloria1=0;
+            int caloria2=0;
+            int r=0;
+            String cal=ComboListarCalorias.getSelectedItem().toString();
+            int largo=cal.length();
+            String calMas="";
+            for (int i = 0; i < largo-1; i++) {
+                if(cal.substring(i, i+1).equals("-")){
+                    i=largo;
+                }else{
+                    calMas=calMas+cal.substring(i, i+1);
+                }                   
+                }
+            
+            caloria1=Integer.parseInt(calMas);
+            calMas="";
+            for (int i = 0; i < largo-1; i++) {
+                if(cal.substring(i, i+1).equals("-")){
+                     r=i+2;
+                }else if(cal.substring(i, i+1).equals(" ")){
+                    i=largo;
+                }else if(r==i+1){
+                    calMas=calMas+cal.substring(i, i+1);
+                    r=r+1;
+                }
+            }
+            caloria2=Integer.parseInt(calMas);
+            ComidaData comiData=new ComidaData();
+            ArrayList<Comida> comida=new ArrayList<>();
+            comida=comiData.listarComidasPorCalorias(caloria1, caloria2);
+            cargarTablaComidasParaAgregar(comida);
+            
+        }
+    }//GEN-LAST:event_ComboListarCaloriasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -732,12 +798,12 @@ if(pasSelec!=null){
     }
 
     public void CargarComboBox() {
-
+        ComboListarCalorias.addItem("Comidas");
         ComboListarCalorias.addItem("0-250 Kcal");
         ComboListarCalorias.addItem("250-500 Kcal");
         ComboListarCalorias.addItem("500-750 Kcal");
         ComboListarCalorias.addItem("750-1000 Kcal");
-        ComboListarCalorias.addItem("1000< Kcal");
+        ComboListarCalorias.addItem("1000-3500 Kcal");
 
     }
 
@@ -753,11 +819,15 @@ if(pasSelec!=null){
         }
     }
 
-    public void CargarComboBoxListarDietas() {
+    public void CargarComboBoxListarDietas(Paciente x) {
+        
         DietaData dd = new DietaData();
-        for (Dieta dieta : dd.listarDietas()) {
-            ComboListaDietas.addItem(dieta.getNombre());
+        ArrayList<Dieta> dieta=new ArrayList<>();
+        dieta=dd.listarDietas(x);
+            for (Dieta dieta1 : dieta) {
+            ComboListaDietas.addItem(dieta1.getNombre());
         }
+        
     }
 
     public void cargarTablaComidasParaAgregar(ArrayList<Comida> list) {
@@ -778,5 +848,11 @@ if(pasSelec!=null){
             modelo2.addRow(new Object[]{elem.getNombre(), elem.getCantCalorias()});
         }
 
+    }
+    public void limpiarTodo(){
+        int cant=ComboListaDietas.getItemCount();
+         for (int i = cant - 1; i > -1; i--) {
+            ComboListaDietas.removeItemAt(i);
+        }
     }
 }

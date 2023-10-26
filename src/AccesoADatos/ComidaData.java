@@ -64,12 +64,13 @@ public class ComidaData {
         return comidas;
     }
     
-    public ArrayList <Comida> listarComidasPorCalorias(int cantCalorias){
+    public ArrayList <Comida> listarComidasPorCalorias(int caloria1, int caloria2){
       ArrayList <Comida> comidas =new ArrayList<>();
-      String sql="SELECT * FROM comida WHERE cantCalorias <= ?";
+      String sql="SELECT * FROM comida WHERE cantCalorias >= ? AND cantCalorias <=?";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
-            ps.setInt(1, cantCalorias);
+            ps.setInt(1, caloria1);
+            ps.setInt(2, caloria2);
             ResultSet rs=ps.executeQuery();
             while (rs.next()){
                 Comida comida=new Comida();

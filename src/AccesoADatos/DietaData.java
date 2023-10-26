@@ -71,11 +71,12 @@ public class DietaData {
         }
     }
 
-    public ArrayList<Dieta> listarDietas() {
+    public ArrayList<Dieta> listarDietas(Paciente paciente) {
         ArrayList<Dieta> dietas = new ArrayList<>();
-        String sql = "SELECT nombre FROM dieta";
+        String sql = "SELECT nombre FROM dieta where idPaciente=?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, paciente.getIdPaciente());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Dieta dieta = new Dieta();
@@ -90,5 +91,6 @@ public class DietaData {
 
         return dietas;
     }
+    
 
 }
