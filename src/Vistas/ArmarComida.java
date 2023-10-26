@@ -486,16 +486,21 @@ public class ArmarComida extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 private void cargarCombo1() {
-        ComboBox.addItem("Categoria");
+         ComboBox.addItem("Categoria");
         ComboBox.addItem("Vegetales");
-        ComboBox.addItem("Tuberculos");
-        ComboBox.addItem("Legumbres");
         ComboBox.addItem("Frutas");
-        ComboBox.addItem("Cereales");
-        ComboBox.addItem("Lacteos");
-        ComboBox.addItem("Panificados");
-        ComboBox.addItem("Carnes");
+        ComboBox.addItem("Frutos Secos");
+        ComboBox.addItem("Lacteos y derivados");
+        ComboBox.addItem("Carnes/Embutidos");
+        ComboBox.addItem("Pescados/Mariscos");
+        ComboBox.addItem("Dulces");
+        ComboBox.addItem("Cereales y derivados");
+        ComboBox.addItem("Legumbres");
+        ComboBox.addItem("Huevos");
+        ComboBox.addItem("Pasteleria");
         ComboBox.addItem("Bebidas");
+        ComboBox.addItem("Aceites y grasas");
+        ComboBox.addItem("Salsas y condimentos");   
 
     }
 
