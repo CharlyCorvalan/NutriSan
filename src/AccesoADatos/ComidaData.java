@@ -118,12 +118,13 @@ public class ComidaData {
     }
     public Comida buscarComida(int id){
        Comida comida=new Comida();
-        String sql="Select nombre, detalle, cantCalorias from comida where idComida =?";
+        String sql="Select idComida,nombre, detalle, cantCalorias from comida where idComida =?";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet resultado=ps.executeQuery();
             while(resultado.next()){
+                 
                 comida.setIdComida(resultado.getInt("iDComida"));
                 comida.setDetalle(resultado.getString("detalle"));
                 comida.setCantCalorias(resultado.getInt("cantCalorias"));

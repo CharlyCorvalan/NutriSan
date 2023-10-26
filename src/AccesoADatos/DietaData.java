@@ -87,10 +87,33 @@ public class DietaData {
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al conectar a la tabla dieta " + ex);
+        }       
+        return dietas;
+    }
+    public Dieta buscarDieta(int id, int paciente){
+        Dieta dieta=new Dieta();
+        String sql="Select idDieta,nombre,fechaInicial,fechaFinal,pesoInicial,pesoFinal from dieta where idDieta=? AND idPaciente=?";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.setInt(2, paciente);
+            ResultSet resultado=ps.executeQuery();
+            while(resultado.next()){
+                
+                dieta.setIdDieta(resultado.getInt("idDieta"));
+                dieta.setNombre(resultado.getString("nombre"));
+                dieta.setPesoFinal(resultado.getDouble("pesoFinal"));
+                dieta.setPesoInicial(resultado.getDouble("pesoInicial"));
+                dieta.setFechaInicial(resultado.getDate("fechaInicial").toLocalDate());
+                dieta.setFechaFinal(resultado.getDate("fechaFinal").toLocalDate());
+                
+            }
+        } catch (SQLException ex) {
+           JOptionPane.showMessageDialog(null, "Error al acceder a la tabla dieta");
         }
         
-
-        return dietas;
+        
+        return dieta;
     }
     
 

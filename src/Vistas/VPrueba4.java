@@ -323,7 +323,10 @@ public class VPrueba4 extends javax.swing.JFrame {
         } else if (ingredientes.isVisible() == true) {
             cerrarVentana(ingredientes);
             abrirVentanas(paciente);
-        } else {
+        } else if(paciente.isVisible()==true){
+            cerrarVentana(paciente);
+            abrirVentanas(paciente);
+        }else{
             abrirVentanas(paciente);
         }
         
@@ -419,7 +422,10 @@ public class VPrueba4 extends javax.swing.JFrame {
         } else if (ingredientes.isVisible() == true) {
             cerrarVentana(ingredientes);
             abrirVentanas(dieta);
-        } else {
+        } else if(dieta.isVisible()==true){
+            cerrarVentana(dieta);
+            abrirVentanas(dieta);
+        }else{
             abrirVentanas(dieta);
         }
         
@@ -435,7 +441,10 @@ public class VPrueba4 extends javax.swing.JFrame {
         } else if (ingredientes.isVisible() == true) {
             cerrarVentana(ingredientes);
             abrirVentanas(comida);
-        } else {
+        } else if(comida.isVisible()==true){
+            cerrarVentana(comida);
+            abrirVentanas(comida);
+        }else{
             abrirVentanas(comida);
         }
         
@@ -459,7 +468,10 @@ public class VPrueba4 extends javax.swing.JFrame {
         } else if (comida.isVisible() == true) {
             cerrarVentana(comida);
             abrirVentanas(ingredientes);
-        } else {
+        } else if(ingredientes.isVisible()==true){
+            cerrarVentana(ingredientes);
+            abrirVentanas(ingredientes);
+        }else{
             abrirVentanas(ingredientes);
         }
     }//GEN-LAST:event_jLabel1MouseClicked
