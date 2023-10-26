@@ -628,9 +628,9 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
                 PanelCantCalorias.setVisible(true);
                 ComboListaDietas.addItem(TextoNomDieta.getText());
                 try {
-                    int pesoInicial = Integer.parseInt(TextoPesoInicial.getText());
-                    int pesoFinal = Integer.parseInt(TextoPesoFinal.getText());
-                    int dif;
+                    double pesoInicial = Double.parseDouble(TextoPesoInicial.getText());
+                    double pesoFinal = Double.parseDouble(TextoPesoFinal.getText());
+                    double dif;
                     Boolean subir;
                     if (pesoInicial > pesoFinal) {
                         dif = pesoInicial - pesoFinal;
@@ -639,7 +639,6 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
                         dif = pesoFinal - pesoInicial;
                         subir = true;
                     }
-
                     LocalDate fechaInicial;
                     LocalDate fechafinalllll = null;
                     fechaInicial = CalendarioFechaInicial.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -690,7 +689,7 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Faltan datos");
             }
         } else if (modificar == true) {
-
+                
         }
 
     }//GEN-LAST:event_LabelBotonPreVisualizarDietaMouseClicked
@@ -733,7 +732,6 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
                     calMas = calMas + cal.substring(i, i + 1);
                 }
             }
-
             caloria1 = Integer.parseInt(calMas);
             calMas = "";
             for (int i = 0; i < largo - 1; i++) {
@@ -778,7 +776,6 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
     private void LabelBotonModificarDietaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelBotonModificarDietaMouseClicked
         crear = false;
         modificar = true;
-
         if (ComboPacientes.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un paciente para continuar");
         } else {
@@ -820,11 +817,53 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
                 TextoFechaFinalAutomatica.setText(dieta.getFechaFinal().toString());
                 PanelFechaFinal.setVisible(true);
                 PanelCantCalorias.setVisible(true);
+                
+                try {
+                    double pesoInicial = Double.parseDouble(TextoPesoInicial.getText());
+                    double pesoFinal = Double.parseDouble(TextoPesoFinal.getText());
+                    double dif;
+                    Boolean subir;
+                    if (pesoInicial > pesoFinal) {
+                        dif = pesoInicial - pesoFinal;
+                        subir = false;
+                    } else {
+                        dif = pesoFinal - pesoInicial;
+                        subir = true;
+                    }
+                    if (dif > 0 && dif <= 5) {
+                        if (subir == false) {
+                            TextoObjetivoCaloriasEditable.setText("14000");
+                        } else {
+                            TextoObjetivoCaloriasEditable.setText("22400");
+                        }
+                    } else if (dif > 5 && dif <= 10) {
+                        if (subir == false) {
+                            TextoObjetivoCaloriasEditable.setText("17500");
+                        } else {
+                            TextoObjetivoCaloriasEditable.setText("21700");
+                        }    
+                    } else if (dif > 10 && dif <= 15) {
+                        if (subir == false) {
+                            TextoObjetivoCaloriasEditable.setText("16800");
+                        } else {
+                            TextoObjetivoCaloriasEditable.setText("21000");
+                        }
+                    } else if (dif > 15) {
+                        if (subir == false) {
+                            TextoObjetivoCaloriasEditable.setText("17500");
+                        } else {
+                            TextoObjetivoCaloriasEditable.setText("20300");
+                        }
+                    } 
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Ingrese un valor numerico" + e);
+                }
             }
             TextoPesoFinal.setEditable(true);
             TextoPesoInicial.setEditable(true);
             CalendarioFechaInicial.setEnabled(true);
             TextoNomDieta.setEditable(true);
+            
 
         }
     }//GEN-LAST:event_LabelBotonModificarDietaMouseClicked
@@ -961,6 +1000,7 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
 //        }
 
     }
+    
 
     public void limpiarTodo() {
         int cant = ComboListaDietas.getItemCount();
