@@ -4,6 +4,7 @@
  */
 package Vistas;
 
+import AccesoADatos.DietaComidaData;
 import AccesoADatos.DietaData;
 import AccesoADatos.PacienteData;
 import Entidades.Comida;
@@ -47,7 +48,7 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
         LabelAvisoModificar.setVisible(false);
         LabelAvisoCrearDieta.setVisible(false);
         LabelAvisoEmpezar.setVisible(false);
-        
+        LabelAvisoPrevisualizarPlanDieta.setVisible(false);
         CargarComboPacientes();
         TextoObjetivoCaloriasEditable.setEditable(false);
         TextoCaloriasSumadas.setEditable(false);
@@ -99,6 +100,8 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
         LabelAvisoCrearDieta = new javax.swing.JLabel();
         LabelAvisoEmpezar = new javax.swing.JLabel();
         ComboPacientes = new javax.swing.JComboBox<>();
+        LabelBotonPreVisualizarDieta = new javax.swing.JLabel();
+        LabelAvisoPrevisualizarPlanDieta = new javax.swing.JLabel();
         Fondo = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -448,6 +451,25 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
 
         getContentPane().add(ComboPacientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 200, 20));
 
+        LabelBotonPreVisualizarDieta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/visualizarDietaChiquita.png"))); // NOI18N
+        LabelBotonPreVisualizarDieta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LabelBotonPreVisualizarDieta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LabelBotonPreVisualizarDietaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                LabelBotonPreVisualizarDietaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                LabelBotonPreVisualizarDietaMouseExited(evt);
+            }
+        });
+        getContentPane().add(LabelBotonPreVisualizarDieta, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, 40, 30));
+
+        LabelAvisoPrevisualizarPlanDieta.setForeground(new java.awt.Color(0, 0, 0));
+        LabelAvisoPrevisualizarPlanDieta.setText("Ver Plan Dieta");
+        getContentPane().add(LabelAvisoPrevisualizarPlanDieta, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, -1, -1));
+
         Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FondoDieta.png"))); // NOI18N
         Fondo.setPreferredSize(new java.awt.Dimension(750, 565));
         getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 750, 590));
@@ -488,31 +510,94 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_CalendarioFechaInicialPropertyChange
 
     private void LabelCrearDietaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelCrearDietaMouseClicked
-        
+String pasSelec=ComboPacientes.getSelectedItem().toString();
+if(pasSelec!=null){
+    
+}
 
     }//GEN-LAST:event_LabelCrearDietaMouseClicked
 
     private void TextoNomDietaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TextoNomDietaMouseClicked
-       if(TextoNomDieta.getText().equals("Ingrese un nombre de dieta..")){
-        TextoNomDieta.setText("");
-        TextoNomDieta.setForeground(Color.BLACK);
-       }
+        if (TextoNomDieta.getText().equals("Ingrese un nombre de dieta..")) {
+            TextoNomDieta.setText("");
+            TextoNomDieta.setForeground(Color.BLACK);
+        }
     }//GEN-LAST:event_TextoNomDietaMouseClicked
 
     private void LabelBotonCrearDietaComidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelBotonCrearDietaComidaMouseClicked
-       String nom=TextoNomDieta.getText();
-       int CaloriasSumadas=Integer.parseInt(TextoCaloriasSumadas.getText());
-       int ObjetivoCaloriasEditable=Integer.parseInt(TextoObjetivoCaloriasEditable.getText());
-        if (ComboPacientes.getSelectedIndex() != 0 && TextoNomDieta != null && TextoPesoInicial != null && TextoPesoFinal != null && CalendarioFechaInicial != null&&CaloriasSumadas<ObjetivoCaloriasEditable&&modelo.getRowCount()>-1) {
+        ArrayList<Comida> comidas=new ArrayList<>();
+        String nom = TextoNomDieta.getText();
+        int pesoInicial = Integer.parseInt(TextoPesoInicial.getText());
+                int pesoFinal = Integer.parseInt(TextoPesoFinal.getText());
+        int CaloriasSumadas = Integer.parseInt(TextoCaloriasSumadas.getText());
+        int ObjetivoCaloriasEditable = Integer.parseInt(TextoObjetivoCaloriasEditable.getText());
+        LocalDate fechaInicial;
+         fechaInicial = CalendarioFechaInicial.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+         LocalDate fechafinalllll=null;
+         String fecha=TextoFechaFinalAutomatica.getText();
+         fechafinalllll.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        if (ComboPacientes.getSelectedIndex() != 0 && TextoNomDieta != null && TextoPesoInicial != null && TextoPesoFinal != null && CalendarioFechaInicial != null && CaloriasSumadas < ObjetivoCaloriasEditable && modelo.getRowCount() > -1) {
 
-            //PanelFechaFinal.setVisible(true);
-            PanelCantCalorias.setVisible(true);
             TextoPesoInicial.setEditable(false);
             TextoPesoFinal.setEditable(false);
             TextoNomDieta.setEditable(false);
             CalendarioFechaInicial.getDateEditor().setEnabled(false);
             CalendarioFechaInicial.setSelectableDateRange(CalendarioFechaInicial.getDate(), CalendarioFechaInicial.getDate());
+
+            Paciente pas = new Paciente();
+            String numeroID = (ComboPacientes.getSelectedItem().toString());
+            int cadena = numeroID.length();
+            String numiD = "";
+            for (int i = 0; i < cadena - 1; i++) {
+                if (numeroID.substring(i, i + 1).equals("-")) {
+                    i = cadena;
+                } else {
+                    numiD = numiD + numeroID.substring(i, i + 1);
+                }
+            }
+
+            int numDni = Integer.parseInt(numiD);
+
+            PacienteData PD = new PacienteData();
+
+            pas.setIdPaciente(PD.buscarXdni(numDni).getIdPaciente());
+            Dieta die = new Dieta(nom, pas, fechaInicial, pesoInicial, pesoFinal, fechafinalllll);
+            DietaData DD = new DietaData();
+            DD.agregarDieta(die);
+
             
+            int filaselec = TablaComidasAgregadas.getSelectedRow();
+            if(filaselec>-1){
+               DietaComidaData DCD=new DietaComidaData();
+               
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
+        }
+    }//GEN-LAST:event_LabelBotonCrearDietaComidaMouseClicked
+
+    private void CalendarioFechaInicialAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_CalendarioFechaInicialAncestorAdded
+
+    }//GEN-LAST:event_CalendarioFechaInicialAncestorAdded
+
+    private void CalendarioFechaInicialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CalendarioFechaInicialMouseClicked
+//        if(CalendarioFechaInicial.getCalendar().get){
+//        PanelFechaFinal.setVisible(true);
+//        }
+    }//GEN-LAST:event_CalendarioFechaInicialMouseClicked
+
+    private void LabelBotonPreVisualizarDietaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelBotonPreVisualizarDietaMouseEntered
+        LabelAvisoPrevisualizarPlanDieta.setVisible(true);
+    }//GEN-LAST:event_LabelBotonPreVisualizarDietaMouseEntered
+
+    private void LabelBotonPreVisualizarDietaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelBotonPreVisualizarDietaMouseExited
+        LabelAvisoPrevisualizarPlanDieta.setVisible(false);
+    }//GEN-LAST:event_LabelBotonPreVisualizarDietaMouseExited
+
+    private void LabelBotonPreVisualizarDietaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelBotonPreVisualizarDietaMouseClicked
+        if (TextoPesoFinal.getText() != null && TextoPesoFinal != null && CalendarioFechaInicial.getDate() != null) {
+            PanelFechaFinal.setVisible(true);
+            PanelCantCalorias.setVisible(true);
             try {
                 int pesoInicial = Integer.parseInt(TextoPesoInicial.getText());
                 int pesoFinal = Integer.parseInt(TextoPesoFinal.getText());
@@ -527,7 +612,7 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
                 }
 
                 LocalDate fechaInicial;
-                LocalDate fechafinalllll=null;
+                LocalDate fechafinalllll = null;
                 fechaInicial = CalendarioFechaInicial.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
                 if (dif > 0 && dif <= 5) {
@@ -567,44 +652,15 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
                     String fechaFFFinal = fechafinalllll.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                     TextoFechaFinalAutomatica.setText(fechaFFFinal);
                 }
-                Paciente pas=new Paciente();
-                String numeroID=(ComboPacientes.getSelectedItem().toString());
-                
-                int cadena=numeroID.length();
-                String numiD="";
-                for (int i = 0; i <cadena-1; i++) {
-                    if(numeroID.substring(i, i+1).equals("-")){
-                        i=cadena;
-                    }else{
-                        numiD=numiD+numeroID.substring(i,i+1 );
-                    }
-                }
-                
-                int numDni=Integer.parseInt(numiD);
-                
-                PacienteData PD=new PacienteData();
-                
-                pas.setIdPaciente(PD.buscarXdni(numDni).getIdPaciente());
-            Dieta die=new Dieta(nom, pas, fechaInicial, pesoInicial, pesoFinal, fechafinalllll);
-            DietaData DD=new DietaData();
-            DD.agregarDieta(die);
-            } catch (NumberFormatException e) {
+            
+        
+                }catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Ingrese un valor numerico" + e);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
+                             }
+    
         }
-    }//GEN-LAST:event_LabelBotonCrearDietaComidaMouseClicked
-
-    private void CalendarioFechaInicialAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_CalendarioFechaInicialAncestorAdded
-         
-    }//GEN-LAST:event_CalendarioFechaInicialAncestorAdded
-
-    private void CalendarioFechaInicialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CalendarioFechaInicialMouseClicked
-        if(CalendarioFechaInicial.getCalendar().get){
-        PanelFechaFinal.setVisible(true);
-        }
-    }//GEN-LAST:event_CalendarioFechaInicialMouseClicked
+        
+    }//GEN-LAST:event_LabelBotonPreVisualizarDietaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -616,8 +672,10 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
     private javax.swing.JLabel LabelAvisoCrearDieta;
     private javax.swing.JLabel LabelAvisoEmpezar;
     private javax.swing.JLabel LabelAvisoModificar;
+    private javax.swing.JLabel LabelAvisoPrevisualizarPlanDieta;
     private javax.swing.JLabel LabelBotonCrearDietaComida;
     private javax.swing.JLabel LabelBotonModificarDieta;
+    private javax.swing.JLabel LabelBotonPreVisualizarDieta;
     private javax.swing.JLabel LabelCantCalorias;
     private javax.swing.JLabel LabelCrearDieta;
     private javax.swing.JLabel LabelFechaFinal;
@@ -691,7 +749,7 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
         for (Paciente paciente : pacientes) {
             String nom = paciente.getNombre();
             int dni = paciente.getDni();
-            ComboPacientes.addItem(dni+"-"+nom);
+            ComboPacientes.addItem(dni + "-" + nom);
         }
     }
 
