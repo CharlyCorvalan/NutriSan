@@ -413,27 +413,37 @@ public class VPrueba4 extends javax.swing.JFrame {
     }//GEN-LAST:event_LComidaMouseExited
 
     private void LDietaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LDietaMouseClicked
-        if (paciente.isVisible() == true) {
+        if (paciente.isVisible() == true) {           
             cerrarVentana(paciente);
             abrirVentanas(dieta);
+            dieta.limpiarTodo();
+            dieta.UbicarCombo();
         } else if (comida.isVisible() == true) {
             cerrarVentana(comida);
             abrirVentanas(dieta);
+            dieta.limpiarTodo();
+            dieta.UbicarCombo();
         } else if (ingredientes.isVisible() == true) {
             cerrarVentana(ingredientes);
             abrirVentanas(dieta);
+            dieta.limpiarTodo();
+            dieta.UbicarCombo();
         } else if(dieta.isVisible()==true){
             cerrarVentana(dieta);
             abrirVentanas(dieta);
+            dieta.limpiarTodo();
+            dieta.UbicarCombo();
         }else{
             abrirVentanas(dieta);
+            dieta.limpiarTodo();
+            dieta.UbicarCombo();
         }
         
     }//GEN-LAST:event_LDietaMouseClicked
 
     private void LComidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LComidaMouseClicked
         if (paciente.isVisible() == true) {
-            cerrarVentana(paciente);
+            cerrarVentana(paciente);            
             abrirVentanas(comida);
         } else if (dieta.isVisible() == true) {
             cerrarVentana(dieta);
@@ -543,6 +553,8 @@ public class VPrueba4 extends javax.swing.JFrame {
     
     private void cerrarVentana(JInternalFrame x) {
         x.dispose();
+        
         escritorio.remove(x);
     }
+    
 }
