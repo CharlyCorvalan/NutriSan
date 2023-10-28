@@ -58,7 +58,7 @@ public class VPrueba4 extends javax.swing.JFrame {
         LDieta = new javax.swing.JLabel();
         LPaciente = new javax.swing.JLabel();
         LComida = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        LIngredientes = new javax.swing.JLabel();
         PanelInicio = new javax.swing.JPanel();
         LabelInicio = new javax.swing.JLabel();
         PanelPaciente = new javax.swing.JPanel();
@@ -196,21 +196,21 @@ public class VPrueba4 extends javax.swing.JFrame {
         });
         Blateral.add(LComida, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/manzanaFinal.png"))); // NOI18N
-        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        LIngredientes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LIngredientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/manzanaFinal.png"))); // NOI18N
+        LIngredientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LIngredientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
+                LIngredientesMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel1MouseEntered(evt);
+                LIngredientesMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel1MouseExited(evt);
+                LIngredientesMouseExited(evt);
             }
         });
-        Blateral.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, -1, -1));
+        Blateral.add(LIngredientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, -1, -1));
 
         PanelInicio.setBackground(new java.awt.Color(204, 204, 204));
         PanelInicio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -316,17 +316,22 @@ public class VPrueba4 extends javax.swing.JFrame {
     private void LPacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LPacienteMouseClicked
         if (dieta.isVisible() == true) {
             cerrarVentana(dieta);
+            paciente.limpiarTodo();
             abrirVentanas(paciente);
         } else if (comida.isVisible() == true) {
             cerrarVentana(comida);
+            paciente.limpiarTodo();
             abrirVentanas(paciente);
         } else if (ingredientes.isVisible() == true) {
             cerrarVentana(ingredientes);
+            paciente.limpiarTodo();
             abrirVentanas(paciente);
         } else if(paciente.isVisible()==true){
             cerrarVentana(paciente);
+            paciente.limpiarTodo();
             abrirVentanas(paciente);
         }else{
+            paciente.limpiarTodo();
             abrirVentanas(paciente);
         }
         
@@ -443,48 +448,58 @@ public class VPrueba4 extends javax.swing.JFrame {
 
     private void LComidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LComidaMouseClicked
         if (paciente.isVisible() == true) {
-            cerrarVentana(paciente);            
+            cerrarVentana(paciente); 
+            comida.limpiarPantalla();
             abrirVentanas(comida);
         } else if (dieta.isVisible() == true) {
             cerrarVentana(dieta);
+            comida.limpiarPantalla();
             abrirVentanas(comida);
         } else if (ingredientes.isVisible() == true) {
             cerrarVentana(ingredientes);
+            comida.limpiarPantalla();
             abrirVentanas(comida);
         } else if(comida.isVisible()==true){
             cerrarVentana(comida);
+            comida.limpiarPantalla();
             abrirVentanas(comida);
         }else{
+            comida.limpiarPantalla();
             abrirVentanas(comida);
         }
         
     }//GEN-LAST:event_LComidaMouseClicked
 
-    private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
+    private void LIngredientesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LIngredientesMouseEntered
         PanelIngredientes.setVisible(true);
-    }//GEN-LAST:event_jLabel1MouseEntered
+    }//GEN-LAST:event_LIngredientesMouseEntered
 
-    private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
+    private void LIngredientesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LIngredientesMouseExited
         PanelIngredientes.setVisible(false);
-    }//GEN-LAST:event_jLabel1MouseExited
+    }//GEN-LAST:event_LIngredientesMouseExited
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+    private void LIngredientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LIngredientesMouseClicked
         if (paciente.isVisible() == true) {
             cerrarVentana(paciente);
+            ingredientes.limpiarTodo();
             abrirVentanas(ingredientes);
         } else if (dieta.isVisible() == true) {
             cerrarVentana(dieta);
+            ingredientes.limpiarTodo();
             abrirVentanas(ingredientes);
         } else if (comida.isVisible() == true) {
             cerrarVentana(comida);
+            ingredientes.limpiarTodo();
             abrirVentanas(ingredientes);
         } else if(ingredientes.isVisible()==true){
             cerrarVentana(ingredientes);
+            ingredientes.limpiarTodo();
             abrirVentanas(ingredientes);
         }else{
+            ingredientes.limpiarTodo();
             abrirVentanas(ingredientes);
         }
-    }//GEN-LAST:event_jLabel1MouseClicked
+    }//GEN-LAST:event_LIngredientesMouseClicked
 
     /**
      * @param args the command line arguments
@@ -527,6 +542,7 @@ public class VPrueba4 extends javax.swing.JFrame {
     private javax.swing.JLabel LComida;
     private javax.swing.JLabel LDieta;
     private javax.swing.JLabel LHome;
+    private javax.swing.JLabel LIngredientes;
     private javax.swing.JLabel LPaciente;
     private javax.swing.JLabel LabelBuscar;
     private javax.swing.JLabel LabelCerrar;
@@ -538,7 +554,6 @@ public class VPrueba4 extends javax.swing.JFrame {
     private javax.swing.JPanel PanelInicio;
     private javax.swing.JPanel PanelPaciente;
     private javax.swing.JDesktopPane escritorio;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

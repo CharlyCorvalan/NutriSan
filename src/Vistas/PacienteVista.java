@@ -20,16 +20,16 @@ import javax.swing.table.DefaultTableModel;
  * @author charl
  */
 public class PacienteVista extends javax.swing.JInternalFrame {
-    
+
     private JComponent Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
     private Dimension DimensionBarra = null;
-    private boolean N, M, E, B = false;
+    private boolean N, M, E, L = false;
     private DefaultTableModel modelo = new DefaultTableModel() {
         public boolean isCellEditable(int f, int c) {
             return false;
         }
     };
-    
+
     public PacienteVista() {
         initComponents();
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
@@ -41,6 +41,8 @@ public class PacienteVista extends javax.swing.JInternalFrame {
         PanelModificar.setVisible(false);
         PanelEliminar.setVisible(false);
         PanelListar.setVisible(false);
+        BotonModificar.setVisible(false);
+        BotonEliminar.setVisible(false);
     }
 
     /**
@@ -62,11 +64,9 @@ public class PacienteVista extends javax.swing.JInternalFrame {
         AvisoVolver = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         PanelAceptar = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        BotonAceptar = new javax.swing.JLabel();
         PanelCancelar = new javax.swing.JPanel();
         BotonCancelar = new javax.swing.JLabel();
-        PanelBuscar = new javax.swing.JPanel();
-        BotonBuscar = new javax.swing.JLabel();
         LabelNuevo = new javax.swing.JLabel();
         TextoTelefono = new javax.swing.JTextField();
         LabelDNI = new javax.swing.JLabel();
@@ -155,16 +155,21 @@ public class PacienteVista extends javax.swing.JInternalFrame {
         jLabel7.setText("¿Desea continuar?");
         PanelAdvertencia.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 190, 20));
 
-        getContentPane().add(PanelAdvertencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 330, 210));
+        getContentPane().add(PanelAdvertencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 330, 210));
 
         PanelAceptar.setBackground(new java.awt.Color(204, 204, 204));
         PanelAceptar.setMinimumSize(new java.awt.Dimension(120, 30));
         PanelAceptar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("ACEPTAR");
-        PanelAceptar.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 30));
+        BotonAceptar.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
+        BotonAceptar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BotonAceptar.setText("ACEPTAR");
+        BotonAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BotonAceptarMouseClicked(evt);
+            }
+        });
+        PanelAceptar.add(BotonAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 30));
 
         getContentPane().add(PanelAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, -1, -1));
 
@@ -186,29 +191,13 @@ public class PacienteVista extends javax.swing.JInternalFrame {
 
         getContentPane().add(PanelCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 270, -1, -1));
 
-        PanelBuscar.setBackground(new java.awt.Color(255, 255, 255));
-        PanelBuscar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        BotonBuscar.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
-        BotonBuscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        BotonBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar2.png"))); // NOI18N
-        BotonBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        BotonBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotonBuscarMouseClicked(evt);
-            }
-        });
-        PanelBuscar.add(BotonBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 30));
-
-        getContentPane().add(PanelBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, 50, 30));
-
         LabelNuevo.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
         LabelNuevo.setText("NOMBRE:");
         getContentPane().add(LabelNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         TextoTelefono.setEditable(false);
         TextoTelefono.setForeground(new java.awt.Color(102, 102, 102));
-        TextoTelefono.setText(" Telefono de contacto (solo numeros)");
+        TextoTelefono.setText("Telefono de contacto (solo numeros)");
         TextoTelefono.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TextoTelefonoMouseClicked(evt);
@@ -222,7 +211,7 @@ public class PacienteVista extends javax.swing.JInternalFrame {
 
         TextoDni.setEditable(false);
         TextoDni.setForeground(new java.awt.Color(102, 102, 102));
-        TextoDni.setText(" (solo numeros)");
+        TextoDni.setText("(solo numeros)");
         TextoDni.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TextoDniMouseClicked(evt);
@@ -240,7 +229,7 @@ public class PacienteVista extends javax.swing.JInternalFrame {
 
         TextoNombre.setEditable(false);
         TextoNombre.setForeground(new java.awt.Color(102, 102, 102));
-        TextoNombre.setText(" Nombre completo del paciente");
+        TextoNombre.setText("Nombre completo del paciente");
         TextoNombre.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TextoNombreMouseClicked(evt);
@@ -401,7 +390,13 @@ public class PacienteVista extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonNuevoMouseClicked
-        check(1);
+        limpiarTodo();
+        N = true;    
+        TextoNombre.setEditable(true);
+        TextoDni.setEditable(true);
+        TextoTelefono.setEditable(true);
+        TextoDireccion.setEditable(true);
+        
 
     }//GEN-LAST:event_BotonNuevoMouseClicked
 
@@ -409,13 +404,23 @@ public class PacienteVista extends javax.swing.JInternalFrame {
         if (N == true) {
             TextoNombre.setForeground(Color.black);
             TextoNombre.setText("");
+        }else if(M==true){
+            TextoNombre.setForeground(Color.black);
+            JOptionPane.showMessageDialog(null, "Solo se puede editar Direccion y Telefono");
+        }else if(E==true){
+            JOptionPane.showMessageDialog(null, "Para editar elija la opcion de editar");
         }
     }//GEN-LAST:event_TextoNombreMouseClicked
 
     private void TextoDniMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TextoDniMouseClicked
-        if (N == true || M == true || E == true) {
+        if (N == true){
             TextoDni.setForeground(Color.black);
             TextoDni.setText("");
+        }else if(M==true){
+            TextoDni.setForeground(Color.black);
+            JOptionPane.showMessageDialog(null, "Solo se puede editar Direccion y Telefono");
+        }else if(E==true){
+            JOptionPane.showMessageDialog(null, "Para editar elija la opcion de editar");
         }
     }//GEN-LAST:event_TextoDniMouseClicked
 
@@ -423,9 +428,11 @@ public class PacienteVista extends javax.swing.JInternalFrame {
         if (N == true) {
             TextoDireccion.setForeground(Color.black);
             TextoDireccion.setText("");
-        } else if (M == true && B == true) {
+        } else if (M == true) {
             TextoDireccion.setForeground(Color.black);
             TextoDireccion.setEditable(true);
+        }else if(E==true){
+            JOptionPane.showMessageDialog(null, "Para editar elija la opcion de editar");
         }
     }//GEN-LAST:event_TextoDireccionMouseClicked
 
@@ -433,71 +440,67 @@ public class PacienteVista extends javax.swing.JInternalFrame {
         if (N == true) {
             TextoTelefono.setForeground(Color.black);
             TextoTelefono.setText("");
-        } else if (M == true && B == true) {
+        } else if (M == true) {
             TextoTelefono.setForeground(Color.black);
             TextoTelefono.setEditable(true);
+        }else if(E==true){
+            JOptionPane.showMessageDialog(null, "Para editar elija la opcion de editar");
         }
     }//GEN-LAST:event_TextoTelefonoMouseClicked
 
     private void BotonModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonModificarMouseClicked
-        check(2);
-        if (M == true) {
-            TextoDni.setText("Coloque el dni del paciente a buscar");
+        M = true;
+        N = false;
+        E = false;
+        if (L == true && TablaListar.getSelectedRow() > -1) {
+            TextoNombre.setText(modelo.getValueAt(TablaListar.getSelectedRow(), 0).toString());
+            TextoDni.setText(modelo.getValueAt(TablaListar.getSelectedRow(), 1).toString());
+            TextoDireccion.setText(modelo.getValueAt(TablaListar.getSelectedRow(), 2).toString());
+            TextoTelefono.setText(modelo.getValueAt(TablaListar.getSelectedRow(), 3).toString());
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un Paciente de la lista");
         }
     }//GEN-LAST:event_BotonModificarMouseClicked
 
     private void BotonEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonEliminarMouseClicked
-        check(3);
-        if (E == true) {
-            TextoDni.setText("Coloque el dni del paciente a buscar");
+        E = true;
+        N = false;
+        M = false;
+        if (L == true && TablaListar.getSelectedRow() > -1) {
+            TextoNombre.setText(modelo.getValueAt(TablaListar.getSelectedRow(), 0).toString());
+            TextoDni.setText(modelo.getValueAt(TablaListar.getSelectedRow(), 1).toString());
+            TextoDireccion.setText(modelo.getValueAt(TablaListar.getSelectedRow(), 2).toString());
+            TextoTelefono.setText(modelo.getValueAt(TablaListar.getSelectedRow(), 3).toString());
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un Paciente de la lista");
         }
     }//GEN-LAST:event_BotonEliminarMouseClicked
 
-    private void BotonBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonBuscarMouseClicked
-        B = true;
-        Paciente pa = new Paciente();
-        PacienteData paData = new PacienteData();
-        String dniS = TextoDni.getText();
-        try {
-            int dni = Integer.parseInt(dniS);
-            pa = buscarXDNI(dni);
-            if (pa.getDni() != 0) {
-                pa = (paData.buscarXdni(dni));
-                TextoNombre.setText(pa.getNombre());
-                TextoTelefono.setText(pa.getTelefono());
-                TextoDireccion.setText(pa.getDomicilio());
-            } else {
-                JOptionPane.showMessageDialog(null, "DNI de paciente no encontrado");
-                TextoDni.setText("Coloque el dni del paciente a buscar");
-                TextoDni.setForeground(Color.gray);
-            }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "DNI incorrecto, intente nuevamente");
-            TextoDni.setText("Coloque el dni del paciente a buscar");
-            TextoDni.setForeground(Color.gray);
-        }
-
-    }//GEN-LAST:event_BotonBuscarMouseClicked
-
     private void AvisoSIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AvisoSIMouseClicked
-        int dni = Integer.parseInt(TextoDni.getText());
-        Paciente pa = new Paciente();
-        PacienteData paData = new PacienteData();
-        if (M == true && B == true) {
-            pa = (paData.buscarXdni(dni));
-            pa.setDomicilio(TextoDireccion.getText());
-            pa.setTelefono(TextoTelefono.getText());
-            paData.modificiarPaciente(pa);
-        } else if (E == true && B == true) {
-            paData.eliminarPaciente(pa.getIdPaciente());
-        } else if (N == true) {
-            pa.setNombre(TextoNombre.getText());
-            pa.setDni(dni);
-            pa.setDomicilio(TextoDireccion.getText());
-            pa.setTelefono(TextoTelefono.getText());
-            paData.agregarPaciente(pa);
+        try {
+            int dni = Integer.parseInt(TextoDni.getText());
+            Paciente pa = new Paciente();
+            PacienteData paData = new PacienteData();
+            if (M == true) {
+                pa = (paData.buscarXdni(dni));
+                pa.setDomicilio(TextoDireccion.getText());
+                pa.setTelefono(TextoTelefono.getText());
+                paData.modificiarPaciente(pa);
+            } else if (E == true) {
+                 pa = (paData.buscarXdni(dni));
+                paData.eliminarPaciente(pa.getIdPaciente());
+            } else if (N == true) {
+                pa.setNombre(TextoNombre.getText());
+                pa.setDni(dni);
+                pa.setDomicilio(TextoDireccion.getText());
+                pa.setTelefono(TextoTelefono.getText());
+                paData.agregarPaciente(pa);
+            }
+            PanelAdvertencia.setVisible(false);
+            limpiarTodo();
+        } catch (NumberFormatException x) {
+            JOptionPane.showMessageDialog(null, "Campo DNI espera un numero entero");
         }
-        PanelAdvertencia.setVisible(false);
     }//GEN-LAST:event_AvisoSIMouseClicked
 
     private void AvisoVolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AvisoVolverMouseClicked
@@ -505,22 +508,15 @@ public class PacienteVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_AvisoVolverMouseClicked
 
     private void BotonCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonCancelarMouseClicked
-        TextoNombre.setEditable(false);
-        TextoDni.setEditable(false);
-        TextoTelefono.setEditable(false);
-        TextoDireccion.setEditable(false);
-        TextoNombre.setForeground(Color.gray);
-        TextoDni.setForeground(Color.gray);
-        TextoTelefono.setForeground(Color.gray);
-        TextoDireccion.setForeground(Color.gray);
-        TextoNombre.setText("Nombre completo del paciente");
-        TextoDni.setText("(solo numeros)");
-        TextoDireccion.setText("Agregar calle y numero");
-        TextoTelefono.setText("Telefono de contacto (solo numeros)");
+        limpiarTodo();
     }//GEN-LAST:event_BotonCancelarMouseClicked
 
     private void BotonListarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonListarMouseClicked
-        limpiarTabla();
+       limpiarTodo();
+        L = true;       
+        BotonModificar.setVisible(true);
+        BotonEliminar.setVisible(true);
+        
         PacienteData padata = new PacienteData();
         ArrayList<Paciente> paciente = new ArrayList<>(padata.listarPaciente());
         cargarTabla(paciente);
@@ -559,12 +555,30 @@ public class PacienteVista extends javax.swing.JInternalFrame {
         PanelListar.setVisible(false);
     }//GEN-LAST:event_BotonListarMouseExited
 
+    private void BotonAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonAceptarMouseClicked
+        if(TextoNombre.getText().equalsIgnoreCase("Nombre completo del paciente")||TextoDni.getText().equalsIgnoreCase("(solo numeros)")||TextoDireccion.getText().equalsIgnoreCase("Agregar calle y numero")||TextoTelefono.getText().equalsIgnoreCase("Telefono de contacto (solo numeros)")){
+            JOptionPane.showMessageDialog(null, "hola");
+        }else if (N == true) {
+            PanelAdvertencia.setVisible(true);
+            OpcionDeAviso.setText("Agregar");
+        } else if (M == true) {
+            PanelAdvertencia.setVisible(true);
+            OpcionDeAviso.setText("Modificar");
+        } else if (E == true) {
+            PanelAdvertencia.setVisible(true);
+            OpcionDeAviso.setText("Eliminar");
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una opcion para continuar");
+        }
+        
+    }//GEN-LAST:event_BotonAceptarMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AvisoSI;
     private javax.swing.JLabel AvisoVolver;
+    private javax.swing.JLabel BotonAceptar;
     private javax.swing.JLabel BotonAgregar;
-    private javax.swing.JLabel BotonBuscar;
     private javax.swing.JLabel BotonCancelar;
     private javax.swing.JLabel BotonEliminar;
     private javax.swing.JLabel BotonListar;
@@ -578,7 +592,6 @@ public class PacienteVista extends javax.swing.JInternalFrame {
     private javax.swing.JTextField OpcionDeAviso;
     private javax.swing.JPanel PanelAceptar;
     private javax.swing.JPanel PanelAdvertencia;
-    private javax.swing.JPanel PanelBuscar;
     private javax.swing.JPanel PanelCancelar;
     private javax.swing.JPanel PanelEliminar;
     private javax.swing.JPanel PanelListar;
@@ -594,7 +607,6 @@ public class PacienteVista extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -602,8 +614,11 @@ public class PacienteVista extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
-    private void check(int x) {
-        B = false;
+    public void limpiarTodo() {
+        N=false;
+        L=false;
+        M=false;
+        E=false;
         TextoNombre.setEditable(false);
         TextoDni.setEditable(false);
         TextoTelefono.setEditable(false);
@@ -616,35 +631,21 @@ public class PacienteVista extends javax.swing.JInternalFrame {
         TextoDni.setText("(solo numeros)");
         TextoDireccion.setText("Agregar calle y numero");
         TextoTelefono.setText("Telefono de contacto (solo numeros)");
-        if (x == 1) {
-            N = true;
-            M = false;
-            E = false;
-            TextoNombre.setEditable(true);
-            TextoDni.setEditable(true);
-            TextoTelefono.setEditable(true);
-            TextoDireccion.setEditable(true);
-        } else if (x == 2) {
-            M = true;
-            N = false;
-            E = false;
-            TextoDni.setEditable(true);
-            
-        } else if (x == 3) {
-            E = true;
-            N = false;
-            M = false;
-            TextoDni.setEditable(true);
-        }
+        limpiarTabla();
+        Tabla.setVisible(false);
+        BotonModificar.setVisible(false);
+        BotonEliminar.setVisible(false);
+       
+        
     }
-    
+
     private Paciente buscarXDNI(int x) {
         PacienteData paData = new PacienteData();
         Paciente pa = new Paciente();
         pa = (paData.buscarXdni(x));
         return pa;
     }
-    
+
     private void cargarCabecera() {
         modelo.addColumn("Nombre");
         modelo.addColumn("DNI");
@@ -652,13 +653,13 @@ public class PacienteVista extends javax.swing.JInternalFrame {
         modelo.addColumn("Telefono");
         TablaListar.setModel(modelo);
     }
-    
+
     private void cargarTabla(ArrayList<Paciente> x) {
         for (Paciente paciente : x) {
             modelo.addRow(new Object[]{paciente.getNombre(), paciente.getDni(), paciente.getDomicilio(), paciente.getTelefono()});
         }
     }
-    
+
     private void limpiarTabla() {
         int filas = modelo.getRowCount() - 1;
         for (int i = filas; i > -1; i--) {

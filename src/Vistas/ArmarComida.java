@@ -390,10 +390,10 @@ public class ArmarComida extends javax.swing.JInternalFrame {
                 limpiarPantalla();
                 id=0;
             }
-        } else if (L == true) {
+        }else if (L == true) {
             String nombre = TextoNombre.getText();
             String TexCalo=TextoCalorias.getText();
-            if(E==false||M==false){
+            if(E==false&&M==false){
                 JOptionPane.showMessageDialog(null, "Debe seleccionar una opcion para continuar");
             }else if (nombre.isEmpty() || ComboDetalle.getSelectedIndex() == 0 || TexCalo.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Debe completar los datos antes de continuar");
@@ -426,7 +426,7 @@ public class ArmarComida extends javax.swing.JInternalFrame {
                 limpiarPantalla();
                 id=0;
             }
-        }else if(N==false||M==false||E==false){
+        }else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una opcion para continuar");
         }
     }//GEN-LAST:event_BotonAceptarMouseClicked
@@ -435,6 +435,7 @@ public class ArmarComida extends javax.swing.JInternalFrame {
         E = true;
         N=false;
         M=false;
+        L=true;
         JOptionPane.showMessageDialog(null, "Eligio eliminar una comida");
     }//GEN-LAST:event_EliminarMouseClicked
 
@@ -443,6 +444,7 @@ public class ArmarComida extends javax.swing.JInternalFrame {
         M = true;
         E=false;
         N=false;
+        L=true;
         OpcionCombo.setText("Ingredientes");
         limpiarCombo(ComboBox);
         cargarCombo1();
@@ -604,11 +606,11 @@ private void cargarCombo1() {
         modelo2.insertRow(filas, new Object[]{ingrediente.getIdIngredientes(), ingrediente.getNombre(), ingrediente.getCategoria(), ingrediente.getCantCalorias()});
     }
 
-    private void limpiarPantalla() {
+    public void limpiarPantalla() {
         calorias = 0;
         TextoNombre.setText("");
-        limpiarCombo(ComboDetalle);
         TextoCalorias.setText("0");
+        limpiarCombo(ComboDetalle);   
         limpiarCombo(ComboBox);
         limpiarTabla(modelo);
         limpiarTabla(modelo2);

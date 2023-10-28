@@ -599,7 +599,8 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Revise los datos antes de continuar");
             }
             
-        } else if (modificar == true) {
+        }else if (modificar == true) {
+            
             Dieta diet = new Dieta();
             String cadena=ComboListaDietas.getSelectedItem().toString();
             int largo=cadena.length();
@@ -612,29 +613,52 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
                 }
             }
             int idDieta=Integer.parseInt(pos); 
+            
             diet.setIdDieta(idDieta);
             DietaComidaData DCD = new DietaComidaData();
-            ArrayList<Comida> comida =new ArrayList<>();
+            
             int filas=modelo.getRowCount();
-            for (int i = 0; i < filas-1; i++) {
-                Comida comi=new Comida();
+            ArrayList<Comida>comida1=new ArrayList<>();
+            comida1=DCD.ListarDietaComidas(idDieta);
+            int largoArray=comida1.size();
+            
+            for (int i = 0; i < filas; i++) {
+               int contador=0;
+               Comida comi=new Comida();
                int idComi= Integer.parseInt(modelo.getValueAt(i, 0).toString());
-               comi.setIdComida(idComi);
-               boolean Coincide=DCD.BuscarComida(comi, diet);
-               if(Coincide==false){
-                   DCD.AgregarUnaComida(diet, comi);
-               }
-            }
-            comida=DCD.ListarDietaComidas(idDieta);
-            int filaComi=comida.size();
-            for (int i = 0; i < filas-1; i++) {
-                for (int j = 0; j < filaComi-1; j++) {
-                    if(i==j){
-                        
-                    }
+                for (int j = 0; j < largoArray; j++) {   
+                     comi=comida1.get(j);
+                     if(idComi!=comi.getIdComida()){
+                         contador++;
+                     }
+                }
+                System.out.println(contador);
+                if(contador==largoArray){
+                    Comida comida2=new Comida();
+                    comida2.setIdComida(idComi);
+                    DCD.AgregarUnaComida(diet, comida2);
+                    
                 }
             }
-            
+              
+            ArrayList<Comida> comida =new ArrayList<>();
+            comida=DCD.ListarDietaComidas(idDieta);
+            int filaComi=comida.size();           
+            for (int i = 0; i < filaComi-1; i++) {
+                int contador=0;
+                Comida com=new Comida();
+                com=comida.get(i);
+                for (int j = 0; j < filas; j++) {
+                    int id=Integer.parseInt(modelo.getValueAt(j, 0).toString());                   
+                    if(com.getIdComida()!=id){                      
+                      contador++;
+                    }
+                }
+                if(contador==filas){
+                    DCD.modificarDietaComida(diet, com);
+                    
+                }
+            } 
             
             limpiarTodo();
         }

@@ -25,17 +25,17 @@ public class IngredientesVista extends javax.swing.JInternalFrame {
     private Dimension DimensionBarra = null;
     private DefaultTableModel modelo = new DefaultTableModel();
     private boolean N, M, E, A = false;
-
+    
     public IngredientesVista() {
+        
         initComponents();
+        
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         cargarCabecera();
         cargarCombo();
-        limpiarTabla();
-
+        limpiarTabla();    
         TextoNombre.setBackground(Color.GRAY);
-        TextoCalorias.setBackground(Color.gray);
-
+        TextoCalorias.setBackground(Color.gray);   
     }
 
     /**
@@ -369,7 +369,7 @@ private void cargarCabecera() {
         }
     }
 
-    private void limpiarTodo() {
+    public  void limpiarTodo() {
         TextoNombre.setText("");
         TextoCalorias.setText("");
         ComboBox.setSelectedIndex(0);

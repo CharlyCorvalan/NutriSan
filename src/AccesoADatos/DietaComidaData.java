@@ -86,27 +86,29 @@ String sql="SELECT comida.idComida, nombre, detalle, cantCalorias FROM comida jo
             ps.setInt(1, dieta.getIdDieta());
             ps.setInt(2, comida.getIdComida());
             ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                return true;
+            }
+            
         } catch (SQLException ex) {
             Logger.getLogger(DietaComidaData.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
         return false;
-        
+ 
     }
     
-    public void modificarDietaComida(Dieta dieta) {
-        String sql = "delete from dietacomida where idDieta=? ";
+    public void modificarDietaComida(Dieta dieta,Comida comida) {
+        String sql = "delete  from dietacomida where idDieta=? AND idComida=? ";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setInt(1, dieta.getIdDieta());
+            ps.setInt(2, comida.getIdComida());
             int resultado=ps.executeUpdate();
             if(resultado==1){
                 JOptionPane.showMessageDialog(null, "Exito");
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla dieta comida");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla dieta comida 2323232");
         }
 
     }
@@ -116,11 +118,13 @@ String sql="SELECT comida.idComida, nombre, detalle, cantCalorias FROM comida jo
         try {
             DietaComida DC=new DietaComida();
             PreparedStatement ps=con.prepareStatement( sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, dieta.getIdDieta());
-            ps.setInt(2, comida.getIdComida());
-            ResultSet rs=ps.executeQuery();
+            ps.setInt(1,comida.getIdComida() );
+            ps.setInt(2,dieta.getIdDieta() );
+            ps.executeUpdate();
+            ResultSet rs=ps.getGeneratedKeys();
             while(rs.next()){
                 DC.setId(rs.getInt(1));
+                
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Error al conectar la base de datos dieta comida" +ex);
