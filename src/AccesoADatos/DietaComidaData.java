@@ -105,7 +105,7 @@ String sql="SELECT comida.idComida, nombre, detalle, cantCalorias FROM comida jo
             ps.setInt(2, comida.getIdComida());
             int resultado=ps.executeUpdate();
             if(resultado==1){
-                JOptionPane.showMessageDialog(null, "Exito");
+                //JOptionPane.showMessageDialog(null, "Exito");
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla dieta comida 2323232");

@@ -57,7 +57,7 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
         CalendarioFechaInicial.setEnabled(false);
         TextoNomDieta.setEditable(false);
         TextoCaloriasSumadas.setText("0");
-        
+        ComboListarCalorias.setVisible(false);
     }
 
     /**
@@ -519,6 +519,12 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_CalendarioFechaInicialPropertyChange
 
     private void LabelCrearDietaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelCrearDietaMouseClicked
+       if(modificar=true){
+           crear=false;
+           
+       }else 
+        
+        limpiarComboDietas(ComboListaDietas);
         crear = true;
         modificar = false;
         String pasSelec = ComboPacientes.getSelectedItem().toString();
@@ -529,8 +535,9 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
             TextoPesoInicial.setEditable(true);
             CalendarioFechaInicial.setEnabled(true);
             TextoNomDieta.setEditable(true);
+            ComboListarCalorias.setVisible(true);
         }
-
+       
     }//GEN-LAST:event_LabelCrearDietaMouseClicked
 
     private void TextoNomDietaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TextoNomDietaMouseClicked
@@ -543,6 +550,11 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_TextoNomDietaMouseClicked
 
     private void LabelBotonCrearDietaComidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelBotonCrearDietaComidaMouseClicked
+if(ComboPacientes.getSelectedIndex()==0){
+    
+    JOptionPane.showMessageDialog(null, "Seleccione un paciente para continuar");
+}else
+
         if (crear == true) {
             try {
                 String nom = TextoNomDieta.getText();
@@ -659,9 +671,11 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
                     
                 }
             } 
-            
+            JOptionPane.showMessageDialog(null, "Se han guardado los cambios.");
             limpiarTodo();
         }
+  
+
     }//GEN-LAST:event_LabelBotonCrearDietaComidaMouseClicked
 
     private void CalendarioFechaInicialAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_CalendarioFechaInicialAncestorAdded
@@ -669,9 +683,7 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_CalendarioFechaInicialAncestorAdded
 
     private void CalendarioFechaInicialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CalendarioFechaInicialMouseClicked
-//        if(CalendarioFechaInicial.getCalendar().get){
-//        PanelFechaFinal.setVisible(true);
-//        }
+
     }//GEN-LAST:event_CalendarioFechaInicialMouseClicked
 
     private void LabelBotonPreVisualizarDietaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelBotonPreVisualizarDietaMouseEntered
@@ -781,6 +793,7 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_ComboPacientesActionPerformed
 
     private void ComboListarCaloriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboListarCaloriasActionPerformed
+
         limpiarTabla(modelo2);
         
         if (ComboListarCalorias.getSelectedIndex() != 0) {
@@ -813,9 +826,7 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
             ComidaData comiData = new ComidaData();
             ArrayList<Comida> comida = new ArrayList<>();
             comida = comiData.listarComidasPorCalorias(caloria1, caloria2);
-//            for (Comida comida1 : comida) {
-//                modelo2.addRow(new Object[]{comida1.getIdComida(),comida1.getNombre(),comida1.getCantCalorias()});
-//            }
+
             cargarTablaComidasParaAgregar(comida);
             
         }
@@ -839,12 +850,14 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_TablaComidasParaAgregarMouseClicked
 
     private void LabelBotonModificarDietaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelBotonModificarDietaMouseClicked
+        limpiarTabla(modelo);
         crear = false;
         modificar = true;
         ver = true;
         if (ComboPacientes.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un paciente para continuar");
         } else {
+            ComboListarCalorias.setVisible(true);
             String dniS = ComboPacientes.getSelectedItem().toString();
             int largo = dniS.length();
             String numSum = "";
