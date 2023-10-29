@@ -610,6 +610,8 @@ private void cargarCombo1() {
         calorias = 0;
         TextoNombre.setText("");
         TextoCalorias.setText("0");
+        Editar.setVisible(false);
+        Eliminar.setVisible(false);
         limpiarCombo(ComboDetalle);   
         limpiarCombo(ComboBox);
         limpiarTabla(modelo);

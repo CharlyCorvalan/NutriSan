@@ -331,8 +331,12 @@ private void cargarCabecera() {
         IngredientesData ingreData = new IngredientesData();
         ArrayList<Ingredientes> ingredientes = new ArrayList<>();
         ingredientes = ingreData.listarIngredientesPorCateg(ComboBox.getSelectedItem().toString());
+        if(ComboBox.getSelectedIndex()==0){
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una categoria para listar");
+        }else{
         for (Ingredientes ingre : ingredientes) {
             modelo.addRow(new Object[]{ingre.getIdIngredientes(), ingre.getNombre(), ComboBox.getSelectedItem().toString(), ingre.getCantCalorias(), ingre.isEstado()});
+        }
         }
     }
 

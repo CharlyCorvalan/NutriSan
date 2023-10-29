@@ -155,7 +155,7 @@ public class PacienteVista extends javax.swing.JInternalFrame {
         jLabel7.setText("¿Desea continuar?");
         PanelAdvertencia.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 190, 20));
 
-        getContentPane().add(PanelAdvertencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 330, 210));
+        getContentPane().add(PanelAdvertencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 330, 210));
 
         PanelAceptar.setBackground(new java.awt.Color(204, 204, 204));
         PanelAceptar.setMinimumSize(new java.awt.Dimension(120, 30));
@@ -391,12 +391,12 @@ public class PacienteVista extends javax.swing.JInternalFrame {
 
     private void BotonNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonNuevoMouseClicked
         limpiarTodo();
-        N = true;    
+        N = true;
         TextoNombre.setEditable(true);
         TextoDni.setEditable(true);
         TextoTelefono.setEditable(true);
         TextoDireccion.setEditable(true);
-        
+
 
     }//GEN-LAST:event_BotonNuevoMouseClicked
 
@@ -404,22 +404,22 @@ public class PacienteVista extends javax.swing.JInternalFrame {
         if (N == true) {
             TextoNombre.setForeground(Color.black);
             TextoNombre.setText("");
-        }else if(M==true){
+        } else if (M == true) {
             TextoNombre.setForeground(Color.black);
             JOptionPane.showMessageDialog(null, "Solo se puede editar Direccion y Telefono");
-        }else if(E==true){
+        } else if (E == true) {
             JOptionPane.showMessageDialog(null, "Para editar elija la opcion de editar");
         }
     }//GEN-LAST:event_TextoNombreMouseClicked
 
     private void TextoDniMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TextoDniMouseClicked
-        if (N == true){
+        if (N == true) {
             TextoDni.setForeground(Color.black);
             TextoDni.setText("");
-        }else if(M==true){
+        } else if (M == true) {
             TextoDni.setForeground(Color.black);
             JOptionPane.showMessageDialog(null, "Solo se puede editar Direccion y Telefono");
-        }else if(E==true){
+        } else if (E == true) {
             JOptionPane.showMessageDialog(null, "Para editar elija la opcion de editar");
         }
     }//GEN-LAST:event_TextoDniMouseClicked
@@ -431,7 +431,7 @@ public class PacienteVista extends javax.swing.JInternalFrame {
         } else if (M == true) {
             TextoDireccion.setForeground(Color.black);
             TextoDireccion.setEditable(true);
-        }else if(E==true){
+        } else if (E == true) {
             JOptionPane.showMessageDialog(null, "Para editar elija la opcion de editar");
         }
     }//GEN-LAST:event_TextoDireccionMouseClicked
@@ -443,7 +443,7 @@ public class PacienteVista extends javax.swing.JInternalFrame {
         } else if (M == true) {
             TextoTelefono.setForeground(Color.black);
             TextoTelefono.setEditable(true);
-        }else if(E==true){
+        } else if (E == true) {
             JOptionPane.showMessageDialog(null, "Para editar elija la opcion de editar");
         }
     }//GEN-LAST:event_TextoTelefonoMouseClicked
@@ -481,26 +481,33 @@ public class PacienteVista extends javax.swing.JInternalFrame {
             int dni = Integer.parseInt(TextoDni.getText());
             Paciente pa = new Paciente();
             PacienteData paData = new PacienteData();
+            pa = (paData.buscarXdni(dni));
             if (M == true) {
-                pa = (paData.buscarXdni(dni));
+
                 pa.setDomicilio(TextoDireccion.getText());
                 pa.setTelefono(TextoTelefono.getText());
                 paData.modificiarPaciente(pa);
             } else if (E == true) {
-                 pa = (paData.buscarXdni(dni));
+
                 paData.eliminarPaciente(pa.getIdPaciente());
             } else if (N == true) {
-                pa.setNombre(TextoNombre.getText());
-                pa.setDni(dni);
-                pa.setDomicilio(TextoDireccion.getText());
-                pa.setTelefono(TextoTelefono.getText());
-                paData.agregarPaciente(pa);
+                if (pa.getNombre() != null) {
+                    JOptionPane.showMessageDialog(null, "Dni de paciente existente, verifique la informacion");
+                } else {
+                    pa.setNombre(TextoNombre.getText());
+                    pa.setDni(dni);
+                    pa.setDomicilio(TextoDireccion.getText());
+                    pa.setTelefono(TextoTelefono.getText());
+                    paData.agregarPaciente(pa);
+                }
             }
             PanelAdvertencia.setVisible(false);
             limpiarTodo();
         } catch (NumberFormatException x) {
             JOptionPane.showMessageDialog(null, "Campo DNI espera un numero entero");
         }
+        PanelAdvertencia.setVisible(false);
+           
     }//GEN-LAST:event_AvisoSIMouseClicked
 
     private void AvisoVolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AvisoVolverMouseClicked
@@ -512,11 +519,11 @@ public class PacienteVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BotonCancelarMouseClicked
 
     private void BotonListarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonListarMouseClicked
-       limpiarTodo();
-        L = true;       
+        limpiarTodo();
+        L = true;
         BotonModificar.setVisible(true);
         BotonEliminar.setVisible(true);
-        
+
         PacienteData padata = new PacienteData();
         ArrayList<Paciente> paciente = new ArrayList<>(padata.listarPaciente());
         cargarTabla(paciente);
@@ -556,21 +563,27 @@ public class PacienteVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BotonListarMouseExited
 
     private void BotonAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonAceptarMouseClicked
-        if(TextoNombre.getText().equalsIgnoreCase("Nombre completo del paciente")||TextoDni.getText().equalsIgnoreCase("(solo numeros)")||TextoDireccion.getText().equalsIgnoreCase("Agregar calle y numero")||TextoTelefono.getText().equalsIgnoreCase("Telefono de contacto (solo numeros)")){
-            JOptionPane.showMessageDialog(null, "hola");
-        }else if (N == true) {
-            PanelAdvertencia.setVisible(true);
-            OpcionDeAviso.setText("Agregar");
-        } else if (M == true) {
-            PanelAdvertencia.setVisible(true);
-            OpcionDeAviso.setText("Modificar");
-        } else if (E == true) {
-            PanelAdvertencia.setVisible(true);
-            OpcionDeAviso.setText("Eliminar");
-        } else {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar una opcion para continuar");
-        }
-        
+        String nombre = TextoNombre.getText();
+        String dni = TextoDni.getText();
+        String direccion = TextoDireccion.getText();
+        String telefono = TextoTelefono.getText();
+        if (nombre.isEmpty() == true || dni.isEmpty() == true || direccion.isEmpty() == true || telefono.isEmpty() == true) {
+            JOptionPane.showMessageDialog(null, "Debe completar todos los datos vacios");
+        } else if (TextoNombre.getText().equalsIgnoreCase("Nombre completo del paciente") || TextoDni.getText().equalsIgnoreCase("(solo numeros)") || TextoDireccion.getText().equalsIgnoreCase("Agregar calle y numero") || TextoTelefono.getText().equalsIgnoreCase("Telefono de contacto (solo numeros)")) {
+                JOptionPane.showMessageDialog(null, "Debe completar todos los datos");
+
+            } else if (N == true) {
+                PanelAdvertencia.setVisible(true);
+                OpcionDeAviso.setText("Agregar");
+            } else if (M == true) {
+                PanelAdvertencia.setVisible(true);
+                OpcionDeAviso.setText("Modificar");
+            } else if (E == true) {
+                PanelAdvertencia.setVisible(true);
+                OpcionDeAviso.setText("Eliminar");
+            } else {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar una opcion para continuar");
+            }
     }//GEN-LAST:event_BotonAceptarMouseClicked
 
 
@@ -615,10 +628,10 @@ public class PacienteVista extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     public void limpiarTodo() {
-        N=false;
-        L=false;
-        M=false;
-        E=false;
+        N = false;
+        L = false;
+        M = false;
+        E = false;
         TextoNombre.setEditable(false);
         TextoDni.setEditable(false);
         TextoTelefono.setEditable(false);
@@ -635,8 +648,7 @@ public class PacienteVista extends javax.swing.JInternalFrame {
         Tabla.setVisible(false);
         BotonModificar.setVisible(false);
         BotonEliminar.setVisible(false);
-       
-        
+
     }
 
     private Paciente buscarXDNI(int x) {
