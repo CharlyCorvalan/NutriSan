@@ -167,8 +167,10 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
         getContentPane().add(PanelIngPesoFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 200, 20));
 
         PanelFechaInicial.setBackground(new java.awt.Color(204, 204, 255));
+        PanelFechaInicial.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         LabelFechaInicial.setText("Fecha inicial");
+        PanelFechaInicial.add(LabelFechaInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 70, -1));
 
         CalendarioFechaInicial.setBackground(new java.awt.Color(204, 204, 255));
         CalendarioFechaInicial.addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -190,28 +192,7 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
                 CalendarioFechaInicialPropertyChange(evt);
             }
         });
-
-        javax.swing.GroupLayout PanelFechaInicialLayout = new javax.swing.GroupLayout(PanelFechaInicial);
-        PanelFechaInicial.setLayout(PanelFechaInicialLayout);
-        PanelFechaInicialLayout.setHorizontalGroup(
-            PanelFechaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelFechaInicialLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(LabelFechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(CalendarioFechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        PanelFechaInicialLayout.setVerticalGroup(
-            PanelFechaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelFechaInicialLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(LabelFechaInicial)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelFechaInicialLayout.createSequentialGroup()
-                .addGap(0, 1, Short.MAX_VALUE)
-                .addComponent(CalendarioFechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        PanelFechaInicial.add(CalendarioFechaInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 132, 30));
 
         getContentPane().add(PanelFechaInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 220, 30));
 

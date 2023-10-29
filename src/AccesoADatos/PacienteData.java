@@ -136,15 +136,15 @@ public Paciente buscarXdni(int dni){
         }
     return pa;
 }
-public Paciente buscarXNombre(String nombre){
+public Paciente buscarXID(int id){
     Paciente pa=new Paciente();
-    String sql="select idPaciente, nombre, dni, domicilio, telefono,estado from paciente where nombre like ?";
+    String sql="select  nombre, dni, domicilio, telefono,estado from paciente where idPaciente=?";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
-            ps.setString(1, nombre);
+            ps.setInt(1, id);
             ResultSet  resultado=ps.executeQuery();
             while(resultado.next()){
-                pa.setIdPaciente(resultado.getInt("idPaciente"));
+                
                 pa.setNombre(resultado.getString("nombre"));
                 pa.setDomicilio(resultado.getString("domicilio"));
                 pa.setDni(resultado.getInt("dni"));
@@ -154,7 +154,7 @@ public Paciente buscarXNombre(String nombre){
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de Pacientes");
         }
-        System.out.println(pa);
+       
     return pa;
 }
 }

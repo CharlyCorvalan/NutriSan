@@ -22,6 +22,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private ArmarDieta dieta = new ArmarDieta();
     private ArmarComida comida = new ArmarComida();
     private IngredientesVista ingredientes = new IngredientesVista();
+    private Consultas consulta = new Consultas();
     int xMouse, yMouse;
     public boolean acceso;
     private String usuario = "Grupo9";
@@ -68,6 +69,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         LPaciente = new javax.swing.JLabel();
         LComida = new javax.swing.JLabel();
         LIngredientes = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         PanelInicio = new javax.swing.JPanel();
         LabelInicio = new javax.swing.JLabel();
         PanelPaciente = new javax.swing.JPanel();
@@ -236,6 +238,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         Blateral.add(LIngredientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, -1, -1));
 
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pacientes2.png"))); // NOI18N
+        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel12MouseClicked(evt);
+            }
+        });
+        Blateral.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 50, 40));
+
         PanelInicio.setBackground(new java.awt.Color(204, 204, 204));
         PanelInicio.setPreferredSize(new java.awt.Dimension(120, 30));
         PanelInicio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -288,7 +299,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel1.setText("Nuticionista Grupo 9");
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/580b57fcd9996e24bc43c44d.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/FlechaInicio.png"))); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 204, 255));
@@ -469,6 +480,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
             cerrarVentana(paciente);
             paciente.limpiarTodo();
             abrirVentanas(paciente);
+        } else if (consulta.isVisible() == true) {
+            cerrarVentana(consulta);
+            paciente.limpiarTodo();
+            abrirVentanas(paciente);
         } else {
             paciente.limpiarTodo();
             abrirVentanas(paciente);
@@ -493,6 +508,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
             cerrarVentana(comida);
         } else if (ingredientes.isVisible() == true) {
             cerrarVentana(ingredientes);
+        }else if(consulta.isVisible()==true){
+            cerrarVentana(consulta);
         }
 
     }//GEN-LAST:event_LHomeMouseClicked
@@ -577,6 +594,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
             abrirVentanas(dieta);
             dieta.limpiarTodo();
             dieta.UbicarCombo();
+        } else if (consulta.isVisible() == true) {
+            cerrarVentana(consulta);
+            abrirVentanas(dieta);
+            dieta.limpiarTodo();
+            dieta.UbicarCombo();
         } else {
             abrirVentanas(dieta);
             dieta.limpiarTodo();
@@ -588,6 +610,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void LComidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LComidaMouseClicked
         if (acceso == false) {
             PanelIngreso.setVisible(true);
+            JOptionPane.showMessageDialog(null, "Acceso restringido. Ingrese usuario y contraseña");
+            cerrarVentana(dieta);
+            cerrarVentana(paciente);
+            cerrarVentana(comida);
+            cerrarVentana(ingredientes);
+            cerrarVentana(consulta);
         } else if (acceso == true) {
             if (paciente.isVisible() == true) {
                 cerrarVentana(paciente);
@@ -603,6 +631,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 abrirVentanas(comida);
             } else if (comida.isVisible() == true) {
                 cerrarVentana(comida);
+                comida.limpiarPantalla();
+                abrirVentanas(comida);
+            } else if (consulta.isVisible() == true) {
+                cerrarVentana(consulta);
                 comida.limpiarPantalla();
                 abrirVentanas(comida);
             } else {
@@ -624,6 +656,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void LIngredientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LIngredientesMouseClicked
         if (acceso == false) {
             PanelIngreso.setVisible(true);
+            JOptionPane.showMessageDialog(null, "Acceso restringido. Ingrese usuario y contraseña");
+            cerrarVentana(dieta);
+            cerrarVentana(paciente);
+            cerrarVentana(comida);
+            cerrarVentana(ingredientes);
+            cerrarVentana(consulta);
         } else if (acceso == true) {
             if (paciente.isVisible() == true) {
                 cerrarVentana(paciente);
@@ -639,6 +677,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 abrirVentanas(ingredientes);
             } else if (ingredientes.isVisible() == true) {
                 cerrarVentana(ingredientes);
+                ingredientes.limpiarTodo();
+                abrirVentanas(ingredientes);
+            } else if (consulta.isVisible() == true) {
+                cerrarVentana(consulta);
                 ingredientes.limpiarTodo();
                 abrirVentanas(ingredientes);
             } else {
@@ -673,6 +715,34 @@ public class MenuPrincipal extends javax.swing.JFrame {
         TextoContraseña.setText("");
     }//GEN-LAST:event_TextoContraseñaMouseClicked
 
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+
+        if (dieta.isVisible() == true) {
+            cerrarVentana(dieta);
+            consulta.limpiarPantalla();
+            abrirVentanas(consulta);
+        } else if (comida.isVisible() == true) {
+            cerrarVentana(comida);
+            consulta.limpiarPantalla();
+            abrirVentanas(consulta);
+        } else if (ingredientes.isVisible() == true) {
+            cerrarVentana(ingredientes);
+            consulta.limpiarPantalla();
+            abrirVentanas(consulta);
+        } else if (paciente.isVisible() == true) {
+            cerrarVentana(paciente);
+            consulta.limpiarPantalla();
+            abrirVentanas(consulta);
+        } else if (consulta.isVisible() == true) {
+            cerrarVentana(consulta);
+            consulta.limpiarPantalla();
+            abrirVentanas(consulta);
+        } else {
+            consulta.limpiarPantalla();
+            abrirVentanas(consulta);
+        }
+    }//GEN-LAST:event_jLabel12MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -702,11 +772,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MenuPrincipal().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new MenuPrincipal().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -737,6 +807,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
