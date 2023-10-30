@@ -164,6 +164,7 @@ public class PacienteVista extends javax.swing.JInternalFrame {
         BotonAceptar.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
         BotonAceptar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         BotonAceptar.setText("ACEPTAR");
+        BotonAceptar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BotonAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BotonAceptarMouseClicked(evt);

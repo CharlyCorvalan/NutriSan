@@ -14,6 +14,7 @@ import java.awt.Dimension;
 import java.sql.PreparedStatement;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -260,6 +261,7 @@ public class Consultas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BotonNuevaMouseClicked
 
     private void BotonBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonBuscarMouseClicked
+        limpiarCombo();
         String tdni = TextoDni.getText();
         if (tdni.isEmpty() == true) {
             JOptionPane.showMessageDialog(null, "Ingrese un dni y luego en buscar");
@@ -320,7 +322,9 @@ public class Consultas extends javax.swing.JInternalFrame {
                 dieta = dieData.buscarDieta(idDieta, idPaciente);
                 TextoPesoInicial.setText(String.valueOf(dieta.getPesoInicial()));
                 TextoPesoBuscado.setText(String.valueOf(dieta.getPesoFinal()));
-                TextoFechaFinal.setText(dieta.getFechaFinal().toString());
+                LocalDate dato=dieta.getFechaFinal();
+                String datoS=dato.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));          
+                TextoFechaFinal.setText(datoS);
                 LabelFechaVisita.setVisible(true);
                 CalendarioVisita.setVisible(true);
                 LabelPesoVisita.setVisible(true);
@@ -364,9 +368,15 @@ public class Consultas extends javax.swing.JInternalFrame {
                 paciente = paciData.buscarXdni(dniPaciente);
                 int idPaciente = 0;
                 idPaciente = paciente.getIdPaciente();
-                LocalDate fechaVisita;
+                Dieta dieta=new Dieta();
+                dieta.setIdDieta(idDieta);
+                DietaData dietaData=new DietaData();
+                dieta=dietaData.buscarDieta(idDieta, idPaciente);               
+                LocalDate fechaVisita,fechaFinal;
+                fechaFinal=dieta.getFechaFinal();
                 fechaVisita = CalendarioVisita.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                if (pesoIni < pesoFin) {
+                if(fechaVisita.isAfter(fechaFinal)){                   
+                    if (pesoIni < pesoFin) {
 
                     if (pesoVis >= pesoFin) {
 
@@ -385,8 +395,13 @@ public class Consultas extends javax.swing.JInternalFrame {
                         visiData.nuevaVisita(visita);
                     }
                 }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Fecha de visita anterior a Fecha limite, no se registrara la visita");
+                }
+                
             } catch (NumberFormatException ex) {
-
+                JOptionPane.showMessageDialog(null, "Peso visita solo acepta numeros");
+                TextoPesoVisita.setText("");
             }
         }
     }//GEN-LAST:event_BotonRegistrarMouseClicked
