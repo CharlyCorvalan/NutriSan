@@ -546,8 +546,7 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
                 LocalDate fechaInicial;
                 fechaInicial = CalendarioFechaInicial.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 String fecha = TextoFechaFinalAutomatica.getText();
-                LocalDate fechafinalllll = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                System.out.println(fechafinalllll);
+                LocalDate fechafinalllll = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yyyy"));                
                 if (ComboPacientes.getSelectedIndex() != 0 && TextoNomDieta != null && TextoPesoInicial != null && TextoPesoFinal != null && CalendarioFechaInicial != null && CaloriasSumadas < ObjetivoCaloriasEditable && modelo.getRowCount() > 0) {
 
                     TextoPesoInicial.setEditable(false);

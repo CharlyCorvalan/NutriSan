@@ -105,6 +105,12 @@ public class Consultas extends javax.swing.JInternalFrame {
         LabelDni.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
         LabelDni.setText("DNI");
         getContentPane().add(LabelDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 40, -1));
+
+        TextoDni.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TextoDniMouseClicked(evt);
+            }
+        });
         getContentPane().add(TextoDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 120, -1));
 
         BotonBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar2.png"))); // NOI18N
@@ -420,6 +426,35 @@ public class Consultas extends javax.swing.JInternalFrame {
         cargarTabla(2);
     }//GEN-LAST:event_ObjetivoNoMouseClicked
 
+    private void TextoDniMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TextoDniMouseClicked
+        LabelDieta.setVisible(false);
+        LabelPesoInicial.setVisible(false);
+        LabelPesoBuscado.setVisible(false);
+        LabelFechaLimite.setVisible(false);
+        ComboBox.setVisible(false);
+        TextoPesoInicial.setVisible(false);
+        TextoPesoBuscado.setVisible(false);
+        TextoFechaFinal.setVisible(false);
+        LabelFechaVisita.setVisible(false);
+        LabelPesoVisita.setVisible(false);
+        CalendarioVisita.setVisible(false);
+        TextoPesoVisita.setVisible(false);
+        ObjetivoConseguido.setVisible(false);
+        ObjetivoNo.setVisible(false);
+        
+        Tabla.setVisible(false);
+        PanelRegistrar.setVisible(false);
+        PanelCancelar.setVisible(false);
+        limpiarCombo();
+        limpiarTabla();
+        TextoDni.setText("");
+        TextoPesoInicial.setText("");
+        TextoPesoBuscado.setText("");
+        TextoFechaFinal.setText("");
+        TextoPesoVisita.setText("");
+        CalendarioVisita.setDate(null);
+    }//GEN-LAST:event_TextoDniMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BotonBuscar;
@@ -452,6 +487,7 @@ public class Consultas extends javax.swing.JInternalFrame {
 public void limpiarPantalla() {
         LabelDni.setVisible(false);
         TextoDni.setVisible(false);
+        BotonBuscar.setVisible(false);
         LabelDieta.setVisible(false);
         LabelPesoInicial.setVisible(false);
         LabelPesoBuscado.setVisible(false);
@@ -466,7 +502,7 @@ public void limpiarPantalla() {
         TextoPesoVisita.setVisible(false);
         ObjetivoConseguido.setVisible(false);
         ObjetivoNo.setVisible(false);
-        BotonBuscar.setVisible(false);
+        
         Tabla.setVisible(false);
         PanelRegistrar.setVisible(false);
         PanelCancelar.setVisible(false);
