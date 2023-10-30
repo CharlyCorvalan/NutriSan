@@ -271,8 +271,9 @@ public class Consultas extends javax.swing.JInternalFrame {
                 PacienteData paciData = new PacienteData();
                 Paciente paciente = new Paciente();
                 paciente = paciData.buscarXdni(dni);
-                if (paciente == null) {
+                if (paciente.getNombre()==null) {
                     JOptionPane.showMessageDialog(null, "Paciente no encontrado");
+                    TextoDni.setText("");
                 } else {
                     DietaData dietaBuscar = new DietaData();
                     ArrayList<Dieta> dieta = new ArrayList<>();
@@ -403,7 +404,10 @@ public class Consultas extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Peso visita solo acepta numeros");
                 TextoPesoVisita.setText("");
             }
+            
+            limpiarPantalla();
         }
+        
     }//GEN-LAST:event_BotonRegistrarMouseClicked
 
     private void BotonCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonCancelarMouseClicked
@@ -487,10 +491,12 @@ public void limpiarPantalla() {
     }
 
     private void cargarTabla(int x) {
-        if (x == 1) {
-            VisitaData visData = new VisitaData();
+         VisitaData visData = new VisitaData();
             ArrayList<Visita> visita = new ArrayList<>();
+        if (x == 1) {
+           
             visita = visData.objetivoCumplido();
+            int num=visita.size();
             for (Visita pa : visita) {
                 Paciente paciente = new Paciente();
                 PacienteData paci = new PacienteData();
@@ -504,8 +510,7 @@ public void limpiarPantalla() {
                 modelo.addRow(new Object[]{paciente.getNombre(), dieta.getPesoFinal(), dieta.getFechaFinal(), pa.getPesoVisita(), pa.getFechaVisita(), pa.isObjetivo()});
             }
         } else if (x == 2) {
-            VisitaData visData = new VisitaData();
-            ArrayList<Visita> visita = new ArrayList<>();
+            
             visita = visData.noCumplido();
             for (Visita pa : visita) {
                 Paciente paciente = new Paciente();
