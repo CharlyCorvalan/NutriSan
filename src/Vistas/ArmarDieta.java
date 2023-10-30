@@ -176,12 +176,12 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
 
         CalendarioFechaInicial.setBackground(new java.awt.Color(204, 204, 255));
         CalendarioFechaInicial.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 CalendarioFechaInicialAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         CalendarioFechaInicial.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -371,20 +371,20 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(TablaComidasParaAgregar);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(483, 90, 230, 350));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(443, 90, 300, 350));
 
         LabelBotonModificarDieta.setBackground(new java.awt.Color(255, 0, 0));
         LabelBotonModificarDieta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/modificaTransparenteFotos.png"))); // NOI18N
         LabelBotonModificarDieta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         LabelBotonModificarDieta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                LabelBotonModificarDietaMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 LabelBotonModificarDietaMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 LabelBotonModificarDietaMouseExited(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LabelBotonModificarDietaMouseClicked(evt);
             }
         });
         getContentPane().add(LabelBotonModificarDieta, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, -1, -1));
@@ -411,14 +411,14 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
         LabelBotonCrearDietaComida.setText("     Empezar!");
         LabelBotonCrearDietaComida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         LabelBotonCrearDietaComida.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                LabelBotonCrearDietaComidaMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 LabelBotonCrearDietaComidaMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 LabelBotonCrearDietaComidaMouseExited(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LabelBotonCrearDietaComidaMouseClicked(evt);
             }
         });
         getContentPane().add(LabelBotonCrearDietaComida, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 450, 40, 40));
@@ -447,14 +447,14 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
         LabelBotonPreVisualizarDieta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/visualizarDietaChiquita.png"))); // NOI18N
         LabelBotonPreVisualizarDieta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         LabelBotonPreVisualizarDieta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                LabelBotonPreVisualizarDietaMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 LabelBotonPreVisualizarDietaMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 LabelBotonPreVisualizarDietaMouseExited(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LabelBotonPreVisualizarDietaMouseClicked(evt);
             }
         });
         getContentPane().add(LabelBotonPreVisualizarDieta, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, 40, 30));
@@ -593,65 +593,6 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
             }
 
         } else if (modificar == true) {
-
-//            Dieta diet = new Dieta();
-//            String cadena=ComboListaDietas.getSelectedItem().toString();
-//            int largo=cadena.length();
-//            String pos="";
-//            for (int i = 0; i < largo-1; i++) {
-//                if(cadena.substring(i, i+1).equals("-")){
-//                 i=largo;
-//                } else{
-//                    pos=pos+cadena.substring(i, i+1);
-//                }
-//            }
-//            int idDieta=Integer.parseInt(pos); 
-//            
-//            diet.setIdDieta(idDieta);
-//            DietaComidaData DCD = new DietaComidaData();
-//            
-//            int filas=modelo.getRowCount();
-//            ArrayList<Comida>comida1=new ArrayList<>();
-//            comida1=DCD.ListarDietaComidas(idDieta);
-//            int largoArray=comida1.size();
-//            
-//            for (int i = 0; i < filas; i++) {
-//               int contador=0;
-//               Comida comi=new Comida();
-//               int idComi= Integer.parseInt(modelo.getValueAt(i, 0).toString());
-//                for (int j = 0; j < largoArray; j++) {   
-//                     comi=comida1.get(j);
-//                     if(idComi!=comi.getIdComida()){
-//                         contador++;
-//                     }
-//                }
-//                System.out.println(contador);
-//                if(contador==largoArray){
-//                    Comida comida2=new Comida();
-//                    comida2.setIdComida(idComi);
-//                    DCD.AgregarUnaComida(diet, comida2);
-//                    
-//                }
-//            }
-//              
-//            ArrayList<Comida> comida =new ArrayList<>();
-//            comida=DCD.ListarDietaComidas(idDieta);
-//            int filaComi=comida.size();           
-//            for (int i = 0; i < filaComi-1; i++) {
-//                int contador=0;
-//                Comida com=new Comida();
-//                com=comida.get(i);
-//                for (int j = 0; j < filas; j++) {
-//                    int id=Integer.parseInt(modelo.getValueAt(j, 0).toString());                   
-//                    if(com.getIdComida()!=id){                      
-//                      contador++;
-//                    }
-//                }
-//                if(contador==filas){
-//                    DCD.modificarDietaComida(diet, com);
-//                    
-//                }
-//            } 
             Dieta dieta = new Dieta();
             DietaData DD = new DietaData();
             DietaComidaData DCD = new DietaComidaData();
@@ -1098,8 +1039,8 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
     public void CargarComboPacientes() {
         ComboPacientes.addItem("Seleccionar Paciente");
         PacienteData pd = new PacienteData();
-        ArrayList<Paciente> pacientes = new ArrayList<>();
-        pacientes = pd.listarPaciente();
+        ArrayList<Paciente> pacientes = new ArrayList<>(pd.listarPaciente());
+        
         for (Paciente paciente : pacientes) {
             String nom = paciente.getNombre();
             int dni = paciente.getDni();
@@ -1199,5 +1140,6 @@ public class ArmarDieta extends javax.swing.JInternalFrame {
 
     public void UbicarCombo() {
         ComboPacientes.setSelectedIndex(0);
+        CargarComboPacientes();
     }
 }

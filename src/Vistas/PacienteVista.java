@@ -101,7 +101,7 @@ public class PacienteVista extends javax.swing.JInternalFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         PanelAdvertencia.setBackground(new java.awt.Color(255, 255, 255));
-        PanelAdvertencia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        PanelAdvertencia.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         PanelAdvertencia.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 0, 51));
@@ -121,7 +121,7 @@ public class PacienteVista extends javax.swing.JInternalFrame {
 
         OpcionDeAviso.setFont(new java.awt.Font("Roboto Black", 0, 24)); // NOI18N
         OpcionDeAviso.setBorder(null);
-        PanelAdvertencia.add(OpcionDeAviso, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 100, -1));
+        PanelAdvertencia.add(OpcionDeAviso, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 150, -1));
 
         jLabel4.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
